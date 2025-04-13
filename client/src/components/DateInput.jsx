@@ -1,20 +1,23 @@
 import { useState } from "react";
-import CalendarDays from "../assets/icons/CalendarDays";
-import ChevronDown from "../assets/icons/ChevronDown";
-
+import DateTimePicker from "./DateTimePicker";
 function DateInput() {
 
-    const [time, setTime] = useState("Jetzt");
-
-  return (
-    <>
-        <div className="flex items-center w-[45%] bg-gray-100 rounded-r-lg py-4 hover:cursor-pointer">
-            <CalendarDays/>
-            <p className="text-xs font-normal pl-2 pr-0.5">{time}</p>      
-            <ChevronDown style={"pr-2 scale-60"} />  
-        </div>
-    </>
-  )
+    const [depart, setDepart] = useState(true);
+    return (
+      <>
+          <div className="flex flex-col items-center w-full">
+              <div className="w-full">
+                <button className={`w-1/2 text-center py-2 border-b-2 hover:cursor-pointer ${depart ? "border-black" : "border-zinc-100 text-zinc-600"}`} onClick={() => { setDepart(true) }}>
+                  <p>Abfahrt um:</p>
+                </button>
+                <button className={`w-1/2 text-center py-2 border-b-2 hover:cursor-pointer ${!depart ? "border-black" : "border-zinc-100 text-zinc-600"}`} onClick={() => { setDepart(false) }}>
+                  <p>Ankunft bis:</p>
+                </button>
+              </div> 
+          </div> 
+          <DateTimePicker subLabel={depart} />
+      </>
+    )
 }
 
 export default DateInput

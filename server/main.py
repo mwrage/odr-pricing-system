@@ -4,15 +4,14 @@ from flask_cors import CORS
 app = Flask(__name__)
 cors = CORS(app, origin = '*')
 
-@app.route("/api/test", methods = ['GET'])
+@app.route("/api/users", methods = ['GET'])
 def users():
     return jsonify(
         {
-            "testobjs": [
-                'test-obj-1',
-                'test-obj-2',
-                'test-obj-3'
-            ]
+            "testUser": {
+                'ticket': 'true',
+                'defaultLocation': {'lat': '53.8680752133924', 'lng': '10.686651454571164'},
+            }
         }
     )
 

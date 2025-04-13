@@ -1,7 +1,10 @@
-import { useState } from "react"
+import { useState, useContext  } from "react"
+import { AppContext } from "../context/context"
 import TextInput from "./TextInput"
 import PassengersInput from "./PassengersInput"
 import DateInput from "./DateInput"
+import ConfirmButton from "./ConfirmButton";
+import DateTimePicker from "./DateTimePicker";
 import ChevronDown from "../assets/icons/ChevronDown"
 import ArrowDownward from "../assets/icons/ArrowDownward"
 import Search1 from "../assets/icons/Search1";
@@ -18,6 +21,7 @@ function BookingArea() {
     const [rotated, setRotated] = useState(false)
     const [time, setTime] = useState("Jetzt");
     const [passengersNum, setPassengersNum] = useState(1);
+    const { tripRequested, setTripRequested } = useContext(AppContext);
     
     const expandSettings = () => {
       setExpanded(!expanded)
@@ -33,13 +37,19 @@ function BookingArea() {
       setPassengerSettings(!passengerSettings)
     }
 
+    const handleRequest = () => {
+      // ToDo: get real request parameters
+      // ToDo: check request parameters
+      setTripRequested(true)
+    }
+
     return (
       <> 
         {/* ${expanded ? "h-full" : dateSettings ? "h-1/2" : passengerSettings ? "h-2/3" : "h-[35%]" } */}
         <div className={`z-20 flex flex-col w-full bg-white rounded-b-3xl self-end px-5 pb-5 rounded-t-md ${(expanded ||  dateSettings || passengerSettings) ? "h-full" :  "h-[35%]" }`} style={{ boxShadow: '0 -2px 6px rgba(0, 0, 0, 0.1)' }}>
         { !dateSettings && !passengerSettings && (
             <button onClick={expandSettings} className="w-full pt-2 pb-3 hover:cursor-pointer">
-              <div className="w-1/6 h-1 bg-zinc-100 rounded-full mx-auto"></div>
+              <div className="w-1/6 h-1 bg-zinc-200 rounded-full mx-auto"></div>
             </button>
         )}
 
@@ -105,6 +115,9 @@ function BookingArea() {
                 <Bus1 size={22} />
                 <p className="px-2 text-sm">Hauptbahnhof Lübeck</p>
               </div>
+              <button onClick={handleRequest}>
+                <ConfirmButton label={"Fahrt anfragen"}/>
+              </button>
             </>
         )}
 
@@ -113,7 +126,7 @@ function BookingArea() {
             <>
               {/* Header */}
               <div className="w-full flex items-center justify-between pt-4 pb-2">
-                <button onClick={toggleDateSettings} className="hover:cursor-pointer w-1/4">
+                <button onClick={toggleDateSettings} className="hover:cursor-pointer w-1/4 py-2 pr-2">
                   <ChevronDown size={20} style={"rotate-90"} />
                 </button>
                 <h1 className="text-lg font-semibold w-[70%]">Eine Fahrt buchen</h1>
@@ -121,6 +134,10 @@ function BookingArea() {
               <div></div>
               {/* Route inputs */}
               <div className="w-full h-0.5 bg-zinc-100 rounded-full my-1"></div>
+              <DateInput />
+              <button onClick={toggleDateSettings}>
+                <ConfirmButton label={"Planen"}/>
+              </button>
             </>
         )}
 
@@ -129,14 +146,18 @@ function BookingArea() {
             <>
               {/* Header */}
               <div className="w-full flex items-center justify-between pt-4 pb-2">
-                <button onClick={togglePassengerSettings} className="hover:cursor-pointer w-1/4">
+                <button onClick={togglePassengerSettings} className="hover:cursor-pointer w-1/4 py-2 pr-2">
                   <ChevronDown size={20} style={"rotate-90"} />
                 </button>
                 <h1 className="text-lg font-semibold w-3/4">Zusätzliche Fahrgäste</h1>
               </div>
               <div></div>
               {/* Route inputs */}
-              <div className="w-full h-0.5 bg-zinc-100 rounded-full my-1"></div>
+              <div className="w-full h-0.5 bg-zinc-100 rounded-full mb-1"></div>
+              <PassengersInput />
+              <button onClick={togglePassengerSettings}>
+                <ConfirmButton label={"Erledigt"}/>
+              </button>
             </>
         )}
 

@@ -1,19 +1,19 @@
-import { useState } from "react";
-import User4 from "../assets/icons/User4";
-import ChevronDown from "../assets/icons/ChevronDown";
+import PassengerCounter from "./PassengerCounter";
 
 function PassengersInput() {
 
-    const [passengersNum, setPassengersNum] = useState(1);
-
   return (
     <>
-        <button className="flex items-center border-1 border-zinc-400 px-3 py-1.5 rounded-full hover:cursor-pointer">
-            <User4 size={18}/>
-            <p className="font-normal text-xs px-1">{passengersNum} {passengersNum == 1 ? "Fahrgast" : "Fahrgäste"}</p>
-            <ChevronDown size={14} style={"pt-0.5"}/>
-        </button>
-    </>
+        <PassengerCounter type={"Erwachsene"} ticket={"ÖPNV-Ticket vorhanden"} id={"adults-with-ticket"}/>
+        <div className="w-full h-0.5 bg-zinc-100 rounded-full my-0.5"></div>
+        <PassengerCounter type={"Erwachsene"} ticket={"kein ÖPNV-Ticket vorhanden"} id={"adults-no-ticket"}/>
+        <div className="w-full h-0.5 bg-zinc-100 rounded-full my-0.5"></div>
+        <PassengerCounter type={"Kinder ab 6 J."} ticket={"ÖPNV-Ticket vorhanden"} id={"children-with-ticket"}/>
+        <div className="w-full h-0.5 bg-zinc-100 rounded-full my-0.5"></div>
+        <PassengerCounter type={"Kinder ab 6 J."} ticket={"kein ÖPNV-Ticket vorhanden"} id={"children-no-ticket"}/>
+        <div className="w-full h-0.5 bg-zinc-100 rounded-full my-0.5"></div>
+        <PassengerCounter type={"Kinder unter 6 J."} ticket={""} id={"children-below-6"}/>
+      </>
   )
 }
 
