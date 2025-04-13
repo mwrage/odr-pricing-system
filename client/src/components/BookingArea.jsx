@@ -7,11 +7,17 @@ import ArrowDownward from "../assets/icons/ArrowDownward"
 import Search1 from "../assets/icons/Search1";
 import MapPin5 from "../assets/icons/MapPin5"
 import Bus1 from "../assets/icons/Bus1"
+import CalendarDays from "../assets/icons/CalendarDays";
+import User4 from "../assets/icons/User4";
 
 function BookingArea() {
     const [expanded, setExpanded] = useState(false)
+    const [dateSettings, setDateSettings] = useState(false)
+    const [passengerSettings, setPassengerSettings] = useState(false)
     const [chooseStart, setChooseStart] = useState(false)
     const [rotated, setRotated] = useState(false)
+    const [time, setTime] = useState("Jetzt");
+    const [passengersNum, setPassengersNum] = useState(1);
     
     const expandSettings = () => {
       setExpanded(!expanded)
@@ -20,16 +26,25 @@ function BookingArea() {
       setChooseStart(!chooseStart)
       setRotated(!setRotated)
     }
+    const toggleDateSettings = () => {
+      setDateSettings(!dateSettings)
+    }
+    const togglePassengerSettings = () => {
+      setPassengerSettings(!passengerSettings)
+    }
 
     return (
-      <>
-        <div className={`flex flex-col w-full bg-white rounded-b-3xl self-end px-5 pb-5 rounded-t-md ${expanded ? "h-[95%]" : "h-[35%]" }`} style={{ boxShadow: '0 -2px 6px rgba(0, 0, 0, 0.1)' }}>
-        <button onClick={expandSettings} className="w-full pt-2 pb-3 hover:cursor-pointer">
-          <div className="w-1/6 h-1 bg-zinc-100 rounded-full mx-auto"></div>
-        </button>
+      <> 
+        {/* ${expanded ? "h-full" : dateSettings ? "h-1/2" : passengerSettings ? "h-2/3" : "h-[35%]" } */}
+        <div className={`z-20 flex flex-col w-full bg-white rounded-b-3xl self-end px-5 pb-5 rounded-t-md ${(expanded ||  dateSettings || passengerSettings) ? "h-full" :  "h-[35%]" }`} style={{ boxShadow: '0 -2px 6px rgba(0, 0, 0, 0.1)' }}>
+        { !dateSettings && !passengerSettings && (
+            <button onClick={expandSettings} className="w-full pt-2 pb-3 hover:cursor-pointer">
+              <div className="w-1/6 h-1 bg-zinc-100 rounded-full mx-auto"></div>
+            </button>
+        )}
 
         {/* Default requests settings view */}
-        { !expanded && (
+        { !expanded && !dateSettings && !passengerSettings && (
             <>
               {/* Search + date */}
               <div className="w-full flex items-center justify-between">
@@ -39,12 +54,22 @@ function BookingArea() {
                     <p className="justify-self-start pl-8 font-medium py-3.5">Wohin?</p>
                   </div>
                 </button>
-                <DateInput />
+                {/* <DateInput /> */}
+                <button className="flex items-center w-[45%] bg-gray-100 rounded-r-lg py-4 hover:cursor-pointer" onClick={toggleDateSettings}>
+                  <CalendarDays/>
+                  <p className="text-xs font-normal pl-2 pr-0.5">{time}</p>      
+                  <ChevronDown style={"pr-2 scale-60"} />  
+                </button>
               </div>
               {/* Passenger */}
               <div className="w-full flex items-center justify-between py-4">
                   <p className="text-sm font-normal">Fährst du alleine?</p>
-                  <PassengersInput />
+                  {/* <PassengersInput /> */}
+                  <button className="flex items-center border-1 border-zinc-400 px-3 py-1.5 rounded-full hover:cursor-pointer" onClick={togglePassengerSettings}>
+                    <User4 size={18}/>
+                    <p className="font-normal text-xs px-1">{passengersNum} {passengersNum == 1 ? "Fahrgast" : "Fahrgäste"}</p>
+                    <ChevronDown size={14} style={"pt-0.5"}/>
+                  </button>
               </div>
               <div className="flex items-center py-2">
                 <Bus1 size={22} />
@@ -54,7 +79,7 @@ function BookingArea() {
         )}
 
         {/* Expanded requests settings view */}
-        { expanded && (
+        { expanded && !dateSettings && !passengerSettings && (
             <>
               {/* Header */}
               <div className="w-full flex items-center justify-between pt-4 pb-2">
@@ -80,6 +105,38 @@ function BookingArea() {
                 <Bus1 size={22} />
                 <p className="px-2 text-sm">Hauptbahnhof Lübeck</p>
               </div>
+            </>
+        )}
+
+        {/* Date and time settings view */}
+        { !expanded && dateSettings && (
+            <>
+              {/* Header */}
+              <div className="w-full flex items-center justify-between pt-4 pb-2">
+                <button onClick={toggleDateSettings} className="hover:cursor-pointer w-1/4">
+                  <ChevronDown size={20} style={"rotate-90"} />
+                </button>
+                <h1 className="text-lg font-semibold w-[70%]">Eine Fahrt buchen</h1>
+              </div>
+              <div></div>
+              {/* Route inputs */}
+              <div className="w-full h-0.5 bg-zinc-100 rounded-full my-1"></div>
+            </>
+        )}
+
+        {/* Passenger settings view */}
+        { !expanded && passengerSettings && (
+            <>
+              {/* Header */}
+              <div className="w-full flex items-center justify-between pt-4 pb-2">
+                <button onClick={togglePassengerSettings} className="hover:cursor-pointer w-1/4">
+                  <ChevronDown size={20} style={"rotate-90"} />
+                </button>
+                <h1 className="text-lg font-semibold w-3/4">Zusätzliche Fahrgäste</h1>
+              </div>
+              <div></div>
+              {/* Route inputs */}
+              <div className="w-full h-0.5 bg-zinc-100 rounded-full my-1"></div>
             </>
         )}
 
