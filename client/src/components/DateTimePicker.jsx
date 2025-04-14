@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import "react-datepicker/dist/react-datepicker.css";
 import { getDay } from 'date-fns';
 
 function DateTimePicker (props) {
