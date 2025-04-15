@@ -1,20 +1,24 @@
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
+import { AppContext } from "../context/context"
 import Minus from "../assets/icons/Minus";
 import Plus from "../assets/icons/Plus";
 
 function PassengerCounter(props) {
     const { type, ticket, id } = props;
     const [count, setCount] = useState(0)
+    const { passengersNum, setPassengersNum } = useContext(AppContext);
     const totalMax = 6
 
     const incrementCount = () => {
         if (count < totalMax) {
-            setCount(count + 1)            
+            setCount(count + 1)  
+            setPassengersNum(passengersNum + 1)          
         }
     }
     const decrementCount = () => {
         if (count > 0) {
-            setCount(count - 1)            
+            setCount(count - 1)
+            setPassengersNum(passengersNum - 1)            
         }
     }
 

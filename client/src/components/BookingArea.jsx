@@ -2,6 +2,8 @@ import { useState, useContext  } from "react"
 import { AppContext } from "../context/context"
 import TextInput from "./TextInput"
 import PassengersInput from "./PassengersInput"
+import PassengerButton from "./PassengerButton"
+import PassengerSettings from "./PassengersSettings"
 import DateInput from "./DateInput"
 import ConfirmButton from "./ConfirmButton";
 import DateTimePicker from "./DateTimePicker";
@@ -20,7 +22,6 @@ function BookingArea() {
     const [chooseStart, setChooseStart] = useState(false)
     const [rotated, setRotated] = useState(false)
     const [time, setTime] = useState("Jetzt");
-    const [passengersNum, setPassengersNum] = useState(1);
     const { tripRequested, setTripRequested } = useContext(AppContext);
     
     const expandSettings = () => {
@@ -66,7 +67,7 @@ function BookingArea() {
                 </button>
                 {/* <DateInput /> */}
                 <button className="flex items-center w-[45%] bg-gray-100 rounded-r-lg py-4 hover:cursor-pointer" onClick={toggleDateSettings}>
-                  <CalendarDays/>
+                  <CalendarDays style={"ml-3"} />
                   <p className="text-xs font-normal pl-2 pr-0.5">{time}</p>      
                   <ChevronDown style={"pr-2 scale-60"} />  
                 </button>
@@ -76,9 +77,7 @@ function BookingArea() {
                   <p className="text-sm font-normal">Fährst du alleine?</p>
                   {/* <PassengersInput /> */}
                   <button className="flex items-center border-1 border-zinc-400 px-3 py-1.5 rounded-full hover:cursor-pointer" onClick={togglePassengerSettings}>
-                    <User4 size={18}/>
-                    <p className="font-normal text-xs px-1">{passengersNum} {passengersNum == 1 ? "Fahrgast" : "Fahrgäste"}</p>
-                    <ChevronDown size={14} style={"pt-0.5"}/>
+                    <PassengerButton />
                   </button>
               </div>
               <div className="flex items-center py-2">
@@ -112,7 +111,7 @@ function BookingArea() {
               <div className="w-full h-0.5 bg-zinc-100 rounded-full my-2"></div>
               <p className="px-2 text-xs">Vorschläge</p>
               <div className="flex items-center py-2">
-                <Bus1 size={22} />
+                <Bus1 size={22} color={"#343C54"}/>
                 <p className="px-2 text-sm">Hauptbahnhof Lübeck</p>
               </div>
               <button onClick={handleRequest}>
@@ -143,22 +142,7 @@ function BookingArea() {
 
         {/* Passenger settings view */}
         { !expanded && passengerSettings && (
-            <>
-              {/* Header */}
-              <div className="w-full flex items-center justify-between pt-4 pb-2">
-                <button onClick={togglePassengerSettings} className="hover:cursor-pointer w-1/4 py-2 pr-2">
-                  <ChevronDown size={20} style={"rotate-90"} />
-                </button>
-                <h1 className="text-lg font-semibold w-3/4">Zusätzliche Fahrgäste</h1>
-              </div>
-              <div></div>
-              {/* Route inputs */}
-              <div className="w-full h-0.5 bg-zinc-100 rounded-full mb-1"></div>
-              <PassengersInput />
-              <button onClick={togglePassengerSettings}>
-                <ConfirmButton label={"Erledigt"}/>
-              </button>
-            </>
+          <PassengerSettings togglePassengerSettings={togglePassengerSettings} />
         )}
 
         </div>

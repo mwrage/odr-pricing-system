@@ -4,9 +4,19 @@ import Car2 from "../assets/icons/Car2";
 import LumLogo from "/lumo-logo.webp"
 import RssRight from "../assets/icons/RSSRight";
 import ArrowDownward from "../assets/icons/ArrowDownward"
+import StackedBarChart from "./StackedBarChart";
+import Legend from "./Legend";
 
 function TripOptionShort(props) {
-    const { walk_to, walk_from, prebooking, departure, stop, arrival,  price } = props
+    const { selected, walk_to, walk_from, prebooking, departure, stop, arrival, price, discount, regular_price } = props
+
+    const segments = [
+        { label: "1", value: 1, color: "bg-zinc-700" },
+        { label: "3,20", value: 3.2, color: "bg-amber-500" },
+        { label: "1,32", value: 1.32, color: "bg-indigo-500" },
+        { label: "0,88", value: 0.88, color: "bg-sky-500" },
+        { label: "-1,80", value: 1.8, color: "bg-pink-500/10 text-pink-700" },
+      ];
 
     return (
         <>              
@@ -43,18 +53,35 @@ function TripOptionShort(props) {
                     </div>
                     
                 )}
-                <div className="w-full h-[1px] bg-zinc-100 rounded-full my-0.5"></div>
+
+                <div className="w-full h-[1px] bg-zinc-200 rounded-full my-0.5"></div>
                 
                 {/* Price */}
-                <div className="flex items-center py-2">
-                    {arrival && (
-                        <p className="px-1 pb-1 w-full">Ankunft um {arrival}</p>
-                    )}
-                    <div className="w-full flex item-center justify-end">
-                        <p className="px-1 font-semibold text-sm">€ {price} </p>
-                        <ArrowDownward size={20} style={"-rotate-90"} />
+                <div className="flex items-end h-full py-2">
+                    <div className="flex flex-col h-full w-full">
+                        {arrival && (
+                            <p className="px-1 pb-1">Ankunft um {arrival}</p>
+                        )}
+                        <p className="text-zinc-500 text-sm pb-1 justify-self-end">Regulärer Fahrtpreis <span className="line-through">€ {regular_price}</span></p>                        
+                    </div>
+
+                    <div className="w-1/2 flex flex-col items-end justify-center">
+                        <div className="flex">
+                            <p className="text-red-500 font-light text-xs pr-5">{discount}</p>                            
+                        </div>
+
+                        <div className="flex">
+                            <p className="px-1 pb-1 font-semibold text-sm">€ {price}</p>
+                            <ArrowDownward size={20} style={"-rotate-90"} />  
+                        </div>  
                     </div>
                 </div>
+                
+                <div className="flex flex-col pb-2">
+                    <StackedBarChart segments={segments} />
+                    <Legend open={selected}/>
+                </div>
+                
         </>
     )
 }

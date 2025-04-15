@@ -10,7 +10,7 @@ function BookingScreen() {
 
   return (
     <>
-      <div className="flex flex-col w-full h-full bg-gray-100 rounded-3xl">
+      <div className="flex flex-col w-full h-full text-zinc-800 bg-gray-100 rounded-3xl inter-300">
         <Map />
         {!tripRequested ? <BookingArea /> : <RequestResults />}
       </div>
