@@ -22,7 +22,7 @@ function BookingArea() {
     const [chooseStart, setChooseStart] = useState(false)
     const [rotated, setRotated] = useState(false)
     const [time, setTime] = useState("Jetzt");
-    const { tripRequested, setTripRequested } = useContext(AppContext);
+    const { tripRequested, setTripRequested, tripTime } = useContext(AppContext);
     
     const expandSettings = () => {
       setExpanded(!expanded)
@@ -32,6 +32,7 @@ function BookingArea() {
       setRotated(!setRotated)
     }
     const toggleDateSettings = () => {
+      console.log(tripTime)
       setDateSettings(!dateSettings)
     }
     const togglePassengerSettings = () => {

@@ -1,9 +1,9 @@
-import { useState } from 'react';
-import { getDay } from 'date-fns';
+import { useState, useContext, useEffect  } from "react"
+import { AppContext } from "../context/context"
 
-function DateTimePicker (props) {
+function DateTimePicker ({ subLabel }) {
 
-    const { subLabel } = props
+    const { tripTime, setTripTime } = useContext(AppContext);
      
     const getTimePeriod = () => {
       const days = []
@@ -66,8 +66,11 @@ function DateTimePicker (props) {
         : generateTimes(20, 0, 0, 40)
   
       setTimes(newTimes)
-      setSelectedTime('')
     }
+
+    useEffect(() => {
+      setTripTime([selected, selectedTime])
+    }, [selected, selectedTime]);
 
     return (
         <>
