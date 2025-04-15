@@ -23,6 +23,7 @@ function BookingArea() {
     const [rotated, setRotated] = useState(false)
     const [time, setTime] = useState("Jetzt");
     const { tripRequested, setTripRequested, tripTime } = useContext(AppContext);
+    const [results, setResults] = useState([]);
     
     const expandSettings = () => {
       setExpanded(!expanded)
@@ -40,10 +41,30 @@ function BookingArea() {
     }
 
     const handleRequest = () => {
-      // ToDo: get real request parameters
-      // ToDo: check request parameters
+      setResults(sendRequestToBackend())
       setTripRequested(true)
     }
+
+    async function sendRequestToBackend () {
+      const data = {
+        prebooking: false,
+        start: {lat: 53.86982462745334, lng: 10.694405102733041},
+        target: {lat: 53.86704111436375, lng: 10.680672192769197},
+        departure: true,
+        time: "2019-06-24T01:23:45",
+      }
+    
+      const response = await fetch("http://localhost:8080/api/process-request", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+    
+      const result = await response.json();
+      console.log("Antwort vom Backend:", result);
+    };
 
     return (
       <> 
