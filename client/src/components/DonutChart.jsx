@@ -1,7 +1,7 @@
 import { useRef, useEffect, useState } from 'react';
 import * as d3 from 'd3';
 
-const DonutChart = ({ data, width = 300, height = 300 }) => {
+const DonutChart = ({ data, total, max, width = 300, height = 300 }) => {
     const ref = useRef();
     const radius = Math.min(width, height) / 2;
     const color = d3.scaleOrdinal(d3.schemeCategory10);
@@ -33,9 +33,6 @@ const DonutChart = ({ data, width = 300, height = 300 }) => {
 
   }, [data, width, height]);
 
-  const total = "6.40€"
-  const max = "8.20€"
-
   return (
     <div className="relative w-1/2 aspect-square">
       <svg
@@ -46,8 +43,8 @@ const DonutChart = ({ data, width = 300, height = 300 }) => {
       ></svg>
       <div className="absolute inset-0 flex items-center justify-center text-center pointer-events-none">
         <div className='-space-y-1'>
-          <p className="text-xl font-bold inter-800">{total}</p>
-          <p className="text-xs inter-300 text-zinc-600">statt {max}</p>
+          <p className="text-xl font-bold inter-800">{total.toFixed(2)}€</p>
+          <p className="text-xs inter-300 text-zinc-600">statt {max.toFixed(2)}€</p>
         </div>
       </div>
 
@@ -62,10 +59,10 @@ const DonutChart = ({ data, width = 300, height = 300 }) => {
               left: `calc(50% + ${x * 0.85}px)`,
               top: `calc(50% + ${y * 0.76}px)`,
               transform: 'translate(-50%, -50%)',
-              color: d.data.color,
+              color: d.data.textColorDonut,
             }}
           >
-            <p>{d.data.label}</p>
+            <p>{d.data.label.toFixed(2)}€</p>
             <p>{d.data.factor}</p>
           </div>
         );

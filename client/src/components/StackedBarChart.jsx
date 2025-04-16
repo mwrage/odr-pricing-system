@@ -1,5 +1,3 @@
-import { useState } from "react"
-
 function StackedBarChart({ segments, borderRadius = 8 }) {
     const total = segments.reduce((sum, seg) => sum + seg.value, 0);
 
@@ -30,7 +28,7 @@ function StackedBarChart({ segments, borderRadius = 8 }) {
           return (
             <div
               key={idx}
-              className={`flex items-center justify-center text-xs py-[0.15rem] ${seg.textColor}`}
+              className={`flex items-center justify-center text-xs py-[0.15rem] ${seg.textColorBar}`}
               style={{
                 width: `${widthPercent}%`,
                 backgroundColor: seg.color,

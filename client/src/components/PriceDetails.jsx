@@ -7,28 +7,19 @@ import CloudSun from "../assets/icons/CloudSun";
 import DonutChart from "./DonutChart";
 
 function PriceDetails(props) {
-    const { walk_to, walk_from, prebooking, departure, stop, arrival, price, discount, regular_price } = props
+    const { walk_to, walk_from, prebooking, departure, stop, arrival, price, discount, regular_price, segments } = props
     const [showExplanation, setShowExplanation] = useState(1)
     const title = "Hier kommt der Titel hin."
     const subtitle = "Hier kommt die Untertitel hin."
     const rule = "Wenn du kein gültiges ÖPNV-Ticket besitzt, entspricht dein Grundpreis dem Einzelfahrschein der geltenden Preisstufe."
     const state = "Hier kommt der Zustand hin."
 
-    const segments = [
-        { factor:"Min.", label: "1€", value: 1, color: "#3f3f46", opacity: 1 },
-        { factor:"Alternativangebot", label: "-1,80€", value: 1.8, color: "#ec4899", opacity: 0.2 },
-        { factor:"Ticket", label: "3,20€", value: 3.2, color: "#f59e0b", opacity: 1},
-        { factor:"Sicherheit", label: "1,32€", value: 1.32, color: "#6366f1", opacity: 1 },
-        { factor:"Komfort", label: "0,88€", value: 0.88, color: "#0ea5e9", opacity: 1 },
-
-      ];
-
 
     return (
       <div className="flex flex-col h-full">
 
         <div className="flex items-center justify-center w-full pt-8 pb-10">
-            <DonutChart data={segments} /> 
+            <DonutChart total={price} max={regular_price} data={segments} /> 
         </div>
         
 
