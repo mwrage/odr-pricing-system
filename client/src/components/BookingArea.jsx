@@ -49,9 +49,9 @@ function BookingArea() {
       const data = {
         prebooking: false,
         start: {lat: 53.86982462745334, lng: 10.694405102733041},
-        target: {lat: 53.86704111436375, lng: 10.680672192769197},
+        dest: {lat: 53.86704111436375, lng: 10.680672192769197},
         departure: true,
-        time: "2019-06-24T01:23:45",
+        time: "2025-04-18T21:34:45",
       }
     
       const response = await fetch("http://localhost:8080/api/process-request", {
