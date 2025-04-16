@@ -1,4 +1,3 @@
-import { useState } from "react"
 import ChevronDown from "../assets/icons/ChevronDown";
 import Car2 from "../assets/icons/Car2";
 import LumLogo from "/lumo-logo.webp"
@@ -8,15 +7,24 @@ import StackedBarChart from "./StackedBarChart";
 import Legend from "./Legend";
 
 function TripOptionShort(props) {
-    const { selected, walk_to, walk_from, prebooking, departure, stop, arrival, price, discount, regular_price } = props
+    const { selected, walk_to, walk_from, prebooking, departure, stop, arrival, price, discount, regular_price, 
+            ticket_share, alternative_share, safety_share, comfort_share    } = props
 
     const segments = [
-        { label: "1", value: 1, color: "bg-zinc-700" },
-        { label: "3,20", value: 3.2, color: "bg-amber-500" },
-        { label: "1,32", value: 1.32, color: "bg-indigo-500" },
-        { label: "0,88", value: 0.88, color: "bg-sky-500" },
-        { label: "-1,80", value: 1.8, color: "bg-pink-500/10 text-pink-700" },
-      ];
+        { factor:"Min.", label: 1, value: 1, color: "#3f3f46", textColor: "text-white" },
+        { factor:"Ticket", label: ticket_share, value: ticket_share < 0 ? ticket_share * (-1) : ticket_share, color: ticket_share < 0 ? "rgba(245, 158, 11, 0.2)" : "#f59e0b", textColor: ticket_share < 0 ? "text-zinc-800" : "text-white"},        
+        { factor:"Alternativangebot", label: alternative_share, value: alternative_share < 0 ? alternative_share * (-1) : alternative_share, color: alternative_share < 0 ? "rgba(236, 72, 153, 0.2)" : "#ec4899", textColor: alternative_share < 0 ? "text-zinc-800" : "text-white"},
+        { factor:"Sicherheit", label: safety_share, value: safety_share < 0 ? safety_share * (-1) : safety_share, color: safety_share < 0 ? "rgba(99, 102, 241, 0.2)" : "#6366f1", textColor: safety_share < 0 ? "text-zinc-800" : "text-white"},
+        { factor:"Komfort", label: comfort_share, value: comfort_share < 0 ? comfort_share * (-1) : comfort_share, color: comfort_share < 0 ? "rgba(14, 165, 233, 0.2)" : "#0ea5e9", textColor: comfort_share < 0 ? "text-zinc-800" : "text-white"},  
+    ];
+
+    // const segments = [
+    //     { label: "1", value: 1, color: "bg-zinc-700" },
+    //     { label: "3,20", value: 3.2, color: "bg-amber-500" },
+    //     { label: "1,32", value: 1.32, color: "bg-indigo-500" },
+    //     { label: "0,88", value: 0.88, color: "bg-sky-500" },
+    //     { label: "-1,80", value: 1.8, color: "bg-pink-500/10 text-pink-700" },
+    //   ];
 
     return (
         <>              

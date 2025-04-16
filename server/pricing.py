@@ -48,9 +48,9 @@ def calculate_price(factor_classifications, ticket_level):
     safety_share = temp_safety_share if factor_classifications['safety'] else temp_safety_share * (-1)
     temp_comfort_share = dynamic_surcharge * factor_shares['comfort'] 
     comfort_share = temp_comfort_share if factor_classifications['comfort'] else temp_comfort_share * (-1)
-
+    print("TEST")
     return {'total_price': total_price, 'individual_price': individual_price, 'discount': discount,
-            'ticket_share': ticket_share, 'alternative_share': alternative_share, 'safety_share': safety_share, 'comfort_share': comfort_share}
+            'ticket_share': round(ticket_share, 2), 'alternative_share': round(alternative_share, 2), 'safety_share': round(safety_share, 2), 'comfort_share': round(comfort_share, 2)}
 
 # calculate ticket price and price components based on request
 def get_ticket_price(has_ticket, ticket_level, lumo_time, bus_time, walking_distance, waiting_time, weather, temperature):

@@ -22,7 +22,7 @@ function BookingArea() {
     const [chooseStart, setChooseStart] = useState(false)
     const [rotated, setRotated] = useState(false)
     const [time, setTime] = useState("Jetzt");
-    const { tripRequested, setTripRequested, tripTime, setRequestResponse } = useContext(AppContext);
+    const { tripRequested, setTripRequested, tripTime, setRequestResponse, setWaitingForResponse } = useContext(AppContext);
     const [results, setResults] = useState([]);
     
     const expandSettings = () => {
@@ -42,11 +42,12 @@ function BookingArea() {
 
     const handleRequest = () => {
       setResults(sendRequestToBackend())
-      setTripRequested(true)
+      setWaitingForResponse(true)
     }
 
     async function sendRequestToBackend () {
       const data = {
+        debug: true,
         prebooking: false,
         ticket: true,
         start: {lat: 53.86982462745334, lng: 10.694405102733041},
@@ -65,7 +66,8 @@ function BookingArea() {
     
       const result = await response.json();
       setRequestResponse([result])
-      console.log("Antwort vom Backend:", result.data);
+      setWaitingForResponse(false)
+      setTripRequested(true)
     };
 
     return (

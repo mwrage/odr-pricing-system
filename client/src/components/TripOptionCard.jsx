@@ -7,12 +7,11 @@ import QuestionMarkCircle from "../assets/icons/QuestionMarkCircle";
 
 
 function TripOptionCard(props) {
-    const { index, selected, onClick, type, walk_to, walk_from, prebooking, departure, stop, arrival, price, discount, regular_price } = props
+    const { index, selected, onClick, type, walk_to, walk_from, prebooking, departure, stop, arrival, price, discount, regular_price, ticket_share, alternative_share, safety_share, comfort_share } = props
     const [showDetails, setShowDetails] = useState(false)
     const [isOpen, setIsOpen] = useState(false)
 
     return (
-        <>
             <div key={index} className={`flex flex-col w-full h-fit bg-white border ${selected ? "border-black" : "border-zinc-200"} rounded-lg pt-3 mb-4 text-sm`} onClick={onClick}>
                 {showDetails ? (
                     <>
@@ -33,12 +32,11 @@ function TripOptionCard(props) {
                     </>
                 ) : (
                     <>
-                    <TripOptionShort selected={selected} walk_to={walk_to} walk_from={walk_from} prebooking={prebooking} departure={departure} stop={stop} arrival={arrival} price={price} discount={discount} regular_price={regular_price}/>
+                    <TripOptionShort selected={selected} walk_to={walk_to} walk_from={walk_from} prebooking={prebooking} departure={departure} stop={stop} arrival={arrival} price={price} discount={discount} regular_price={regular_price} ticket_share={ticket_share} alternative_share={alternative_share} safety_share={safety_share} comfort_share={comfort_share}/>
                     <button className="w-11/12 self-center text-sm text-center bg-zinc-800 text-white mt-2 mb-3 rounded-lg py-2" onClick={() => setShowDetails(true)}>Mehr zu meinem Preis</button>
                     </>
                 )}
             </div>
-        </>
     )
 }
 
