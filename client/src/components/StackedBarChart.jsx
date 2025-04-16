@@ -1,4 +1,4 @@
-function StackedBarChart({ segments, borderRadius = 8 }) {
+function StackedBarChart({ segments, borderRadius = 6 }) {
     const total = segments.reduce((sum, seg) => sum + seg.value, 0);
 
     const sortedSegments = [...segments].sort((a, b) => {
@@ -11,10 +11,10 @@ function StackedBarChart({ segments, borderRadius = 8 }) {
 
     return (
       <div
-        className="w-full flex overflow-hidden"
+        className="w-full flex overflow-hidden border border-zinc-200"
         style={{
           borderRadius,
-          boxShadow: "inset 0 0 0 1px #ccc",
+          boxShadow: "inset 0 0 0 1px #cccccc",
         }}
       >
         {sortedSegments.map((seg, idx) => {

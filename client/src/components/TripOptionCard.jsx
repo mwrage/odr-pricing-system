@@ -20,7 +20,7 @@ function TripOptionCard(props) {
     ];
 
     return (
-            <div key={index} className={`flex flex-col w-full h-fit bg-white border ${selected ? "border-black" : "border-zinc-200"} rounded-lg pt-3 mb-4 text-sm`} onClick={onClick}>
+            <div key={index} className={`flex flex-col w-full h-fit bg-white border ${selected ? "border-black" : "border-zinc-200"} rounded-lg px-2 pt-3 mb-4 text-sm`} onClick={onClick}>
                 {showDetails ? (
                     <>
                     <div className="w-full flex items-center justify-between px-2">
@@ -42,7 +42,7 @@ function TripOptionCard(props) {
                     <>
                     {/* <TripOptionShort selected={selected} walk_to={walk_to} walk_from={walk_from} prebooking={prebooking} departure={departure} stop={stop} arrival={arrival} price={price} discount={discount} regular_price={regular_price} ticket_share={ticket_share} alternative_share={alternative_share} safety_share={safety_share} comfort_share={comfort_share}/> */}
                     <TripOptionShort selected={selected} walk_to={walk_to} walk_from={walk_from} prebooking={prebooking} departure={departure} stop={stop} arrival={arrival} price={price} discount={discount} regular_price={regular_price} segments={segments}/>
-                    <button className="hover:cursor-pointer w-11/12 self-center text-sm text-center bg-zinc-800 text-white mt-2 mb-3 rounded-lg py-2" onClick={() => setShowDetails(true)}>Mehr zu meinem Preis</button>
+                    <button className="hover:cursor-pointer w-full self-center text-sm text-center bg-zinc-800 text-white mt-2 mb-3 rounded-lg py-2" onClick={() => setShowDetails(true)}>Mehr zu meinem Preis</button>
                     </>
                 )}
             </div>
