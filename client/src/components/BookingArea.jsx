@@ -48,6 +48,7 @@ function BookingArea() {
     async function sendRequestToBackend () {
       const data = {
         prebooking: false,
+        ticket: true,
         start: {lat: 53.86982462745334, lng: 10.694405102733041},
         dest: {lat: 53.86704111436375, lng: 10.680672192769197},
         departure: true,

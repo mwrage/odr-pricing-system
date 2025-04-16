@@ -52,6 +52,11 @@ def calculate_price(factor_classifications, ticket_level):
     return {'total_price': total_price, 'individual_price': individual_price, 'discount': discount,
             'ticket_share': ticket_share, 'alternative_share': alternative_share, 'safety_share': safety_share, 'comfort_share': comfort_share}
 
+# calculate ticket price and price components based on request
+def get_ticket_price(has_ticket, ticket_level, lumo_time, bus_time, walking_distance, waiting_time, weather, temperature):
+    factor_impacts = determine_factor_impact(has_ticket, lumo_time, bus_time, walking_distance, waiting_time, weather, temperature)
+    pricing = calculate_price(factor_impacts, ticket_level)
+    return pricing
 
 
 # example: determine_factor_impact(True, 10, 12, 124, 8, "bad", 12)
