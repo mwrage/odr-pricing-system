@@ -4,7 +4,6 @@ import LumLogo from "/lumo-logo.webp"
 import RssRight from "../assets/icons/RSSRight";
 import ArrowDownward from "../assets/icons/ArrowDownward"
 import StackedBarChart from "./StackedBarChart";
-import Legend from "./Legend";
 
 function TripOptionShort(props) {
     const { selected, walk_to, walk_from, prebooking, departure, stop, arrival, price, discount, regular_price, segments } = props
@@ -58,7 +57,7 @@ function TripOptionShort(props) {
 
                     <div className="w-1/2 flex flex-col items-end justify-center">
                         <div className="flex">
-                            <p className="text-red-500 font-light text-xs pr-5">{discount}%</p>                            
+                            <p className="text-red-500 font-light text-xs pr-5">-{discount}%</p>                            
                         </div>
 
                         <div className="flex">
@@ -70,7 +69,6 @@ function TripOptionShort(props) {
                 
                 <div className="flex flex-col pb-2 px-2">
                     <StackedBarChart segments={segments} />
-                    <Legend open={selected}/>
                 </div>
                 
         </>

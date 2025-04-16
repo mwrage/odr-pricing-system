@@ -9,7 +9,7 @@ function PassengerButton({ num })  {
         <>
             <User4 size={18}/>
             <p className="font-normal text-xs px-1">{passengersNum} {passengersNum == 1 ? "Fahrgast" : "Fahrgäste"}</p>
-            <ChevronDown size={14} style={"pt-0.5"}/>    
+            <ChevronDown size={14} style={"pb-0.5"}/>    
         </>
 
     );
