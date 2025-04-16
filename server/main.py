@@ -22,7 +22,7 @@ def process_trip_request():
     data = request.get_json()
     routing_data = get_routing_information(data['start']['lat'], data['start']['lng'], data['dest']['lat'], data['dest']['lng'], data['prebooking'], data['time'])
     pricing_data = get_ticket_price(data['ticket'], routing_data['ticket_level'], 10, routing_data['bus_time'], routing_data['total_walking_distance'], 10, routing_data['weather'], routing_data['temperature'])
-    req_data = {'request': data, 'route': routing_data, 'pricing': pricing_data}
+    req_data = {'id': 0, 'request': data, 'route': routing_data, 'pricing': pricing_data}
     return jsonify(req_data)
 
 

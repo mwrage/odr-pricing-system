@@ -1,4 +1,5 @@
-import { useState } from "react"
+import { useState, useContext  } from "react"
+import { AppContext } from "../context/context"
 import TripOptionCard from "./TripOptionCard"
 import PassengerButton from "./PassengerButton";
 import ConfirmButton from "./ConfirmButton";
@@ -10,7 +11,7 @@ function RequestResults() {
     const [expanded, setExpanded] = useState(false)
     const [selectedOption, setSelectedOption] = useState(0);
     const [booked, setBooked] = useState(false)
-
+    const { requestResponse } = useContext(AppContext);
     const expandList = () => {
         setExpanded(!expanded)
       }
@@ -19,6 +20,8 @@ function RequestResults() {
     }
     const simulateBooking = () => {
         setBooked(true)
+        console.log("Test JSON data:")
+        console.log(requestResponse)
         const timer = setTimeout(() => {
             setBooked(false);
         },2000);
@@ -37,10 +40,17 @@ function RequestResults() {
 
                 <div className="overflow-y-scroll h-full no-scrollbar">
                     <h1 className="font-medium py-2">lümo</h1>
+                    {requestResponse.map(option => (
+                        <TripOptionCard index={option.id} selected={option.id === selectedOption} onClick={() => setSelectedOption(option.id)} type={"lumo"} walk_to={option.route.walking_time_org_stop} walk_from={option.route.walking_time_dest_stop} prebooking={option.request.prebooking} departure={"8"} stop={option.route.next_stop_org_name} price={option.pricing.individual_price} discount={option.pricing.discount} regular_price={option.pricing.total_price} />
+                    ))}
+                        {/* <div key={person.id}>
+                        <h3>{person.name}</h3>
+                        <p>Alter: {person.alter}</p>
+                        </div> 
                     <TripOptionCard index={0} selected={0 === selectedOption} onClick={() => setSelectedOption(0)} type={"lumo"} walk_to={1} walk_from={4} prebooking={false} departure={"8"} stop={"Kronsforder Alee"} price={"6.40"} discount={"-22%"} regular_price={"8.20"} />
-                    <TripOptionCard index={1} selected={1 === selectedOption} onClick={() => setSelectedOption(1)} type={"lumo"} walk_to={1} walk_from={4} prebooking={true} departure={"21:30 - 21:50"} stop={"Kronsforder Alee"} arrival={"21:52"} price={"2.00"} discount={"-22%"} regular_price={"8.20"} />     
-                    <TripOptionCard index={2} />                
-                </div>
+                    <TripOptionCard index={1} selected={1 === selectedOption} onClick={() => setSelectedOption(1)} type={"lumo"} walk_to={1} walk_from={4} prebooking={true} departure={"21:30 - 21:50"} stop={"Kronsforder Alee"} arrival={"21:52"} price={"2.00"} discount={"-22%"} regular_price={"8.20"} />       
+              */}  
+              </div>
             </div>
 
             <div className="w-full h-40 bg-white z-100 rounded-b-xl bottom-0 p-2 shadow-[0_-3px_9px_rgba(0,0,0,0.4)]">

@@ -101,7 +101,7 @@ def get_routing_information(lat_org, long_org, lat_dest, long_dest, plan_pref, p
     # 4. waiting time --> lumo simulation
     # 5. weather + temperature --> TODO: radius (out-/inside)
     weather_temperature = get_weather_data()
-    return {'ticket_level': ticket_level, 'next_stop_org_name': next_stop_org['name_next_station'], 'bus_time': bus_time, 'total_walking_distance': total_walking_distance, 'weather': weather_temperature['weather'], 'temperature': weather_temperature['temperature']}
+    return {'ticket_level': ticket_level, 'next_stop_org_name': next_stop_org['name_next_station'], 'bus_time': bus_time, 'walking_time_org_stop': dist_org_stop['time'], 'walking_time_dest_stop': dist_dest_stop['time'], 'walking_dist_org_stop': dist_org_stop['distance'], 'walking_dist_dest_stop': dist_dest_stop['distance'], 'total_walking_distance': total_walking_distance, 'weather': weather_temperature['weather'], 'temperature': weather_temperature['temperature']}
 
 # TODO
 # get next stop within XX m radius as alternative to reduce price if necessary

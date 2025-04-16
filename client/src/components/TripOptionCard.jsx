@@ -1,5 +1,4 @@
 import { useState } from "react"
-import { Description, Dialog, DialogPanel, DialogTitle } from '@headlessui/react'
 import TripOptionShort from "./TripOptionShort";
 import PriceDetails from "./PriceDetails";
 import ChevronDown from "../assets/icons/ChevronDown";

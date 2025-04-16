@@ -22,7 +22,7 @@ function BookingArea() {
     const [chooseStart, setChooseStart] = useState(false)
     const [rotated, setRotated] = useState(false)
     const [time, setTime] = useState("Jetzt");
-    const { tripRequested, setTripRequested, tripTime } = useContext(AppContext);
+    const { tripRequested, setTripRequested, tripTime, setRequestResponse } = useContext(AppContext);
     const [results, setResults] = useState([]);
     
     const expandSettings = () => {
@@ -64,7 +64,8 @@ function BookingArea() {
       });
     
       const result = await response.json();
-      console.log("Antwort vom Backend:", result);
+      setRequestResponse([result])
+      console.log("Antwort vom Backend:", result.data);
     };
 
     return (

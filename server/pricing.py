@@ -39,7 +39,7 @@ def calculate_price(factor_classifications, ticket_level):
     # needs oriented price
     individual_price = (ticket_price[ticket_level] * factor_classifications['ticket']) + min_surcharge + (dynamic_surcharge * factor_classifications['alternative'] * factor_shares['alternative']) + (dynamic_surcharge * factor_classifications['safety'] * factor_shares['safety']) + (dynamic_surcharge * factor_classifications['comfort'] * factor_shares['comfort'])
     # discount due to situational factors
-    discount = ((total_price - individual_price) / total_price)
+    discount = round(((total_price - individual_price) / total_price), 2) * 100
     temp_ticket_share = ticket_price[ticket_level]
     ticket_share = temp_ticket_share if factor_classifications['ticket'] == 1 else temp_ticket_share * (-1)
     temp_alternative_share = dynamic_surcharge * factor_shares['alternative'] 
