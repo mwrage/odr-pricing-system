@@ -2,15 +2,10 @@ function StackedBarChart({ segments, borderRadius = 8 }) {
     const total = segments.reduce((sum, seg) => sum + seg.value, 0);
 
     const sortedSegments = [...segments].sort((a, b) => {
-      // 1€ immer zuerst
       if (a.label === "1€") return -1;
       if (b.label === "1€") return 1;
-    
-      // Positive Werte vor negativen
       if (a.label > 0 && b.label <= 0) return -1;
       if (a.label <= 0 && b.label > 0) return 1;
-    
-      // Wenn beide gleich (beide positiv oder beide negativ), dann Reihenfolge egal
       return 0;
     });
 

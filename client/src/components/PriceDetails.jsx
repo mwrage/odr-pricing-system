@@ -5,15 +5,11 @@ import Bus1 from "../assets/icons/Bus1";
 import Ticket1 from "../assets/icons/Ticket1";
 import CloudSun from "../assets/icons/CloudSun";
 import DonutChart from "./DonutChart";
+import Explanation from "./Explanation";
 
 function PriceDetails(props) {
     const { walk_to, walk_from, prebooking, departure, stop, arrival, price, discount, regular_price, segments } = props
     const [showExplanation, setShowExplanation] = useState(1)
-    const title = "Hier kommt der Titel hin."
-    const subtitle = "Hier kommt die Untertitel hin."
-    const rule = "Wenn du kein gültiges ÖPNV-Ticket besitzt, entspricht dein Grundpreis dem Einzelfahrschein der geltenden Preisstufe."
-    const state = "Hier kommt der Zustand hin."
-
 
     return (
       <div className="flex flex-col h-full">
@@ -39,14 +35,11 @@ function PriceDetails(props) {
         </div>
         <div className="mb2">
         
-            <div lang="de" className={`hyphens-auto px-2.5 pb-2 rounded-b-md ${showExplanation === 1 ? "text-amber-500" : showExplanation === 2 ? "text-pink-500" : showExplanation === 3 ? "text-indigo-500" : "text-sky-500"}`}>
-                <h2 className={`pt-2 inter-500`}>{title}</h2>
-                <h3>{subtitle}</h3>
-                <p className="text-zinc-800 pt-1">{rule}</p>
-                <div className={`w-full h-0.5 rounded-full my-2 border-b-2 border-dashed ${showExplanation === 1 ? "border-amber-500" : showExplanation === 2 ? "border-pink-500" : showExplanation === 3 ? "border-indigo-500" : "border-sky-500"}`}></div>
-                <p className="text-zinc-800 inter-500 text-center">{state}</p>
-                <p className="text-zinc-800 text-center pt-1">{subtitle} {subtitle}</p>
-            </div>
+            <Explanation isTicket={showExplanation === 1 ? true : false} factor={
+                showExplanation === 1 ? "ticket" : showExplanation === 2 ? "alternative" : showExplanation === 3 ? "safety" : "comfort"
+                } isDiscount={true} state={"tbd"} color={
+                    showExplanation === 1 ? "text-amber-500 border-amber-500" : showExplanation === 2 ? "text-pink-500 border-pink-500" : showExplanation === 3 ? "text-indigo-500 border-indigo-500" : "text-sky-500 border-sky-500"
+                    } />
 
         </div>
 
