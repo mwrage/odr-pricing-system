@@ -1,7 +1,9 @@
 import { useState } from "react";
+import LumoLogo from "/lumo-logo.webp"
+import Bus1 from "../assets/icons/Bus1";
 
 function Explanation(props) {
-    const { isTicket, factor, isDiscount, state, color, ticket_level = "p1", minutes = 666, totalWalkingDistance = 666 } = props;
+    const { factor, isDiscount, state, color, ticket_level = "p1", lumoTime = 666, busTime = 666, totalWalkingDistance = 666 } = props;
     const [selectedTicketLevel, setSelectedTicketLevel] = useState(ticket_level);
     const ticketLevels = [
         { id: "p1", label: "Preisstufe 1", price: "2.40€", region: "Innerhalb von Bad Schwartau / Stockelsdorf" },
@@ -31,15 +33,15 @@ function Explanation(props) {
         subtitle = "SUBTITEL für Alternativangebot"
         if (isDiscount) {
             rule =  "Wenn du mit dem Bus wesentlich länger zu deinem Ziel brauchst, wird dein Preis reduziert, weil es kein vergleichbares Angebot gibt."    
-            state_desc = `Der Bus braucht ${minutes} Minuten länger.`
+            state_desc = `Der Bus braucht ${busTime} Minuten länger.`
         } else {
             rule = "Wenn der Bus dich genauso schnell ans Ziel bringen kann, enthält der Preis einen Zuschlag, weil es ein vergleichbares Angebot gibt."
-            state_desc = `Der Bus ist ${minutes} Minuten schneller.`
+            state_desc = `Der Bus ist ${busTime} Minuten schneller.`
         }
     }
     else if (factor === "safety") {
         title = "Sicherheit"
-        subtitle = "lümo bringt dich sicher und verlässlich ans Ziel."
+        subtitle = "lümo bringt dich sicher ans Ziel."
         state_desc = `Die Haltestellen sind insgesamt ${totalWalkingDistance}m entfernt.`
         if (isDiscount) {
             rule =  "Wenn du zum Ein- oder Ausstieg einen weiten Weg zurücklegen musst, reduziert dein Sicherheitsbedürfnis den Preis."    
@@ -58,13 +60,13 @@ function Explanation(props) {
 
     return (
         <div lang="de" className={`hyphens-auto px-2.5 pb-2 rounded-b-md ${color}`}>
-            <h2 className={`pt-2 inter-500`}>{isTicket && !isDiscount ? "Grundpreis: " : isDiscount ? "Reduzierung: " : "Komfortzuschlag: "}{title}</h2>
+            <h2 className={`pt-2 inter-500`}>{factor == "ticket" && !isDiscount ? "Grundpreis: " : isDiscount ? "Reduzierung: " : "Komfortzuschlag: "}{title}</h2>
             <h3>{subtitle}</h3>
             <p className="text-zinc-800 pt-1">{rule}</p>
             <div className={`w-full h-0.5 rounded-full my-2 border-b-2 border-dashed ${color}`}></div>
-            <p className="text-zinc-800 inter-500 text-center">{state_desc}</p>
-            {/* <p className="text-zinc-800 text-center pt-1">{subtitle} {subtitle}</p> */}
-            {isTicket && (
+            <p className="text-zinc-800 inter-400 text-center">{state_desc}</p>
+
+            {factor == "ticket" ? (
                 <div className="flex flex-col items-center justify-between">
                     <div className="flex justify-between w-full">
                         {ticketLevels.map(({ id, label }) => (
@@ -79,6 +81,24 @@ function Explanation(props) {
                         </div>
                     )}
                 </div>
+            ) : 
+            factor == "alternative" ? (
+                <div className="w-full flex items-center justify-center text-zinc-700">
+                    <div className="flex items-center justify-center py-1.5">
+                        <img src={LumoLogo} className="mr-1 w-6 h-6"></img>
+                        <p className="pl-1">{lumoTime} min</p>
+                    </div>
+                    <div className="w-[1px] mx-2 h-6 bg-pink-500"></div>
+                    <div className="flex items-center justify-center py-1.5">
+                        <Bus1 size={24} color={"#ec4899"} />
+                        <p className="pl-1">{busTime} min</p>
+                    </div>
+                </div>
+            ) :
+            factor == "safety" ? (
+                "test"
+            ): (
+                "test"
             )}
         </div>
     )
