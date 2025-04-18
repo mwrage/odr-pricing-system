@@ -35,6 +35,10 @@ const ContextProvider = ({ children }) => {
   // options calculated by the backend
   const [requestResponse, setRequestResponse] = useState([]);
 
+  useEffect(() => {
+    console.log(requestResponse)
+  }, [requestResponse]);
+
   return (
     <AppContext.Provider value={{ tripRequested, setTripRequested, passengersNum, setPassengersNum, tripTime, setTripTime, isDeparture, setIsDeparture,
     requestResponse, setRequestResponse, waitingForResponse, setWaitingForResponse, originCoords, setOriginCoords, destinationCoords, setDestinationCoords,

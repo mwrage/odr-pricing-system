@@ -9,7 +9,6 @@ api_key = 'Qg_RbMu24ib7wN9oPsZRvww6ikkzpvvZHLJ4wpoPp-w'
 hl = "lübeck"
 bs = "bad schwartau"
 sd = "stockelsdorf"
-odr_coords = get_odr_position()
 
 # get coordinates for the next stop to a specified location
 def get_next_stops(lat_org, long_org):
@@ -102,7 +101,8 @@ def get_routing_information(lat_org, long_org, lat_dest, long_dest, plan_pref, p
     dist_dest_stop = get_walking_time_distance(lat_org, long_org, next_stop_dist['coords_next_station']['lat'], next_stop_dist['coords_next_station']['lng'])
     total_walking_distance = dist_org_stop['distance'] + dist_dest_stop['distance']
     # 4. waiting time
-    odr_wait_time = calculate_odr_trip_time(lat_org, long_org, next_stop_org['coords_next_station']['lat'], next_stop_org['coords_next_station']['lng'])
+    odr_coords = get_odr_position()
+    odr_wait_time = calculate_odr_trip_time(odr_coords['lat'], odr_coords['lng'], next_stop_org['coords_next_station']['lat'], next_stop_org['coords_next_station']['lng'])
     # 5. TODO: weather + temperature --> radius (out-/inside)
     weather_temperature = get_weather_data()
     return {'ticket_level': ticket_level, 'next_stop_org_name': next_stop_org['name_next_station'], 'bus_time': bus_time, 'odr_trip_time': odr_trip_time['time'], 'odr_wait_time': odr_wait_time['time'], 'walking_time_org_stop': dist_org_stop['time'], 'walking_time_dest_stop': dist_dest_stop['time'], 'walking_dist_org_stop': dist_org_stop['distance'], 'walking_dist_dest_stop': dist_dest_stop['distance'], 'total_walking_distance': total_walking_distance, 'weather': weather_temperature['weather'], 'temperature': weather_temperature['temperature']}
