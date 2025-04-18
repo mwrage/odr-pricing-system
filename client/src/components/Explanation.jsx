@@ -3,7 +3,7 @@ import LumoLogo from "/lumo-logo.webp"
 import Bus1 from "../assets/icons/Bus1";
 
 function Explanation(props) {
-    const { factor, isDiscount, state, color, ticket_level = "p1", lumoTime = 666, busTime = 666, totalWalkingDistance = 666 } = props;
+    const { factor, isDiscount, state, color, ticket_level, lumoTime, busTime, totalWalkingDistance = 666 } = props;
     const [selectedTicketLevel, setSelectedTicketLevel] = useState(ticket_level);
     const ticketLevels = [
         { id: "p1", label: "Preisstufe 1", price: "2.40€", region: "Innerhalb von Bad Schwartau / Stockelsdorf" },
@@ -33,10 +33,10 @@ function Explanation(props) {
         subtitle = "SUBTITEL für Alternativangebot"
         if (isDiscount) {
             rule =  "Wenn du mit dem Bus wesentlich länger zu deinem Ziel brauchst, wird dein Preis reduziert, weil es kein vergleichbares Angebot gibt."    
-            state_desc = `Der Bus braucht ${busTime} Minuten länger.`
+            state_desc = `Der Bus braucht ${(busTime-lumoTime).toFixed()} Minuten länger.`
         } else {
             rule = "Wenn der Bus dich genauso schnell ans Ziel bringen kann, enthält der Preis einen Zuschlag, weil es ein vergleichbares Angebot gibt."
-            state_desc = `Der Bus ist ${busTime} Minuten schneller.`
+            state_desc = `Der Bus ist ${(lumoTime-busTime).toFixed()} Minuten schneller.`
         }
     }
     else if (factor === "safety") {
@@ -86,12 +86,12 @@ function Explanation(props) {
                 <div className="w-full flex items-center justify-center text-zinc-700">
                     <div className="flex items-center justify-center py-1.5">
                         <img src={LumoLogo} className="mr-1 w-6 h-6"></img>
-                        <p className="pl-1">{lumoTime} min</p>
+                        <p className="pl-1">{lumoTime.toFixed()} min</p>
                     </div>
                     <div className="w-[1px] mx-2 h-6 bg-pink-500"></div>
                     <div className="flex items-center justify-center py-1.5">
                         <Bus1 size={24} color={"#ec4899"} />
-                        <p className="pl-1">{busTime} min</p>
+                        <p className="pl-1">{busTime.toFixed()} min</p>
                     </div>
                 </div>
             ) :

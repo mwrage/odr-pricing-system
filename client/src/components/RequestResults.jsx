@@ -46,7 +46,11 @@ function RequestResults() {
                     <h1 className="font-medium py-2">lümo</h1>
                     {requestResponse.map(option => (
                         <>
-                        <TripOptionCard index={option.id} selected={option.id === selectedOption} onClick={() => setSelectedOption(option.id)} type={"lumo"} walk_to={option.route.walking_time_org_stop} walk_from={option.route.walking_time_dest_stop} prebooking={option.request.prebooking} departure={option.route.odr_wait_time} stop={option.route.next_stop_org_name} price={option.pricing.individual_price} discount={option.pricing.discount} regular_price={option.pricing.total_price} ticket_share={option.pricing.ticket_share} alternative_share={option.pricing.alternative_share} safety_share={option.pricing.safety_share} comfort_share={option.pricing.comfort_share}  />
+                        <TripOptionCard index={option.id} selected={option.id === selectedOption} onClick={() => setSelectedOption(option.id)} type={"lumo"} 
+                        walk_to={option.route.walking_time_org_stop} walk_from={option.route.walking_time_dest_stop} prebooking={option.request.prebooking} departure={option.route.odr_wait_time} 
+                        stop={option.route.next_stop_org_name} price={option.pricing.individual_price} discount={option.pricing.discount} regular_price={option.pricing.total_price} 
+                        ticket_share={option.pricing.ticket_share} alternative_share={option.pricing.alternative_share} safety_share={option.pricing.safety_share} 
+                        comfort_share={option.pricing.comfort_share}  lumoTime={option.route.odr_trip_time} busTime={option.route.bus_time} ticket_level={option.route.ticket_level} />
                         <TripOptionCard index={option.id} selected={option.id === selectedOption} onClick={() => setSelectedOption(option.id)} type={"lumo"} walk_to={option.route.walking_time_org_stop} walk_from={option.route.walking_time_dest_stop} prebooking={option.request.prebooking} departure={8} stop={option.route.next_stop_org_name} price={option.pricing.individual_price} discount={option.pricing.discount} regular_price={option.pricing.total_price} ticket_share={option.pricing.ticket_share} alternative_share={option.pricing.alternative_share} safety_share={option.pricing.safety_share} comfort_share={option.pricing.comfort_share}  />
                         </>
                     ))}     

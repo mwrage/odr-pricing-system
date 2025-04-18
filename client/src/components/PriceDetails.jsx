@@ -8,7 +8,7 @@ import DonutChart from "./DonutChart";
 import Explanation from "./Explanation";
 
 function PriceDetails(props) {
-    const { walk_to, walk_from, prebooking, departure, stop, arrival, price, discount, regular_price, segments } = props
+    const { walk_to, walk_from, prebooking, departure, stop, arrival, price, discount, regular_price, segments, lumoTime, busTime, ticketDiscount, alternativeDiscount, safetyDiscount, comfortDiscount, ticket_level } = props
     const [showExplanation, setShowExplanation] = useState(1)
 
     return (
@@ -35,11 +35,12 @@ function PriceDetails(props) {
         </div>
         <div className="mb2">
         
-            <Explanation isTicket={showExplanation === 1 ? true : false} factor={
-                showExplanation === 1 ? "ticket" : showExplanation === 2 ? "alternative" : showExplanation === 3 ? "safety" : "comfort"
-                } isDiscount={true} state={"tbd"} color={
-                    showExplanation === 1 ? "text-amber-500 border-amber-500" : showExplanation === 2 ? "text-pink-500 border-pink-500" : showExplanation === 3 ? "text-indigo-500 border-indigo-500" : "text-sky-500 border-sky-500"
-                    } />
+            <Explanation isTicket={showExplanation === 1 ? true : false} lumoTime={lumoTime} busTime={busTime} ticket_level={ticket_level}
+            factor={showExplanation === 1 ? "ticket" : showExplanation === 2 ? "alternative" : showExplanation === 3 ? "safety" : "comfort"} 
+            isDiscount={showExplanation === 1 ? ticketDiscount : showExplanation === 2 ? alternativeDiscount : showExplanation === 3 ? safetyDiscount : comfortDiscount} 
+            state={"tbd"} 
+            color={showExplanation === 1 ? "text-amber-500 border-amber-500" : showExplanation === 2 ? "text-pink-500 border-pink-500" : showExplanation === 3 ? "text-indigo-500 border-indigo-500" : "text-sky-500 border-sky-500"
+            } />
 
         </div>
 
