@@ -2,12 +2,14 @@ import requests
 import random
 from geopy.geocoders import Nominatim
 from utils import calculate_time_difference
+from odr_simulation import get_odr_position, calculate_odr_trip_time
 
 # variables
 api_key = 'Qg_RbMu24ib7wN9oPsZRvww6ikkzpvvZHLJ4wpoPp-w'
 hl = "lübeck"
 bs = "bad schwartau"
 sd = "stockelsdorf"
+odr_coords = get_odr_position()
 
 # get coordinates for the next stop to a specified location
 def get_next_stops(lat_org, long_org):
@@ -89,7 +91,8 @@ def get_routing_information(lat_org, long_org, lat_dest, long_dest, plan_pref, p
     place_dest = get_location(lat_dest, long_dest)
     ticket_level = determine_ticket_level(place_org, place_dest)
     # 2. Determine alternative option (bus)
-    # a) lumo --> simulation
+    # a) odr
+    odr_trip_time = calculate_odr_trip_time(lat_org, long_org, lat_dest, long_dest)
     # b) bus
     bus_time = get_toatal_bus_time_in_min(lat_org, long_org, lat_dest, long_dest, plan_time, plan_pref)
     # 3. Determine walking distance (safety)
@@ -98,11 +101,11 @@ def get_routing_information(lat_org, long_org, lat_dest, long_dest, plan_pref, p
     dist_org_stop = get_walking_time_distance(lat_org, long_org, next_stop_org['coords_next_station']['lat'], next_stop_org['coords_next_station']['lng'])
     dist_dest_stop = get_walking_time_distance(lat_org, long_org, next_stop_dist['coords_next_station']['lat'], next_stop_dist['coords_next_station']['lng'])
     total_walking_distance = dist_org_stop['distance'] + dist_dest_stop['distance']
-    # 4. waiting time --> lumo simulation
-    # 5. weather + temperature --> TODO: radius (out-/inside)
+    # 4. waiting time
+    odr_wait_time = calculate_odr_trip_time(lat_org, long_org, next_stop_org['coords_next_station']['lat'], next_stop_org['coords_next_station']['lng'])
+    # 5. TODO: weather + temperature --> radius (out-/inside)
     weather_temperature = get_weather_data()
-    print("TEST")
-    return {'ticket_level': ticket_level, 'next_stop_org_name': next_stop_org['name_next_station'], 'bus_time': bus_time, 'walking_time_org_stop': dist_org_stop['time'], 'walking_time_dest_stop': dist_dest_stop['time'], 'walking_dist_org_stop': dist_org_stop['distance'], 'walking_dist_dest_stop': dist_dest_stop['distance'], 'total_walking_distance': total_walking_distance, 'weather': weather_temperature['weather'], 'temperature': weather_temperature['temperature']}
+    return {'ticket_level': ticket_level, 'next_stop_org_name': next_stop_org['name_next_station'], 'bus_time': bus_time, 'odr_trip_time': odr_trip_time['time'], 'odr_wait_time': odr_wait_time['time'], 'walking_time_org_stop': dist_org_stop['time'], 'walking_time_dest_stop': dist_dest_stop['time'], 'walking_dist_org_stop': dist_org_stop['distance'], 'walking_dist_dest_stop': dist_dest_stop['distance'], 'total_walking_distance': total_walking_distance, 'weather': weather_temperature['weather'], 'temperature': weather_temperature['temperature']}
 
 # TODO
 # get next stop within XX m radius as alternative to reduce price if necessary

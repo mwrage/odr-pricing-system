@@ -1,6 +1,6 @@
 export async function sendRequestToBackend ({setTripRequested, setRequestResponse, setWaitingForResponse, isPreebooked, hasTicket, originCoords, destinationCoords, isDeparture, tripTime}) {
     const data = {
-      debug: true,
+      debug: false,
       prebooking: isPreebooked,
       ticket: hasTicket,
       start: originCoords,

@@ -35,11 +35,11 @@ function TripOptionShort(props) {
                 
                 {/* Departure details */}
                 {prebooking ? (
-                    <p className="py-3 pl-3">Einstieg {departure} von {stop}</p>
+                    <p className="py-3 pl-3">Einstieg {departure.toFixed()} von {stop}</p>
                 ) : (
                     <div className="flex items-center py-3">
                         <RssRight size={20} />
-                        <p><span className="text-teal-700">In {departure} Minuten</span> von {stop}</p> 
+                        <p><span className="text-teal-700">In {departure.toFixed()} Minuten</span> von {stop}</p> 
                     </div>
                     
                 )}
@@ -57,7 +57,7 @@ function TripOptionShort(props) {
 
                     <div className="w-1/2 flex flex-col items-end justify-center">
                         <div className="flex">
-                            <p className="text-red-500 font-light text-xs pr-5">-{discount}%</p>                            
+                            <p className="text-red-500 font-light text-xs pr-5">-{discount.toFixed()}%</p>                            
                         </div>
 
                         <div className="flex">

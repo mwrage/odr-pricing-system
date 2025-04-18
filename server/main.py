@@ -20,14 +20,15 @@ def users():
 @app.route("/api/process-request", methods = ['POST'])
 def process_trip_request():
     data = request.get_json()
+    print(data)
     if (data['debug']):
         routing_data = {'ticket_level': "p2", 'next_stop_org_name': "Hauptbahnhof Lübeck", 'bus_time': 5, 'walking_time_org_stop': 4, 'walking_time_dest_stop': 3, 'walking_dist_org_stop': 34, 'walking_dist_dest_stop': 20, 'total_walking_distance': 54, 'weather': "bad", 'temperature': 3}
         pricing_data = {'total_price': 9.4, 'individual_price': 2.05, 'discount': 78,
                         'ticket_share': round(-3.4, 2), 'alternative_share': round(-2.3, 2), 'safety_share': round(-1.65, 2), 'comfort_share': round(1.05, 2)}
         return {'id': 0, 'request': data, 'route': routing_data, 'pricing': pricing_data}
     else:
-        routing_data = get_routing_information(data['start']['lat'], data['start']['lng'], data['dest']['lat'], data['dest']['lng'], data['prebooking'], data['time'])
-        pricing_data = get_ticket_price(data['ticket'], routing_data['ticket_level'], 10, routing_data['bus_time'], routing_data['total_walking_distance'], 10, routing_data['weather'], routing_data['temperature'])
+        routing_data = get_routing_information(data['start'][0], data['start'][1], data['dest'][0], data['dest'][1], data['prebooking'], data['time'])
+        pricing_data = get_ticket_price(data['ticket'], routing_data['ticket_level'], routing_data['odr_trip_time'], routing_data['bus_time'], routing_data['total_walking_distance'], routing_data['odr_wait_time'], routing_data['weather'], routing_data['temperature'])
         req_data = {'id': 0, 'request': data, 'route': routing_data, 'pricing': pricing_data}
     print(req_data)
     return jsonify(req_data)
