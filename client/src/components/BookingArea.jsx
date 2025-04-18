@@ -22,7 +22,7 @@ function BookingArea() {
     const [chooseStart, setChooseStart] = useState(false)
     const [rotated, setRotated] = useState(false)
     const [time, setTime] = useState("Jetzt");
-    const { tripRequested, setTripRequested, tripTime, setRequestResponse, setWaitingForResponse } = useContext(AppContext);
+    const { setTripRequested, tripTime, setRequestResponse, setWaitingForResponse } = useContext(AppContext);
     const [results, setResults] = useState([]);
     
     const expandSettings = () => {
@@ -128,8 +128,9 @@ function BookingArea() {
                 </button>
               </div>
               {/* Route inputs */}
-              <TextInput label="Gewünschter Start" iconRotation="rotate-180" />
-              <TextInput label="Gewünschtes Zeil"/>
+              <TextInput label="Gewünschter Start" id="originInput" placeholder="" iconRotation="rotate-180" />
+              <TextInput label="Gewünschtes Ziel" id="destinationInput" placeholder="" iconRotation="" />
+
               <div className="flex items-center py-2">
                 <MapPin5 size={20} />
                 <p className="px-2 text-xs">Auf Karte auswählen</p>

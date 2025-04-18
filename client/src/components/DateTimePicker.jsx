@@ -1,28 +1,11 @@
 import { useState, useContext, useEffect  } from "react"
 import { AppContext } from "../context/context"
+import { formatRequestedTime } from "../utils/formatRequestTime";
+import { getTimePeriod } from "../utils/getTimePeriod";
 
 function DateTimePicker ({ subLabel }) {
 
-    const { tripTime, setTripTime } = useContext(AppContext);
-     
-    const getTimePeriod = () => {
-      const days = []
-  
-      for (let i = 0; i < 7; i++) {
-        const date = new Date()
-        date.setDate(date.getDate() + i)
-  
-        const weekday = date.toLocaleDateString('de-DE', { weekday: 'short' })
-        const dateString = date.toLocaleDateString('de-DE', { day: '2-digit', month: 'short' })
-  
-        days.push({
-          value: date.toISOString().split('T')[0],
-          label: `${weekday}., ${dateString}`,
-          weekday: weekday
-        })
-      }
-      return days
-    }
+    const { setTripTime, setIsPreebooked, tripTimeLabels, setTripTimeLabels } = useContext(AppContext);
   
     const generateTimes = (startHour, startMinute, endHour, endMinute) => {
       const times = []
@@ -44,14 +27,14 @@ function DateTimePicker ({ subLabel }) {
     }
 
     const days = getTimePeriod()
-    const [selected, setSelected] = useState(days[0].label)
+    const [selected, setSelected] = useState(tripTimeLabels[0])
     const initialWeekday = days[0].weekday
     const initialTimes = (initialWeekday === 'Sa' || initialWeekday === 'So')
     ? generateTimes(20, 0, 3, 40)
     : generateTimes(20, 0, 0, 40)
 
     const [times, setTimes] = useState(initialTimes)
-    const [selectedTime, setSelectedTime] = useState(initialTimes[0])
+    const [selectedTime, setSelectedTime] = useState(tripTimeLabels[1])
   
     const handleDateChange = (e) => {
       const selectedValue = e.target.value
@@ -68,8 +51,19 @@ function DateTimePicker ({ subLabel }) {
       setTimes(newTimes)
     }
 
+
     useEffect(() => {
-      setTripTime([selected, selectedTime])
+      const formattedTime = formatRequestedTime([selected, selectedTime])
+      const chosenDate = new Date(formattedTime);
+      const dateNow = new Date();
+      const isSameDay = chosenDate.getFullYear() === dateNow.getFullYear() && chosenDate.getMonth() === dateNow.getMonth() && chosenDate.getDate() === dateNow.getDate();
+      if (isSameDay) {
+        setIsPreebooked(false)
+      } else {
+        setIsPreebooked(true)
+      }
+      setTripTime(formattedTime)
+      setTripTimeLabels([selected, selectedTime])
     }, [selected, selectedTime]);
 
     return (

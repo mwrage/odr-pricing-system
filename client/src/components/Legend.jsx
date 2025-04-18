@@ -13,9 +13,9 @@ function Legend(props) {
 
     return (
         <div className="w-full flex items-center justify-center text-sm flex-wrap hyphens-auto" lang="de">
-            {items.map((item) => {
+            {items.map((item, index) => {
             return (
-                <div className="flex items-center px-2">
+                <div key={index} className="flex items-center px-2">
                     <div className={`w-3 h-3 rounded-xs ${item.color}`}></div>
                     <p className="pl-1">{item.label}</p>
                 </div>
