@@ -1,19 +1,17 @@
 import { useState, useContext  } from "react"
 import { AppContext } from "../context/context"
 import TextInput from "./TextInput"
-import PassengersInput from "./PassengersInput"
 import PassengerButton from "./PassengerButton"
 import PassengerSettings from "./PassengersSettings"
 import DateInput from "./DateInput"
 import ConfirmButton from "./ConfirmButton";
-import DateTimePicker from "./DateTimePicker";
 import ChevronDown from "../assets/icons/ChevronDown"
 import ArrowDownward from "../assets/icons/ArrowDownward"
 import Search1 from "../assets/icons/Search1";
 import MapPin5 from "../assets/icons/MapPin5"
 import Bus1 from "../assets/icons/Bus1"
 import CalendarDays from "../assets/icons/CalendarDays";
-import User4 from "../assets/icons/User4";
+import { sendRequestToBackend } from "../utils/sendRequestToBackend"
 
 function BookingArea() {
     const [expanded, setExpanded] = useState(false)
@@ -22,7 +20,7 @@ function BookingArea() {
     const [chooseStart, setChooseStart] = useState(false)
     const [rotated, setRotated] = useState(false)
     const [time, setTime] = useState("Jetzt");
-    const { setTripRequested, tripTime, setRequestResponse, setWaitingForResponse } = useContext(AppContext);
+    const { setTripRequested, tripTime, setRequestResponse, setWaitingForResponse, isPreebooked, hasTicket, originCoords, destinationCoords, isDeparture } = useContext(AppContext);
     const [results, setResults] = useState([]);
     
     const expandSettings = () => {
@@ -41,34 +39,10 @@ function BookingArea() {
     }
 
     const handleRequest = () => {
-      setResults(sendRequestToBackend())
+      const results = sendRequestToBackend({setTripRequested, setRequestResponse, setWaitingForResponse, isPreebooked, hasTicket, originCoords, destinationCoords, isDeparture, tripTime})
+      setResults(results)
       setWaitingForResponse(true)
     }
-
-    async function sendRequestToBackend () {
-      const data = {
-        debug: true,
-        prebooking: false,
-        ticket: true,
-        start: {lat: 53.86982462745334, lng: 10.694405102733041},
-        dest: {lat: 53.86704111436375, lng: 10.680672192769197},
-        departure: true,
-        time: "2025-04-18T21:34:45",
-      }
-    
-      const response = await fetch("http://localhost:8080/api/process-request", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-    
-      const result = await response.json();
-      setRequestResponse([result])
-      setWaitingForResponse(false)
-      setTripRequested(true)
-    };
 
     return (
       <> 
