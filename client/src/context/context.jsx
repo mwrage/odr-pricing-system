@@ -38,15 +38,17 @@ const ContextProvider = ({ children }) => {
   const [requestResponse, setRequestResponse] = useState([]);
   // map interaction
   const [chooseOnMap, setChooseOnMap] = useState(false)
+  const [chooseStart, setChooseStart] = useState(false)
 
   useEffect(() => {
     console.log(requestResponse)
   }, [requestResponse]);
 
   return (
-    <AppContext.Provider value={{ tripRequested, setTripRequested, passengersNum, setPassengersNum, tripTime, setTripTime, isDeparture, setIsDeparture,
-    requestResponse, setRequestResponse, waitingForResponse, setWaitingForResponse, originCoords, setOriginCoords, destinationCoords, setDestinationCoords,
-    isPreebooked, setIsPreebooked, tripTimeLabels, setTripTimeLabels, hasTicket, setHasTicket, chooseOnMap, setChooseOnMap, originName, setOriginName, destinationName, setDestinationName }}>
+    <AppContext.Provider value={{ tripRequested, setTripRequested, passengersNum, setPassengersNum, tripTime, setTripTime, isDeparture, setIsDeparture, 
+      chooseStart, setChooseStart,requestResponse, setRequestResponse, waitingForResponse, setWaitingForResponse, originCoords, setOriginCoords, 
+      destinationCoords, setDestinationCoords, isPreebooked, setIsPreebooked, tripTimeLabels, setTripTimeLabels, hasTicket, setHasTicket, chooseOnMap, setChooseOnMap, 
+      originName, setOriginName, destinationName, setDestinationName }}>
       {children}
     </AppContext.Provider>
   );

@@ -1,6 +1,6 @@
 import { useRef, useContext, useState, useEffect } from "react";
 import { Popover, PopoverButton, PopoverPanel, Switch } from '@headlessui/react'
-import { MapContainer, TileLayer, ZoomControl, useMapEvents, Marker } from "react-leaflet";
+import { MapContainer, TileLayer, ZoomControl, useMapEvents, Marker, Tooltip } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { AppContext } from "../context/context"
 import ChevronDown from "../assets/icons/ChevronDown";
@@ -10,7 +10,7 @@ import { reverseGeocode } from "../utils/reverseGeocode";
 function Map() {
   
     const mapRef = useRef(null);
-    const { tripRequested, setTripRequested, originCoords, setOriginCoords, destinationCoords, setDestinationCoords, hasTicket, setHasTicket, chooseOnMap, setChooseOnMap, setDestinationName } = useContext(AppContext);
+    const { tripRequested, setTripRequested, originCoords, setOriginCoords, destinationCoords, setDestinationCoords, hasTicket, setHasTicket, chooseOnMap, setChooseOnMap, setDestinationName, setOriginName, chooseStart, setChooseStart } = useContext(AppContext);
     const [selectedAddress, setSelectedAddress] = useState("");
     const [center, setCenter] = useState(null);
     const [showTicketSettings, setShowTicketSettings] = useState(false)
@@ -31,13 +31,22 @@ function Map() {
     }
 
     const handleMapClick = async (latlng) => {
-      setChooseOnMap(false)
-      const fetchDestinationName = async () => {
+      if (chooseStart) {
+        const fetchOriginName = async () => {
           const name = await reverseGeocode(latlng.lat, latlng.lng);
-          setDestinationName(name);
+          setOriginName(name);
         };
-      fetchDestinationName();
-      setDestinationCoords(latlng);
+        fetchOriginName();
+        setOriginCoords(latlng);
+      } else {
+        const fetchDestinationName = async () => {
+            const name = await reverseGeocode(latlng.lat, latlng.lng);
+            setDestinationName(name);
+          };
+        fetchDestinationName();
+        setDestinationCoords(latlng);        
+      }
+      setChooseOnMap(false)
       const response = await fetch(
         `https://nominatim.openstreetmap.org/reverse?lat=${latlng.lat}&lon=${latlng.lng}&format=json`
       );
@@ -108,9 +117,15 @@ function Map() {
             attribution='&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url='https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png'
           />
-          <Marker position={originCoords} />
+          <Marker id="originMarker" position={originCoords} >
+            <Tooltip direction="top">Start</Tooltip>
+          </Marker>
           <ClickHandler onMapClick={handleMapClick} />
-          {destinationCoords && <Marker position={destinationCoords} />}
+          {destinationCoords && 
+          <Marker id="destinationMarker" position={destinationCoords} >
+            <Tooltip direction="top">Ziel</Tooltip>  
+          </Marker>
+          }
           <ZoomControl position="bottomright" />
         </MapContainer>            
           )}
