@@ -54,7 +54,8 @@ function RequestResults() {
                         ticket_share={option.pricing.ticket_share} alternative_share={option.pricing.alternative_share} safety_share={option.pricing.safety_share} 
                         comfort_share={option.pricing.comfort_share}  lumoTime={option.route.odr_trip_time} busTime={option.route.bus_time} ticket_level={option.route.ticket_level}
                         weather={option.route.weather} weatherCondition={option.route.condition} temperature={option.route.temperature}
-                        distance_threshold={option.pricing.distance_threshold} temp_threshold={option.pricing.temp_threshold} wait_threshold={option.pricing.wait_threshold} />
+                        distance_threshold={option.pricing.distance_threshold} temp_threshold={option.pricing.temp_threshold} wait_threshold={option.pricing.wait_threshold}
+                        walk_to_dist={option.route.walking_dist_org_stop} walk_from_dist={option.route.walking_dist_dest_stop} />
                         </>
                     ))}     
               </div>

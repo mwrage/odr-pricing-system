@@ -3,9 +3,10 @@ import LumoLogo from "/lumo-logo.webp"
 import Bus1 from "../assets/icons/Bus1";
 import Temperature from "./Temperature";
 import Weather from "./Weather";
+import Route1 from "../assets/icons/Route1"
 
 function Explanation(props) {
-    const { factor, isDiscount, state, color, ticket_level, lumoTime, busTime, totalWalkingDistance, weather, weatherCondition, temperature, waitingTime, distance_threshold, temp_threshold, wait_threshold } = props;
+    const { factor, isDiscount, state, color, ticket_level, lumoTime, busTime, totalWalkingDistance, weather, weatherCondition, temperature, waitingTime, distance_threshold, temp_threshold, wait_threshold,  walk_to, walk_from } = props;
     const [selectedTicketLevel, setSelectedTicketLevel] = useState(ticket_level);
     const ticketLevels = [
         { id: "p1", label: "Preisstufe 1", price: "2.40€", region: "Innerhalb von Bad Schwartau / Stockelsdorf" },
@@ -57,13 +58,13 @@ function Explanation(props) {
         subtitle = "lümo bringt dich sicher ans Ziel."
         state_desc = (
             <>
-              Die Haltestellen sind insgesamt <span className="text-indigo-500">{totalWalkingDistance}m</span> entfernt.
+              Insgesamt musst du <span className="text-indigo-500">{totalWalkingDistance}m</span> weit laufen.
             </>
           );
         if (isDiscount) {
-            rule =  "Wenn du zum Ein- oder Ausstieg einen weiten Weg zurücklegen musst, reduziert dein Sicherheitsbedürfnis den Preis."    
+            rule =  "Kürzere Strecken können mehr Sicherheit bieten. Wenn du weiter als XXXm laufen musst, reduziert sich dein Preis."    
         } else {
-            rule = "Wenn du zum Ein- oder Ausstieg keinen weiten Weg zurücklegen musst und zeitnah vom lümo eingesammelt wirst, bleibt ein Servicezuschlag."
+            rule = "Kürzere Strecken können mehr Sicherheit bieten. Wenn du weiter als XXXm laufen musst, reduziert sich dein Preis."  
         }
     } else {
         title = "Physischer Komfort"
@@ -123,7 +124,21 @@ function Explanation(props) {
                 </div>
             ) :
             factor == "safety" ? (
-                "test"
+                <div className="w-full flex items-center justify-center text-zinc-700">
+                    <div className="flex flex-col items-start justify-start py-1.5">
+                        <p className="inter-500">Einstieg</p>
+                        <p className="">{walk_to.toFixed()}m</p>
+                    </div>
+                    <div className="flex items-center justify-center">
+                        <div className="mx-2 w-6 h-0.5 border-2 border-transparent border-b-indigo-500 border-dashed "></div>
+                        <Route1 size={24} color={"#6366f1"} />
+                        <div className="mx-2 w-6 h-0.5 border-2 border-transparent border-b-indigo-500 border-dashed "></div>
+                    </div>
+                    <div className="flex flex-col items-end justify-end py-1.5">
+                        <p className="inter-500">Ausstieg</p>
+                        <p className="">{walk_from.toFixed()}m</p>
+                    </div>
+                </div>
             ): (
                 <>
                 {isDiscount && (

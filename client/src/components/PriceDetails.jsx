@@ -8,7 +8,7 @@ import DonutChart from "./DonutChart";
 import Explanation from "./Explanation";
 
 function PriceDetails(props) {
-    const { walk_to, walk_from, prebooking, departure, stop, arrival, price, discount, regular_price, segments, lumoTime, busTime, ticketDiscount, alternativeDiscount, safetyDiscount, comfortDiscount, ticket_level, totalWalkingDistance, weather, weatherCondition, temperature, distance_threshold, temp_threshold, wait_threshold } = props
+    const { walk_to, walk_from, prebooking, departure, stop, arrival, price, discount, regular_price, segments, lumoTime, busTime, ticketDiscount, alternativeDiscount, safetyDiscount, comfortDiscount, ticket_level, totalWalkingDistance, weather, weatherCondition, temperature, distance_threshold, temp_threshold, wait_threshold, walk_to_dist, walk_from_dist } = props
     const [showExplanation, setShowExplanation] = useState(1)
 
     return (
@@ -35,7 +35,7 @@ function PriceDetails(props) {
         </div>
         <div className="mb2">
         
-            <Explanation isTicket={showExplanation === 1 ? true : false} lumoTime={lumoTime} busTime={busTime} ticket_level={ticket_level}
+            <Explanation isTicket={showExplanation === 1 ? true : false} lumoTime={lumoTime} busTime={busTime} ticket_level={ticket_level} walk_to={walk_to_dist} walk_from={walk_from_dist}
             factor={showExplanation === 1 ? "ticket" : showExplanation === 2 ? "alternative" : showExplanation === 3 ? "safety" : "comfort"} 
             isDiscount={showExplanation === 1 ? ticketDiscount : showExplanation === 2 ? alternativeDiscount : showExplanation === 3 ? safetyDiscount : comfortDiscount} 
             state={"tbd"} totalWalkingDistance={totalWalkingDistance} weather={weather} weatherCondition={weatherCondition} temperature={temperature} waitingTime={departure}
