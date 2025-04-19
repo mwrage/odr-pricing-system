@@ -67,19 +67,19 @@ function Explanation(props) {
         }
     } else {
         title = "Physischer Komfort"
-        subtitle = "SUBTITEL für Physischer Komfort"
+        subtitle = "lümo ermöglicht angeneme Fahrten."
         if (isDiscount) {
-            rule =  "ToDo: Reduzierung bei schlechtem Wetter / Temperatur / ...."  
+            rule =  "Wenn du länger als XX Minuten warten musst und die Umstände nicht so angenehm sind, reduziert sich dein Preis."  
             state_desc = (
                 <>
-                  Draußen ist es gerade <span className="text-sky-500">nicht so schön</span>.
+                  Du musst <span className="text-sky-500">{waitingTime} Minuten</span> warten!
                 </>
-              );  
+              ); 
         } else {
-            rule = "ToDo: Aufschlag bei gutem Wetter / Temperatur / ...."
+            rule = "Wenn du länger als XX Minuten warten musst und die Umstände nicht so angenehm sind, reduziert sich dein Preis."   
             state_desc = (
                 <>
-                  Du musst nicht lange warten!
+                  Du musst nur <span className="text-sky-500">{waitingTime} Minuten</span> warten!
                 </>
               );  
         }
@@ -125,10 +125,14 @@ function Explanation(props) {
             factor == "safety" ? (
                 "test"
             ): (
+                <>
+                {isDiscount && (
                 <div className="flex flex-col h-20 w-full items-center justify-center">
                     <Weather condition={weatherCondition} temp={temperature} />
                     <Temperature temp={temperature} threshold={temp_threshold} />
                 </div>
+                )}
+                </>
             )}
         </div>
     )
