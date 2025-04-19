@@ -11,7 +11,7 @@ const ContextProvider = ({ children }) => {
   // while backend calculates the options
   const [waitingForResponse, setWaitingForResponse] = useState(false);
   // passengers input
-  const [passengersNum, setPassengersNum] = useState(1);
+  const [passengersNum, setPassengersNum] = useState([1,0,0,0,0]);
   // date / time input
   const dates = getTimePeriod()
   const [tripTimeLabels, setTripTimeLabels] = useState([dates[0].label, '20:00']);
@@ -39,6 +39,11 @@ const ContextProvider = ({ children }) => {
   // map interaction
   const [chooseOnMap, setChooseOnMap] = useState(false)
   const [chooseStart, setChooseStart] = useState(false)
+  // results
+  const [results, setResults] = useState([]);
+  //
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+  const [isValidRequest, setIsValidRequest] = useState(true);
 
   useEffect(() => {
     console.log(requestResponse)
@@ -48,7 +53,7 @@ const ContextProvider = ({ children }) => {
     <AppContext.Provider value={{ tripRequested, setTripRequested, passengersNum, setPassengersNum, tripTime, setTripTime, isDeparture, setIsDeparture, 
       chooseStart, setChooseStart,requestResponse, setRequestResponse, waitingForResponse, setWaitingForResponse, originCoords, setOriginCoords, 
       destinationCoords, setDestinationCoords, isPreebooked, setIsPreebooked, tripTimeLabels, setTripTimeLabels, hasTicket, setHasTicket, chooseOnMap, setChooseOnMap, 
-      originName, setOriginName, destinationName, setDestinationName }}>
+      originName, setOriginName, destinationName, setDestinationName, results, setResults, isButtonDisabled, setIsButtonDisabled, isValidRequest, setIsValidRequest }}>
       {children}
     </AppContext.Provider>
   );

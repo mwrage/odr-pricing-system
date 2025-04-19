@@ -1,8 +1,23 @@
 import PassengersInput from "./PassengersInput";
 import ConfirmButton from "./ConfirmButton";
 import ChevronDown from "../assets/icons/ChevronDown";
+import { sendRequestToBackend } from "../utils/sendRequestToBackend";
+import { useState, useContext  } from "react"
+import { AppContext } from "../context/context"
 
-function PassengerSettings({ togglePassengerSettings })  {
+function PassengerSettings({ createNewRequest = false, togglePassengerSettings })  {
+
+  const { setTripRequested, tripTime, setRequestResponse, setWaitingForResponse, isPreebooked, hasTicket, originCoords, destinationCoords, isDeparture, setResults } = useContext(AppContext);
+
+  const handleButtonClick = () => {
+    if (createNewRequest) {
+      togglePassengerSettings()
+      setWaitingForResponse(true)
+      const results = sendRequestToBackend({setTripRequested, setRequestResponse, setWaitingForResponse, isPreebooked, hasTicket, originCoords, destinationCoords, isDeparture, tripTime})
+      setResults(results)
+    }
+  }
+
   return (
     <>
       {/* Header */}
@@ -20,7 +35,7 @@ function PassengerSettings({ togglePassengerSettings })  {
       <PassengersInput />
 
       {/* Confirm Button */}
-      <button onClick={togglePassengerSettings}>
+      <button className="w-full" onClick={handleButtonClick}>
         <ConfirmButton label={"Erledigt"} />
       </button>
     </>

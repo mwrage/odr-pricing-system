@@ -20,8 +20,8 @@ function BookingArea() {
     //const [chooseStart, setChooseStart] = useState(false)
     const [rotated, setRotated] = useState(false)
     const [time, setTime] = useState("Jetzt");
-    const { setTripRequested, tripTime, setRequestResponse, setWaitingForResponse, isPreebooked, hasTicket, originCoords, destinationCoords, isDeparture, setChooseOnMap, chooseStart, setChooseStart } = useContext(AppContext);
-    const [results, setResults] = useState([]);
+    const { setTripRequested, tripTime, setRequestResponse, setWaitingForResponse, isPreebooked, hasTicket, originCoords, destinationCoords, isDeparture, setChooseOnMap, chooseStart, setChooseStart, results, setResults, isButtonDisabled } = useContext(AppContext);
+    //const [results, setResults] = useState([]);
     
     const expandSettings = () => {
       setExpanded(!expanded)
@@ -115,9 +115,16 @@ function BookingArea() {
                 <Bus1 size={22} color={"#343C54"}/>
                 <p className="px-2 text-sm">Hauptbahnhof Lübeck</p>
               </div>
-              <button onClick={handleRequest}>
-                <ConfirmButton label={"Fahrt anfragen"}/>
-              </button>
+              {!isButtonDisabled ? (
+                <button onClick={handleRequest}>
+                  <ConfirmButton label={"Fahrt anfragen"}/>
+                </button>
+              ) : (
+                <button disabled className="w-full bg-zinc-400 py-2 text-center rounded-xl my-2 hover:cursor-pointer">
+                  <p className="text-white inter-500">Fahrt anfragen</p>
+                </button>
+              )}
+
             </>
         )}
 

@@ -73,14 +73,14 @@ function Explanation(props) {
             rule =  "Wenn du länger als XX Minuten warten musst und die Umstände nicht so angenehm sind, reduziert sich dein Preis."  
             state_desc = (
                 <>
-                  Du musst <span className="text-sky-500">{waitingTime} Minuten</span> warten!
+                  Du musst <span className="text-sky-500">{waitingTime.toFixed()} Minuten</span> warten!
                 </>
               ); 
         } else {
             rule = "Wenn du länger als XX Minuten warten musst und die Umstände nicht so angenehm sind, reduziert sich dein Preis."   
             state_desc = (
                 <>
-                  Du musst nur <span className="text-sky-500">{waitingTime} Minuten</span> warten!
+                  Du musst nur <span className="text-sky-500">{waitingTime.toFixed()} Minuten</span> warten!
                 </>
               );  
         }

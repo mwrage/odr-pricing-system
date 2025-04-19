@@ -110,7 +110,7 @@ function Map() {
             </>
           )}
           {center && (
-        <MapContainer center={center} zoom={16} zoomControl={false} ref={mapRef} className={` absolute text-xs rounded-t-3xl z-10 w-full h-full`}>
+        <MapContainer center={center} zoom={tripRequested ? 10 : 16} zoomControl={false} ref={mapRef} className={` absolute text-xs rounded-t-3xl z-10 w-full h-full`}>
           <TileLayer
             //attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             // url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

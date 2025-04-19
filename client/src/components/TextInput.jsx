@@ -6,7 +6,7 @@ import { reverseGeocode } from "../utils/reverseGeocode";
 function TextInput(props) {
     
     const { id, placeholder, iconRotation, label } = props;
-    const { originCoords, setOriginCoords, setDestinationCoords, originName, setOriginName, destinationName, setDestinationName } = useContext(AppContext);
+    const { originCoords, setOriginCoords, setDestinationCoords, originName, setOriginName, destinationName, setDestinationName, isButtonDisabled, setIsButtonDisabled } = useContext(AppContext);
     const [address, setAddress] = useState([]);
     const [suggestions, setSuggestions] = useState([]);
     const [showDropdown, setShowDropdown] = useState(false);
@@ -67,14 +67,18 @@ function TextInput(props) {
         setDestinationCoords([suggestion.lat, suggestion.lng])
       }
     };
+
+    useEffect(() => {
+      setIsButtonDisabled(!(originName.trim() && destinationName.trim()));
+    }, [originName, destinationName]);
   
     return (
       <div className="relative flex items-center w-full my-2 pr-1">
-        <div className="mx-2.5 absolute justify-self-start">
+        <div className="mx-2.5 absolute justify-self-start pt-4 pb-6">
           <p className="text-xs pb-1">{label}</p>
           <ArrowDownward size={14} style={iconRotation} />
         </div>
-        <input type="text" id={id} value={id === "originInput" ? originName : destinationName} onChange={handleChange} placeholder={placeholder} className="w-full pl-8 py-3.5 bg-gray-100 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:bg-white placeholder:text-zinc-900 placeholder:font-medium" onFocus={() => setShowDropdown(true)} onBlur={() => setTimeout(() => setShowDropdown(false), 100)} />
+        <input type="text" id={id} value={id === "originInput" ? originName : destinationName} onChange={handleChange} placeholder={placeholder} className="w-full pl-8 pt-4 h-14 bg-gray-100 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:bg-white placeholder:text-zinc-900 placeholder:font-medium" onFocus={() => setShowDropdown(true)} onBlur={() => setTimeout(() => setShowDropdown(false), 100)} />
         {showDropdown && suggestions.length > 0 && (
           <ul className="absolute top-full left-0 w-full bg-white shadow-md border border-gray-200 z-10 mt-1 rounded-md max-h-60 overflow-y-auto">
             {suggestions.map((suggestion, index) => (

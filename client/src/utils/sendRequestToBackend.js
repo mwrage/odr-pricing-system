@@ -1,6 +1,7 @@
 export async function sendRequestToBackend ({setTripRequested, setRequestResponse, setWaitingForResponse, isPreebooked, hasTicket, originCoords, destinationCoords, isDeparture, tripTime}) {
+    
     const data = {
-      debug: true,
+      debug: false,
       prebooking: isPreebooked,
       ticket: hasTicket,
       start: originCoords,
@@ -9,6 +10,7 @@ export async function sendRequestToBackend ({setTripRequested, setRequestRespons
       time: tripTime,
     }
   
+    console.log(data.dest[0])
     const response = await fetch("http://localhost:8080/api/process-request", {
       method: "POST",
       headers: {
