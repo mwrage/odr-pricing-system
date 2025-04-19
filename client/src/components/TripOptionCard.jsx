@@ -7,7 +7,7 @@ import QuestionMarkCircle from "../assets/icons/QuestionMarkCircle";
 
 
 function TripOptionCard(props) {
-    const { index, selected, onClick, type, walk_to, walk_from, prebooking, departure, stop, arrival, price, discount, regular_price, ticket_share, alternative_share, safety_share, comfort_share, lumoTime, busTime, ticket_level } = props
+    const { index, selected, onClick, type, walk_to, walk_from, prebooking, departure, stop, arrival, price, discount, regular_price, ticket_share, alternative_share, safety_share, comfort_share, lumoTime, busTime, ticket_level, totalWalkingDistance, weather, weatherCondition, temperature, distance_threshold, temp_threshold, wait_threshold} = props
     const [showDetails, setShowDetails] = useState(false)
     const [isOpen, setIsOpen] = useState(false)
 
@@ -38,7 +38,9 @@ function TripOptionCard(props) {
                     <div className="w-11/12 place-self-center h-0.5 bg-zinc-100 rounded-full my-2"></div>
                     <PriceDetails walk_to={walk_to} walk_from={walk_from} prebooking={prebooking} departure={departure} stop={stop} arrival={arrival} 
                     price={price} discount={discount} regular_price={regular_price} segments={segments} 
-                    lumoTime={lumoTime} busTime={busTime} ticket_level={ticket_level}
+                    lumoTime={lumoTime} busTime={busTime} ticket_level={ticket_level} totalWalkingDistance={totalWalkingDistance} 
+                    weather={weather} weatherCondition={weatherCondition} temperature={temperature}
+                    distance_threshold={distance_threshold} temp_threshold={temp_threshold} wait_threshold={wait_threshold}
                     ticketDiscount={ticket_share < 0 ? true : false} alternativeDiscount={alternative_share < 0 ? true : false}  safetyDiscount={safety_share < 0 ? true : false}  comfortDiscount={comfort_share < 0 ? true : false}/>
                     </>
                 ) : (

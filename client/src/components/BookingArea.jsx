@@ -20,7 +20,7 @@ function BookingArea() {
     const [chooseStart, setChooseStart] = useState(false)
     const [rotated, setRotated] = useState(false)
     const [time, setTime] = useState("Jetzt");
-    const { setTripRequested, tripTime, setRequestResponse, setWaitingForResponse, isPreebooked, hasTicket, originCoords, destinationCoords, isDeparture } = useContext(AppContext);
+    const { setTripRequested, tripTime, setRequestResponse, setWaitingForResponse, isPreebooked, hasTicket, originCoords, destinationCoords, isDeparture, setChooseOnMap } = useContext(AppContext);
     const [results, setResults] = useState([]);
     
     const expandSettings = () => {
@@ -107,7 +107,7 @@ function BookingArea() {
 
               <div className="flex items-center py-2">
                 <MapPin5 size={20} />
-                <p className="px-2 text-xs">Auf Karte auswählen</p>
+                <button className="px-2 text-xs" onClick={() => setChooseOnMap(true)}>Ziel auf Karte auswählen</button>
               </div>
               <div className="w-full h-0.5 bg-zinc-100 rounded-full my-2"></div>
               <p className="px-2 text-xs">Vorschläge</p>

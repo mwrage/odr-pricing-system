@@ -3,13 +3,12 @@ ticket_price = {'p1': 2.4, 'p2': 3.4, 'p3': 4.2}
 min_surcharge = 1
 dynamic_surcharge = 5
 factor_shares = {'alternative': 0.46, 'safety': 0.33, 'comfort': 0.21}
+distance_threshold = 100
+temp_threshold = 5
+wait_threshold = 10
 
 # rules system: determine discount or surcharge for each factor
 def determine_factor_impact(has_ticket, lumo_time, bus_time, walking_distance, waiting_time, weather, temperature):
-    # TODO
-    dist_threshold = 100
-    temp_threshold = 5
-    wait_threshold = 10
     # ticket
     if (has_ticket): 
         ticket = 0
@@ -21,12 +20,13 @@ def determine_factor_impact(has_ticket, lumo_time, bus_time, walking_distance, w
     else:
         alternative = 1
     # safety: wlaking distance
-    if (walking_distance > dist_threshold):
+    if (walking_distance > distance_threshold):
         safety = 0
     else:
         safety = 1
     # comfort: weather / temperature / radius for detecting out- vs. inside waiting
-    if sum([weather == "bad", temperature < temp_threshold , waiting_time > wait_threshold]) == 2:
+    #if sum([weather == "bad", temperature < temp_threshold , waiting_time > wait_threshold]) == 2:
+    if((waiting_time > wait_threshold) and ((weather == "bad") or (temperature < temp_threshold))):
         comfort = 0
     else:
         comfort = 1
@@ -49,7 +49,8 @@ def calculate_price(factor_classifications, ticket_level):
     temp_comfort_share = dynamic_surcharge * factor_shares['comfort'] 
     comfort_share = temp_comfort_share if factor_classifications['comfort'] else temp_comfort_share * (-1)
     print("TEST")
-    return {'total_price': total_price, 'individual_price': individual_price, 'discount': discount,
+    return {'total_price': total_price, 'individual_price': individual_price, 'discount': discount, 
+            'distance_threshold': distance_threshold, 'temp_threshold': temp_threshold,  'wait_threshold': wait_threshold,
             'ticket_share': round(ticket_share, 2), 'alternative_share': round(alternative_share, 2), 'safety_share': round(safety_share, 2), 'comfort_share': round(comfort_share, 2)}
 
 # calculate ticket price and price components based on request

@@ -17,11 +17,13 @@ const ContextProvider = ({ children }) => {
   const [tripTimeLabels, setTripTimeLabels] = useState([dates[0].label, '20:00']);
   const [tripTime, setTripTime] = useState(formatRequestedTime(tripTimeLabels));
   // starting coordinates
+  const [originName, setOriginName] = useState("")
   const [originCoords, setOriginCoords] = useState({
     lat: 53.86793879579819,
     lng: 10.688151930113486,
   });
   // destination coordinates
+  const [destinationName, setDestinationName] = useState("")
   const [destinationCoords, setDestinationCoords] = useState({
     lat: 53.86793879579819,
     lng: 10.688151930113486,
@@ -34,6 +36,8 @@ const ContextProvider = ({ children }) => {
   const [isDeparture, setIsDeparture] = useState(true);
   // options calculated by the backend
   const [requestResponse, setRequestResponse] = useState([]);
+  // map interaction
+  const [chooseOnMap, setChooseOnMap] = useState(false)
 
   useEffect(() => {
     console.log(requestResponse)
@@ -42,7 +46,7 @@ const ContextProvider = ({ children }) => {
   return (
     <AppContext.Provider value={{ tripRequested, setTripRequested, passengersNum, setPassengersNum, tripTime, setTripTime, isDeparture, setIsDeparture,
     requestResponse, setRequestResponse, waitingForResponse, setWaitingForResponse, originCoords, setOriginCoords, destinationCoords, setDestinationCoords,
-    isPreebooked, setIsPreebooked, tripTimeLabels, setTripTimeLabels, hasTicket, setHasTicket }}>
+    isPreebooked, setIsPreebooked, tripTimeLabels, setTripTimeLabels, hasTicket, setHasTicket, chooseOnMap, setChooseOnMap, originName, setOriginName, destinationName, setDestinationName }}>
       {children}
     </AppContext.Provider>
   );

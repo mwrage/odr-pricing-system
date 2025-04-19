@@ -5,40 +5,38 @@ import "leaflet/dist/leaflet.css";
 import { AppContext } from "../context/context"
 import ChevronDown from "../assets/icons/ChevronDown";
 import Ticket1 from "../assets/icons/Ticket1";
-
-function ClickHandler({ onMapClick }) {
-  useMapEvents({
-    click(e) {
-      onMapClick(e.latlng);
-    },
-  });
-  return null;
-}
+import { reverseGeocode } from "../utils/reverseGeocode";
 
 function Map() {
   
     const mapRef = useRef(null);
-    const { tripRequested, setTripRequested, originCoords, setOriginCoords, destinationCoords, setDestinationCoords, hasTicket, setHasTicket } = useContext(AppContext);
+    const { tripRequested, setTripRequested, originCoords, setOriginCoords, destinationCoords, setDestinationCoords, hasTicket, setHasTicket, chooseOnMap, setChooseOnMap, setDestinationName } = useContext(AppContext);
     const [selectedAddress, setSelectedAddress] = useState("");
     const [center, setCenter] = useState(null);
     const [showTicketSettings, setShowTicketSettings] = useState(false)
 
-
-    const people = [
-      { id: 1, name: 'Durward Reynolds' },
-      { id: 2, name: 'Kenton Towne' },
-      { id: 3, name: 'Therese Wunsch' },
-      { id: 4, name: 'Benedict Kessler' },
-      { id: 5, name: 'Katelyn Rohan' },
-    ]
-    const [selectedPerson, setSelectedPerson] = useState(people[0])
-
+    function ClickHandler({ onMapClick }) {
+      if(chooseOnMap) {
+        useMapEvents({
+          click(e) {
+            onMapClick(e.latlng);
+          },
+        });    
+      }
+      return null;
+    }
 
     const navigateBack = () => {
       setTripRequested(false)
     }
 
     const handleMapClick = async (latlng) => {
+      setChooseOnMap(false)
+      const fetchDestinationName = async () => {
+          const name = await reverseGeocode(latlng.lat, latlng.lng);
+          setDestinationName(name);
+        };
+      fetchDestinationName();
       setDestinationCoords(latlng);
       const response = await fetch(
         `https://nominatim.openstreetmap.org/reverse?lat=${latlng.lat}&lon=${latlng.lng}&format=json`

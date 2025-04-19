@@ -1,9 +1,11 @@
 import { useState } from "react";
 import LumoLogo from "/lumo-logo.webp"
 import Bus1 from "../assets/icons/Bus1";
+import Temperature from "./Temperature";
+import Weather from "./Weather";
 
 function Explanation(props) {
-    const { factor, isDiscount, state, color, ticket_level, lumoTime, busTime, totalWalkingDistance = 666 } = props;
+    const { factor, isDiscount, state, color, ticket_level, lumoTime, busTime, totalWalkingDistance, weather, weatherCondition, temperature, waitingTime, distance_threshold, temp_threshold, wait_threshold } = props;
     const [selectedTicketLevel, setSelectedTicketLevel] = useState(ticket_level);
     const ticketLevels = [
         { id: "p1", label: "Preisstufe 1", price: "2.40€", region: "Innerhalb von Bad Schwartau / Stockelsdorf" },
@@ -19,30 +21,45 @@ function Explanation(props) {
 
     if (factor === "ticket") {
         title = "ÖPNV-Tarif" 
-        subtitle = "lümo unterstützt den ÖPNV."      
+        subtitle = "lümo unterstützt den ÖPNV."     
+        state_desc = (
+            <>
+              Du besitzt <span className="text-amber-500">{isDiscount ? "ein" : "kein"}</span> gültiges Ticket.
+            </>
+          );
         if (isDiscount) {
             rule =  "Wenn du ein gültiges ÖPNV-Ticket besitzt, entfällt dein Grundpreis, weil das lümo ein Teil des ÖPNV-Angebots ist."    
-            state_desc = "Du besitzt ein gültiges Ticket."
         } else {
             rule = "Wenn du kein gültiges ÖPNV-Ticket besitzt, entspricht dein Grundpreis dem Einzelfahr-schein der geltenden Preisstufe."
-            state_desc = "Du besitzt kein gültiges Ticket."
         }
     }
     else if (factor === "alternative") {
         title = "Alternativangebot"
-        subtitle = "SUBTITEL für Alternativangebot"
+        subtitle = "lümo sorgt dafür, dass du mobil bleibst." 
         if (isDiscount) {
-            rule =  "Wenn du mit dem Bus wesentlich länger zu deinem Ziel brauchst, wird dein Preis reduziert, weil es kein vergleichbares Angebot gibt."    
-            state_desc = `Der Bus braucht ${(busTime-lumoTime).toFixed()} Minuten länger.`
+            rule =  "Wenn du mit dem Bus wesentlich länger brauchst, wird dein Preis reduziert, weil es kein vergleichbares Angebot gibt."    
+            state_desc = (
+                <>
+                  Der Bus braucht <span className="text-pink-500">{(busTime-lumoTime).toFixed() < 0 ? (busTime-lumoTime).toFixed() * (-1) : (busTime-lumoTime).toFixed()} Minuten</span> länger.
+                </>
+              );
         } else {
             rule = "Wenn der Bus dich genauso schnell ans Ziel bringen kann, enthält der Preis einen Zuschlag, weil es ein vergleichbares Angebot gibt."
-            state_desc = `Der Bus ist ${(lumoTime-busTime).toFixed()} Minuten schneller.`
+            state_desc = (
+                <>
+                  Der Bus ist <span className="text-pink-500">{(lumoTime-busTime).toFixed() < 0 ? (lumoTime-busTime).toFixed() * (-1) : (lumoTime-busTime).toFixed()} Minuten</span> schneller.
+                </>
+              );
         }
     }
     else if (factor === "safety") {
         title = "Sicherheit"
         subtitle = "lümo bringt dich sicher ans Ziel."
-        state_desc = `Die Haltestellen sind insgesamt ${totalWalkingDistance}m entfernt.`
+        state_desc = (
+            <>
+              Die Haltestellen sind insgesamt <span className="text-indigo-500">{totalWalkingDistance}m</span> entfernt.
+            </>
+          );
         if (isDiscount) {
             rule =  "Wenn du zum Ein- oder Ausstieg einen weiten Weg zurücklegen musst, reduziert dein Sicherheitsbedürfnis den Preis."    
         } else {
@@ -52,9 +69,19 @@ function Explanation(props) {
         title = "Physischer Komfort"
         subtitle = "SUBTITEL für Physischer Komfort"
         if (isDiscount) {
-            rule =  "ToDo: Reduzierung bei schlechtem Wetter / Temperatur / ...."    
+            rule =  "ToDo: Reduzierung bei schlechtem Wetter / Temperatur / ...."  
+            state_desc = (
+                <>
+                  Draußen ist es gerade <span className="text-sky-500">nicht so schön</span>.
+                </>
+              );  
         } else {
             rule = "ToDo: Aufschlag bei gutem Wetter / Temperatur / ...."
+            state_desc = (
+                <>
+                  Du musst nicht lange warten!
+                </>
+              );  
         }
     }
 
@@ -98,7 +125,10 @@ function Explanation(props) {
             factor == "safety" ? (
                 "test"
             ): (
-                "test"
+                <div className="flex flex-col h-20 w-full items-center justify-center">
+                    <Weather condition={weatherCondition} temp={temperature} />
+                    <Temperature temp={temperature} threshold={temp_threshold} />
+                </div>
             )}
         </div>
     )

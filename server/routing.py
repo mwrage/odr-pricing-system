@@ -57,7 +57,7 @@ def get_toatal_bus_time_in_min(lat_org, long_org, lat_dest, long_dest, time, pla
 def get_location(lat, long):
     # get address
     geolocator = Nominatim(user_agent="prototyp-on-demand-ridepooling-bachelorarbeit")
-    location = geolocator.reverse(f"{lat}, {long}")
+    location = geolocator.reverse(f"{lat}, {long}", timeout=20)
     # extract place
     if "city" in location.raw["address"]:
         return hl
@@ -79,8 +79,19 @@ def determine_ticket_level(place_org, place_dest):
 
 # get weather
 def get_weather_data():
-    # TODO: use real data
-    return {'weather': random.choice(['good', 'bad']), 'temperature': random.randint(-10, 35)}
+    url = f"http://api.openweathermap.org/data/2.5/weather?lat={53.86546719714734}&lon={10.686561028590345}&appid={"cabb542fdcffe22709530669217342d2"}&units=metric"
+    response = requests.get(url)
+    data = response.json()
+    bad_weather_condition = False
+    for elem in data['weather']:
+        condition = elem['icon']
+        if not (condition in ["01n", "02n", "03n", "04n"]):
+            bad_weather_condition = True
+    if (bad_weather_condition):
+        weather_condition = "bad"
+    else: 
+        weather_condition = "good"
+    return {'weather': weather_condition, 'temperature': data['main']['temp'], 'condition': condition}
 
 
 # use input to generate routing information for requested trip
