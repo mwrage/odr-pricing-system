@@ -1,6 +1,6 @@
 import random
-import json
-from flask import Flask, jsonify, request
+import os
+from flask import Flask, jsonify, request, send_from_directory
 from flask_cors import CORS
 from pricing import get_ticket_price
 from routing import get_routing_information, get_weather_data
@@ -8,6 +8,18 @@ from routing import get_routing_information, get_weather_data
 app = Flask(__name__)
 CORS(app)
 
+client_folder = os.path.join(os.getcwd(), "..", "client")
+dist_folder = os.path.join(client_folder, "dist")
+
+# Server static files from the "dist" folder unter the "client" dir
+@app.route("/", defaults = {"filename": ""})
+@app.route("/<path:filename>")
+def index(filename): 
+    if not filename:
+        filename = "index.html"
+    return send_from_directory(dist_folder, filename)
+
+# api routes
 @app.route("/api/test", methods = ['GET'])
 def users():
     return jsonify(
@@ -19,9 +31,10 @@ def users():
         }
     )
 
-@app.route("/api/process-request", methods = ['POST'])
+@app.route("/api/process-request", methods = ['GET', 'POST'])
 def process_trip_request():
     data = request.get_json()
+    print("DATA")
     print(data)
     if (data['debug']):
         get_weather_data()
@@ -41,6 +54,8 @@ def process_trip_request():
         seen_prices = set()
         for i in range(options_num):
             routing_data = get_routing_information(data['start'][0], data['start'][1], data['dest'][0], data['dest'][1], data['prebooking'], data['time'])
+            print("ROUTING DATA")
+            print(routing_data)
             if (routing_data['status'] == 200):
                 pricing_data = get_ticket_price(data['ticket'], routing_data['ticket_level'], routing_data['odr_trip_time'], routing_data['bus_time'], routing_data['total_walking_distance'], routing_data['odr_wait_time'], routing_data['weather'], routing_data['temperature'])
             else: 
@@ -56,4 +71,4 @@ def process_trip_request():
 
 
 if __name__ == "__main__":
-    app.run(debug = True, port = 8080)
+    app.run(debug = False, port = 8080)

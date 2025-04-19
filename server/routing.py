@@ -59,7 +59,9 @@ def get_location(lat, long):
     geolocator = Nominatim(user_agent="prototyp-on-demand-ridepooling-bachelorarbeit")
     location = geolocator.reverse(f"{lat}, {long}", timeout=20)
     # check validity
-    if ("town" or "city") in location.raw["address"]:
+    print("LOCATION ADDRESS")
+    print(location.raw["address"])
+    if "town" in location.raw["address"] or "city" in location.raw["address"]:
         # extract place
         if "city" in location.raw["address"]:
             return hl
@@ -103,6 +105,10 @@ def get_routing_information(lat_org, long_org, lat_dest, long_dest, plan_pref, p
     # 1. Determine ticket level
     place_org = get_location(lat_org, long_org)
     place_dest = get_location(lat_dest, long_dest)
+    print("place_org")
+    print(place_org)
+    print("place_dest")
+    print(place_dest)
     if (place_org =="invalid" or place_dest == "invalid"):
         return {'status': 400, 'ticket_level': "p1", 'next_stop_org_name': "Nicht gefunden", 'bus_time': "Nicht gefunden", 'odr_trip_time': 0, 'odr_wait_time': 0, 'walking_time_org_stop': 0, 'walking_time_dest_stop': 0, 'walking_dist_org_stop': 0, 'walking_dist_dest_stop': 0, 'total_walking_distance': 0, 'weather': "Nicht gefunden", 'temperature': 0}
     else: 
