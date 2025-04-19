@@ -11,7 +11,9 @@ export async function sendRequestToBackend ({setTripRequested, setRequestRespons
     }
   
     console.log(data.dest[0])
-    const response = await fetch("http://localhost:8080/api/process-request", {
+    const devURL = "http://localhost:8080/api/process-request"
+    const productionURL = "https://odr-pricing-system.onrender.com/api/process-request"
+    const response = await fetch(productionURL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
