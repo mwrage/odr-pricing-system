@@ -1,7 +1,7 @@
 import ChevronDown from "../assets/icons/ChevronDown";
 import Car2 from "../assets/icons/Car2";
 import LumLogo from "/lumo-logo.webp"
-import RssRight from "../assets/icons/RSSRight";
+import RssRight from "../assets/icons/RssRight";
 import ArrowDownward from "../assets/icons/ArrowDownward"
 import StackedBarChart from "./StackedBarChart";
 
