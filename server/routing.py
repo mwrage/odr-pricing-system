@@ -85,7 +85,7 @@ def determine_ticket_level(place_org, place_dest):
 
 # get weather
 def get_weather_data():
-    url = f"http://api.openweathermap.org/data/2.5/weather?lat={53.86546719714734}&lon={10.686561028590345}&appid={"cabb542fdcffe22709530669217342d2"}&units=metric"
+    url = f"http://api.openweathermap.org/data/2.5/weather?lat={53.86546719714734}&lon={10.686561028590345}&appid=cabb542fdcffe22709530669217342d2&units=metric"
     response = requests.get(url)
     data = response.json()
     bad_weather_condition = False
