@@ -12,6 +12,7 @@ import MapPin5 from "../assets/icons/MapPin5"
 import Bus1 from "../assets/icons/Bus1"
 import CalendarDays from "../assets/icons/CalendarDays";
 import { sendRequestToBackend } from "../utils/sendRequestToBackend"
+import { useLocation } from "react-router-dom"
 
 function BookingArea() {
     const [expanded, setExpanded] = useState(false)
@@ -22,6 +23,9 @@ function BookingArea() {
     const [time, setTime] = useState("Jetzt");
     const { setTripRequested, tripTime, setRequestResponse, setWaitingForResponse, isPreebooked, hasTicket, originCoords, destinationCoords, isDeparture, setChooseOnMap, chooseStart, setChooseStart, results, setResults, isButtonDisabled } = useContext(AppContext);
     //const [results, setResults] = useState([]);
+    const location = useLocation();
+    const query = new URLSearchParams(location.search);
+    const scenarioParam = query.get("scenario");
     
     const expandSettings = () => {
       setExpanded(!expanded)
@@ -39,7 +43,7 @@ function BookingArea() {
     }
 
     const handleRequest = () => {
-      const results = sendRequestToBackend({setTripRequested, setRequestResponse, setWaitingForResponse, isPreebooked, hasTicket, originCoords, destinationCoords, isDeparture, tripTime})
+      const results = sendRequestToBackend({setTripRequested, setRequestResponse, setWaitingForResponse, isPreebooked, hasTicket, originCoords, destinationCoords, isDeparture, tripTime, scenarioParam})
       setResults(results)
       setWaitingForResponse(true)
     }

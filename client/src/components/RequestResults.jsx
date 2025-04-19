@@ -56,6 +56,8 @@ function RequestResults() {
                         
                         <>
                         {option.route.status === 200 && (
+                            <>
+                            {setIsValidRequest(true)}
                             <TripOptionCard index={option.id} selected={option.id === selectedOption} onClick={() => setSelectedOption(option.id)} type={"lumo"} totalWalkingDistance={option.route.total_walking_distance}
                             walk_to={option.route.walking_time_org_stop} walk_from={option.route.walking_time_dest_stop} prebooking={option.request.prebooking} departure={option.route.odr_wait_time} 
                             stop={option.route.next_stop_org_name} price={option.pricing.individual_price} discount={option.pricing.discount} regular_price={option.pricing.total_price} 
@@ -64,6 +66,7 @@ function RequestResults() {
                             weather={option.route.weather} weatherCondition={option.route.condition} temperature={option.route.temperature}
                             distance_threshold={option.pricing.distance_threshold} temp_threshold={option.pricing.temp_threshold} wait_threshold={option.pricing.wait_threshold}
                             walk_to_dist={option.route.walking_dist_org_stop} walk_from_dist={option.route.walking_dist_dest_stop} />
+                            </>
                          )}
                         {option.route.status === 400 && (
                             <>

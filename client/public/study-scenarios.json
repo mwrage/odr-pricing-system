@@ -1,0 +1,173 @@
+[
+    {
+      "scenarioID": 0,
+      "options": [
+        {
+            "id": 0,
+            "request": {
+                "debug": false, 
+                "prebooking": false, 
+                "ticket": false, 
+                "start": [53.867, 10.691], 
+                "dest": [53.867, 10.691], 
+                "departure": true, 
+                "time": "2025-04-19T20:00:00"
+            },
+            "route": {
+                "status": 200, 
+                "ticket_level": "p2", 
+                "next_stop_org_name": "Hauptbahnhof Lübeck", 
+                "bus_time": 5, 
+                "odr_trip_time": 12, 
+                "odr_wait_time": 12, 
+                "walking_time_org_stop": 4, 
+                "walking_time_dest_stop": 3, 
+                "walking_dist_org_stop": 34, 
+                "walking_dist_dest_stop": 20, 
+                "total_walking_distance": 54, 
+                "weather": "bad", 
+                "temperature": 3, 
+                "condition": "10n"
+            },
+            "pricing": {
+                "total_price": 9.4, 
+                "individual_price": 2.05, 
+                "discount": 78,
+                "distance_threshold": 100, 
+                "temp_threshold": 5,  
+                "wait_threshold": 10,
+                "ticket_share": -3.4, 
+                "alternative_share": -2.3, 
+                "safety_share": 1.65,
+                "comfort_share": -1.05
+            }
+        },
+        {
+            "id": 1,
+            "request": {
+                "debug": false, 
+                "prebooking": false, 
+                "ticket": false, 
+                "start": [53.867, 10.691], 
+                "dest": [53.867, 10.691], 
+                "departure": true, 
+                "time": "2025-04-19T20:00:00"
+            },
+            "route": {
+                "status": 200, 
+                "ticket_level": "p2", 
+                "next_stop_org_name": "Hauptbahnhof Lübeck", 
+                "bus_time": 5, 
+                "odr_trip_time": 12, 
+                "odr_wait_time": 12, 
+                "walking_time_org_stop": 4, 
+                "walking_time_dest_stop": 3, 
+                "walking_dist_org_stop": 34, 
+                "walking_dist_dest_stop": 20, 
+                "total_walking_distance": 54, 
+                "weather": "bad", 
+                "temperature": 3, 
+                "condition": "10n"
+            },
+            "pricing": {
+                "total_price": 9.4, 
+                "individual_price": 2.05, 
+                "discount": 78,
+                "distance_threshold": 100, 
+                "temp_threshold": 5,  
+                "wait_threshold": 10,
+                "ticket_share": -3.4, 
+                "alternative_share": -2.3, 
+                "safety_share": 1.65,
+                "comfort_share": -1.05
+            }
+        }
+      ]
+    },
+    
+    {
+        "scenarioID": 1,
+        "options": [
+          {
+              "id": 0,
+              "request": {
+                  "debug": false, 
+                  "prebooking": false, 
+                  "ticket": false, 
+                  "start": [53.867, 10.691], 
+                  "dest": [53.867, 10.691], 
+                  "departure": true, 
+                  "time": "2025-04-19T20:00:00"
+              },
+              "route": {
+                  "status": 200, 
+                  "ticket_level": "p2", 
+                  "next_stop_org_name": "Hauptbahnhof Lübeck", 
+                  "bus_time": 5, 
+                  "odr_trip_time": 12, 
+                  "odr_wait_time": 12, 
+                  "walking_time_org_stop": 4, 
+                  "walking_time_dest_stop": 3, 
+                  "walking_dist_org_stop": 34, 
+                  "walking_dist_dest_stop": 20, 
+                  "total_walking_distance": 54, 
+                  "weather": "bad", 
+                  "temperature": 3, 
+                  "condition": "10n"
+              },
+              "pricing": {
+                  "total_price": 9.4, 
+                  "individual_price": 2.05, 
+                  "discount": 78,
+                  "distance_threshold": 100, 
+                  "temp_threshold": 5,  
+                  "wait_threshold": 10,
+                  "ticket_share": -3.4, 
+                  "alternative_share": -2.3, 
+                  "safety_share": 1.65,
+                  "comfort_share": -1.05
+              }
+          },
+          {
+              "id": 1,
+              "request": {
+                  "debug": false, 
+                  "prebooking": false, 
+                  "ticket": false, 
+                  "start": [53.867, 10.691], 
+                  "dest": [53.867, 10.691], 
+                  "departure": true, 
+                  "time": "2025-04-19T20:00:00"
+              },
+              "route": {
+                  "status": 200, 
+                  "ticket_level": "p2", 
+                  "next_stop_org_name": "Hauptbahnhof Lübeck", 
+                  "bus_time": 5, 
+                  "odr_trip_time": 12, 
+                  "odr_wait_time": 12, 
+                  "walking_time_org_stop": 4, 
+                  "walking_time_dest_stop": 3, 
+                  "walking_dist_org_stop": 34, 
+                  "walking_dist_dest_stop": 20, 
+                  "total_walking_distance": 54, 
+                  "weather": "bad", 
+                  "temperature": 3, 
+                  "condition": "10n"
+              },
+              "pricing": {
+                  "total_price": 9.4, 
+                  "individual_price": 2.05, 
+                  "discount": 78,
+                  "distance_threshold": 100, 
+                  "temp_threshold": 5,  
+                  "wait_threshold": 10,
+                  "ticket_share": -3.4, 
+                  "alternative_share": -2.3, 
+                  "safety_share": 1.65,
+                  "comfort_share": -1.05
+              }
+          }
+        ]   
+    }
+]
