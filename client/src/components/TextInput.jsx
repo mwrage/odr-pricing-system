@@ -30,16 +30,18 @@ function TextInput(props) {
         setDestinationName(value)
       }
   
-      if (!value || value.length < 3) {
+      if (!value) {
         setSuggestions([]);
         return;
       }
       
-      const firstThree = value.substring(0, 3).toLowerCase();
+      const maxPrefixLength = Math.min(3, value.length);
+      const prefix = value.substring(0, maxPrefixLength).toLowerCase();
+
       const filtered = address.filter((s) =>
-        s.name.toLowerCase().startsWith(firstThree)
+        s.name.toLowerCase().startsWith(prefix)
       );
-      
+
       if (filtered.length > 0) {
         setSuggestions(filtered);
       } else {

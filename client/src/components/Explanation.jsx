@@ -1,12 +1,17 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { AppContext } from "../context/context";
 import LumoLogo from "/lumo-logo.webp"
 import Bus1 from "../assets/icons/Bus1";
 import Temperature from "./Temperature";
 import Weather from "./Weather";
 import Route1 from "../assets/icons/Route1"
+import { calculateArrayTotal } from "../utils/calculateArrayTotal";
 
 function Explanation(props) {
     const { factor, isDiscount, state, color, ticket_level, lumoTime, busTime, totalWalkingDistance, weather, weatherCondition, temperature, waitingTime, distance_threshold, temp_threshold, wait_threshold,  walk_to, walk_from } = props;
+    const { passengersNum } = useContext(AppContext);
+    const totalPassengers = calculateArrayTotal(passengersNum)
+    const totalPassengersWithTicket = calculateArrayTotal([passengersNum[0], passengersNum[2], passengersNum[4]])
     const [selectedTicketLevel, setSelectedTicketLevel] = useState(ticket_level);
     const ticketLevels = [
         { id: "p1", label: "Preisstufe 1", price: "2.40€", region: "Innerhalb von Bad Schwartau / Stockelsdorf" },
@@ -25,7 +30,7 @@ function Explanation(props) {
         subtitle = "lümo unterstützt den ÖPNV."     
         state_desc = (
             <>
-              Du besitzt <span className="text-amber-500">{isDiscount ? "ein" : "kein"}</span> gültiges Ticket.
+              {totalPassengers > 1 ? `${totalPassengersWithTicket} von ${totalPassengers} besitzen `  : "Du besitzt "}<span className="text-amber-500">{(isDiscount || totalPassengers > 1) ? "ein" : "kein"}</span> gültiges Ticket.
             </>
           );
         if (isDiscount) {
@@ -37,15 +42,14 @@ function Explanation(props) {
     else if (factor === "alternative") {
         title = "Alternativangebot"
         subtitle = "lümo sorgt dafür, dass du mobil bleibst." 
+        rule =  "Wenn du mit dem Bus wesentlich länger brauchst, wird dein Preis reduziert, weil es kein vergleichbares Angebot gibt." 
         if (isDiscount) {
-            rule =  "Wenn du mit dem Bus wesentlich länger brauchst, wird dein Preis reduziert, weil es kein vergleichbares Angebot gibt."    
             state_desc = (
                 <>
                   Der Bus braucht <span className="text-pink-500">{(busTime-lumoTime).toFixed() < 0 ? (busTime-lumoTime).toFixed() * (-1) : (busTime-lumoTime).toFixed()} Minuten</span> länger.
                 </>
               );
         } else {
-            rule = "Wenn der Bus dich genauso schnell ans Ziel bringen kann, enthält der Preis einen Zuschlag, weil es ein vergleichbares Angebot gibt."
             state_desc = (
                 <>
                   Der Bus ist <span className="text-pink-500">{(lumoTime-busTime).toFixed() < 0 ? (lumoTime-busTime).toFixed() * (-1) : (lumoTime-busTime).toFixed()} Minuten</span> schneller.
@@ -56,34 +60,21 @@ function Explanation(props) {
     else if (factor === "safety") {
         title = "Sicherheit"
         subtitle = "lümo bringt dich sicher ans Ziel."
+        rule =  "Kürzere Strecken können mehr Sicherheit bieten. Wenn du weiter als XXXm laufen musst, reduziert sich dein Preis." 
         state_desc = (
             <>
-              Insgesamt musst du <span className="text-indigo-500">{totalWalkingDistance}m</span> weit laufen.
+              Insgesamt {totalPassengers > 1 ? "müsst ihr " : "musst du "}<span className="text-indigo-500">{totalWalkingDistance}m</span> weit laufen.
             </>
           );
-        if (isDiscount) {
-            rule =  "Kürzere Strecken können mehr Sicherheit bieten. Wenn du weiter als XXXm laufen musst, reduziert sich dein Preis."    
-        } else {
-            rule = "Kürzere Strecken können mehr Sicherheit bieten. Wenn du weiter als XXXm laufen musst, reduziert sich dein Preis."  
-        }
     } else {
         title = "Physischer Komfort"
         subtitle = "lümo ermöglicht angeneme Fahrten."
-        if (isDiscount) {
-            rule =  "Wenn du länger als XX Minuten warten musst und die Umstände nicht so angenehm sind, reduziert sich dein Preis."  
-            state_desc = (
-                <>
-                  Du musst <span className="text-sky-500">{waitingTime.toFixed()} Minuten</span> warten!
-                </>
-              ); 
-        } else {
-            rule = "Wenn du länger als XX Minuten warten musst und die Umstände nicht so angenehm sind, reduziert sich dein Preis."   
-            state_desc = (
-                <>
-                  Du musst nur <span className="text-sky-500">{waitingTime.toFixed()} Minuten</span> warten!
-                </>
-              );  
-        }
+        rule =  "Wenn du länger als XX Minuten warten musst und die Umstände nicht so angenehm sind, reduziert sich dein Preis."  
+        state_desc = (
+            <>
+              {totalPassengers > 1 ? "Ihr müsst " : "Du musst "}{isDiscount ? "" : "nur "}<span className="text-sky-500">{waitingTime.toFixed()} Minuten</span> warten!
+            </>
+          ); 
     }
 
     return (
@@ -154,5 +145,3 @@ function Explanation(props) {
 }
 
 export default Explanation 
-
-// - 2.40€ {showP1Details && ("- Innerhalb Bad Schwartau / Stockelsdorf")}
