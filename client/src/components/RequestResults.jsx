@@ -83,12 +83,13 @@ function RequestResults() {
                             <button className="flex items-center justify-self-end border-1 border-zinc-400 px-3 py-1.5 rounded-full hover:cursor-pointer" onClick={() => setShowLegend(true)}>
                                 <LegendButton />                        
                             </button>
-                            <button className="flex items-center justify-self-end border-1 border-zinc-400 px-3 py-1.5 rounded-full hover:cursor-pointer" onClick={togglePassengerSettings}>
-                                <PassengerButton />
+                            <button className="flex items-center justify-self-end border-1 border-zinc-300 text-zinc-400 px-3 py-1.5 rounded-full" >
+                                {/** onClick={togglePassengerSettings}*/ }
+                                <PassengerButton btnStyle={false}/>
                             </button>
                         </div>
                         <div className="flex">
-                            <button className="w-4/5" onClick={simulateBooking}>
+                            <button className="w-full" onClick={simulateBooking}>
                             {isValidRequest ? (
                             <>
                                 { isPreebooked ? <ConfirmButton label={"Eine Fahrt reservieren"} sublabel={tripTimeLabels} /> : <ConfirmButton label={"Diese Fahrt buchen"} /> }
@@ -104,9 +105,9 @@ function RequestResults() {
                             }
                                 
                             </button> 
-                            <button className="w-1/5 my-2 ml-2 flex items-center justify-center bg-gray-200 rounded-xl" onClick={toggleDateSettings}>
+                            {/* <button className="w-1/5 my-2 ml-2 flex items-center justify-center bg-gray-200 rounded-xl" onClick={toggleDateSettings}>
                                 <CalendarDays size={20} />
-                            </button>                   
+                            </button>                    */}
                         </div>                    
                     </div>
                 )}

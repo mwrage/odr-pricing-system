@@ -109,7 +109,7 @@ def get_routing_information(lat_org, long_org, lat_dest, long_dest, plan_pref, p
     print(place_org)
     print("place_dest")
     print(place_dest)
-    if (place_org =="invalid" or place_dest == "invalid"):
+    if (place_org =="invalid" or place_dest == "invalid" or (lat_org == lat_dest and long_org == long_dest)):
         return {'status': 400, 'ticket_level': "p1", 'next_stop_org_name': "Nicht gefunden", 'bus_time': "Nicht gefunden", 'odr_trip_time': 0, 'odr_wait_time': 0, 'walking_time_org_stop': 0, 'walking_time_dest_stop': 0, 'walking_dist_org_stop': 0, 'walking_dist_dest_stop': 0, 'total_walking_distance': 0, 'weather': "Nicht gefunden", 'temperature': 0}
     else: 
         ticket_level = determine_ticket_level(place_org, place_dest)

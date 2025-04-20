@@ -1,4 +1,4 @@
-function StackedBarChart({ segments, borderRadius = 6 }) {
+function StackedBarChart({ segments }) {
     const total = segments.reduce((sum, seg) => sum + seg.value, 0);
 
     const sortedSegments = [...segments].sort((a, b) => {
@@ -10,28 +10,14 @@ function StackedBarChart({ segments, borderRadius = 6 }) {
     });
 
     return (
-      <div
-        className="w-full flex overflow-hidden border border-zinc-200"
-        style={{
-          borderRadius,
-          boxShadow: "inset 0 0 0 1px #cccccc",
-        }}
-      >
+      <div className="w-full flex overflow-hidden rounded-md">
         {sortedSegments.map((seg, idx) => {
           const widthPercent = (seg.value / total) * 100;
   
           return (
-            <div
-              key={idx}
-              className={`flex items-center justify-center text-xs py-[0.15rem] ${seg.textColorBar}`}
-              style={{
-                width: `${widthPercent}%`,
-                backgroundColor: seg.color,
-                opacity: seg.opacity,
-                whiteSpace: "nowrap",
-              }}
-            >
-              {seg.label.toFixed(2)}
+            <div key={idx} className={`flex items-center justify-center border-y text-xs py-[0.15rem] ${idx === sortedSegments.length-1 ? "border-r" : ""} ${seg.textColorBar}`}
+              style={{ width: `${widthPercent}%`, backgroundColor: seg.color, opacity: seg.opacity, whiteSpace: "nowrap" }}>
+              {seg.label != 1 ? seg.label.toFixed(2) : seg.label}
             </div>
           );
         })}

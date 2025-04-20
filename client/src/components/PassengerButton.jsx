@@ -4,7 +4,7 @@ import { AppContext } from "../context/context"
 import { useContext, useState, useEffect } from "react";
 import { calculateArrayTotal } from "../utils/calculateArrayTotal";
 
-function PassengerButton()  {
+function PassengerButton({ btnStyle = true })  {
     const { passengersNum } = useContext(AppContext);
     const [passengersSum, setPassengersSum] = useState(1);
 
@@ -15,9 +15,9 @@ function PassengerButton()  {
 
     return (
         <>
-            <User4 size={18}/>
+            <User4 size={18} color={"#a1a1aa"} />
             <p className="font-normal text-xs px-1">{passengersSum} {passengersSum == 1 ? "Fahrgast" : "Fahrgäste"}</p>
-            <ChevronDown size={14} style={"pb-0.5"}/>    
+            { btnStyle && ( <ChevronDown size={14} style={"pb-0.5"}/> )} 
         </>
 
     );

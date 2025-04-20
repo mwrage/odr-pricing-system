@@ -12,11 +12,11 @@ function TripOptionCard(props) {
     const [isOpen, setIsOpen] = useState(false)
 
     const segments = [
-        { factor:"Min.", label: 1, value: 1, color: "#3f3f46", textColorDonut: "#3f3f46", textColorBar: "text-white" },
-        { factor:"Ticket", label: ticket_share, value: ticket_share < 0 ? ticket_share * (-1) : ticket_share, color: ticket_share < 0 ? "rgba(245, 158, 11, 0.1)" : "#f59e0b", textColorDonut: "#f59e0b", textColorBar: ticket_share < 0 ? "text-zinc-800" : "text-white" },        
-        { factor:"Alternativangebot", label: alternative_share, value: alternative_share < 0 ? alternative_share * (-1) : alternative_share, color: alternative_share < 0 ? "rgba(236, 72, 153, 0.1)" : "#ec4899", textColorDonut: "#ec4899", textColorBar: alternative_share < 0 ? "text-zinc-800" : "text-white"},
-        { factor:"Sicherheit", label: safety_share, value: safety_share < 0 ? safety_share * (-1) : safety_share, color: safety_share < 0 ? "rgba(99, 102, 241, 0.1)" : "#6366f1", textColorDonut: "#6366f1", textColorBar: safety_share < 0 ? "text-zinc-800" : "text-white"},
-        { factor:"Komfort", label: comfort_share, value: comfort_share < 0 ? comfort_share * (-1) : comfort_share, color: comfort_share < 0 ? "rgba(14, 165, 233, 0.1)" : "#0ea5e9", textColorDonut: "#0ea5e9", textColorBar: comfort_share < 0 ? "text-zinc-800" : "text-white"},  
+        { factor:"Min.", label: 1, value: 1, color: "#3f3f46", textColorDonut: "#3f3f46", textColorBar: "text-white border-zinc-800" },
+        { factor:"Ticket", label: ticket_share, value: ticket_share < 0 ? ticket_share * (-1) : ticket_share, color: ticket_share < 0 ? "rgba(245, 158, 11, 0.1)" : "#f59e0b", textColorDonut: "#f59e0b", textColorBar: ticket_share < 0 ? "text-zinc-800 border-amber-300" : "text-white border-amber-500" },        
+        { factor:"Alternativangebot", label: alternative_share, value: alternative_share < 0 ? alternative_share * (-1) : alternative_share, color: alternative_share < 0 ? "rgba(236, 72, 153, 0.1)" : "#ec4899", textColorDonut: "#ec4899", textColorBar: alternative_share < 0 ? "text-zinc-800 border-pink-300" : "text-white border-pink-500"},
+        { factor:"Sicherheit", label: safety_share, value: safety_share < 0 ? safety_share * (-1) : safety_share, color: safety_share < 0 ? "rgba(99, 102, 241, 0.1)" : "#6366f1", textColorDonut: "#6366f1", textColorBar: safety_share < 0 ? "text-zinc-800 border-indigo-300" : "text-white border-indigo-500"},
+        { factor:"Komfort", label: comfort_share, value: comfort_share < 0 ? comfort_share * (-1) : comfort_share, color: comfort_share < 0 ? "rgba(14, 165, 233, 0.1)" : "#0ea5e9", textColorDonut: "#0ea5e9", textColorBar: comfort_share < 0 ? "text-zinc-800 border-sky-300" : "text-white border-sky-500"},  
     ];
 
     return (

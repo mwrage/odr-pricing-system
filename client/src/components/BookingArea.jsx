@@ -21,7 +21,7 @@ function BookingArea() {
     //const [chooseStart, setChooseStart] = useState(false)
     const [rotated, setRotated] = useState(false)
     const [time, setTime] = useState("Jetzt");
-    const { setTripRequested, tripTime, setRequestResponse, setWaitingForResponse, isPreebooked, hasTicket, originCoords, destinationCoords, isDeparture, setChooseOnMap, chooseStart, setChooseStart, results, setResults, isButtonDisabled, passengersNum } = useContext(AppContext);
+    const { setTripRequested, tripTime, setRequestResponse, setWaitingForResponse, isPreebooked, hasTicket, originCoords, destinationCoords, isDeparture, setChooseOnMap, chooseStart, setChooseStart, results, setResults, isButtonDisabled, passengersNum, setDestinationCoords, setDestinationName, setOriginCoords, setOriginName } = useContext(AppContext);
     //const [results, setResults] = useState([]);
     const location = useLocation();
     const query = new URLSearchParams(location.search);
@@ -40,6 +40,18 @@ function BookingArea() {
     }
     const togglePassengerSettings = () => {
       setPassengerSettings(!passengerSettings)
+    }
+    const setSuggestionCoords = (expandSettings) => {
+      if (chooseStart) {
+        setOriginName("Beim Retteich, Lübeck")
+        setOriginCoords([53.8661149458542, 10.670325412242835])
+      } else {
+        setDestinationName("Beim Retteich, Lübeck")
+        setDestinationCoords([53.8661149458542, 10.670325412242835])
+      }
+      if (expandSettings) {
+        setExpanded(true)
+      }
     }
 
     const handleRequest = () => {
@@ -84,10 +96,10 @@ function BookingArea() {
                     <PassengerButton />
                   </button>
               </div>
-              <div className="flex items-center py-2">
+              <button className="flex items-center py-2 hover:cursor-pointer" onClick={() => setSuggestionCoords(true)}>
                 <Bus1 size={22} />
-                <p className="px-2 text-sm">Hauptbahnhof Lübeck</p>
-              </div>
+                <p className="px-2 text-sm">Beim Retteich, Lübeck</p>
+              </button>
             </>   
         )}
 
@@ -115,10 +127,10 @@ function BookingArea() {
               </div>
               <div className="w-full h-0.5 bg-zinc-100 rounded-full my-2"></div>
               <p className="px-2 text-xs">Vorschläge</p>
-              <div className="flex items-center py-2">
+              <button className="flex items-center py-2 hover:cursor-pointer" onClick={() => setSuggestionCoords(false)}>
                 <Bus1 size={22} color={"#343C54"}/>
-                <p className="px-2 text-sm">Hauptbahnhof Lübeck</p>
-              </div>
+                <p className="px-2 text-sm">Beim Retteich, Lübeck</p>
+              </button>
               {!isButtonDisabled ? (
                 <button onClick={handleRequest}>
                   <ConfirmButton label={"Fahrt anfragen"}/>
