@@ -49,7 +49,7 @@ def determine_factor_impact(has_ticket, lumo_time, bus_time, walking_distance, w
         comfort = 0
     else:
         comfort = 1
-    return {'ticket': passengers_tickets, 'alternative': alternative, 'safety': safety, 'comfort': comfort}
+    return {'passengers_data': passengers, 'ticket': passengers_tickets, 'alternative': alternative, 'safety': safety, 'comfort': comfort}
 
 # calculate ticket price for trip
 def calculate_price(factor_classifications, ticket_level):
@@ -80,7 +80,16 @@ def calculate_price(factor_classifications, ticket_level):
     
     #temp_ticket_share = ticket_price_adult[ticket_level] # TODO
     #ticket_share = temp_ticket_share if factor_classifications['ticket'] == 1 else temp_ticket_share * (-1)
-    ticket_share = total_needs_ticket_prices
+    total_num = 0
+    for passenger in factor_classifications['passengers_data']:
+        total_num = total_num + passenger['num']
+
+    if (total_num > 1):
+        ticket_share = total_needs_ticket_prices
+    else:
+        temp_ticket_share = ticket_price_adult[ticket_level] # TODO
+        ticket_share = temp_ticket_share if total_needs_ticket_prices > 0 else temp_ticket_share * (-1)
+
 
     temp_alternative_share = (dynamic_surcharge * factor_shares['alternative'])  * len(factor_classifications['ticket'])
     alternative_share = temp_alternative_share if factor_classifications['alternative'] else temp_alternative_share * (-1)

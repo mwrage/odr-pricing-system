@@ -59,8 +59,8 @@ const DonutChart = ({ data, total, max, width = 300, height = 300 }) => {
             key={i}
             className="absolute text-xs inter-400 text-center pointer-events-none"
             style={{
-              left: `calc(50% + ${x * 0.85}px)`,
-              top: `calc(50% + ${y * 0.8}px)`,
+              left: `calc(50% + ${x * 0.86}px)`,
+              top: `calc(50% + ${y * 0.75}px)`,
               transform: 'translate(-50%, -50%)',
               color: d.data.textColorDonut,
             }}

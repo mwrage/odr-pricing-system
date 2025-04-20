@@ -12,6 +12,8 @@ function Explanation(props) {
     const { passengersNum } = useContext(AppContext);
     const totalPassengers = calculateArrayTotal(passengersNum)
     const totalPassengersWithTicket = calculateArrayTotal([passengersNum[0], passengersNum[2], passengersNum[4]])
+    const singleShare = (factor === "alternative" ? 2.25 : factor === "safety" ? 1.70 : 1.05)
+    const individualShare = (isDiscount ? singleShare * (-1) : singleShare)
     const [selectedTicketLevel, setSelectedTicketLevel] = useState(ticket_level);
     const ticketLevels = [
         { id: "p1", label: "Preisstufe 1", price: "2.40€", region: "Innerhalb von Bad Schwartau / Stockelsdorf" },
@@ -41,18 +43,18 @@ function Explanation(props) {
     }
     else if (factor === "alternative") {
         title = "Alternativangebot"
-        subtitle = "lümo sorgt dafür, dass du mobil bleibst." 
+        subtitle = "lümo sorgt für deine Mobilität." 
         rule =  "Wenn du mit dem Bus wesentlich länger brauchst, wird dein Preis reduziert, weil es kein vergleichbares Angebot gibt." 
         if (isDiscount) {
             state_desc = (
                 <>
-                  Der Bus braucht <span className="text-pink-500">{(busTime-lumoTime).toFixed() < 0 ? (busTime-lumoTime).toFixed() * (-1) : (busTime-lumoTime).toFixed()} Minuten</span> länger.
+                    Der Bus braucht <span className="text-pink-500">{(busTime-lumoTime).toFixed() < 0 ? (busTime-lumoTime).toFixed() * (-1) : (busTime-lumoTime).toFixed()} Minuten</span> länger.
                 </>
               );
         } else {
             state_desc = (
                 <>
-                  Der Bus ist <span className="text-pink-500">{(lumoTime-busTime).toFixed() < 0 ? (lumoTime-busTime).toFixed() * (-1) : (lumoTime-busTime).toFixed()} Minuten</span> schneller.
+                    Der Bus ist <span className="text-pink-500">{(lumoTime-busTime).toFixed() < 0 ? (lumoTime-busTime).toFixed() * (-1) : (lumoTime-busTime).toFixed()} Minuten</span> schneller.
                 </>
               );
         }
@@ -63,24 +65,29 @@ function Explanation(props) {
         rule =  "Kürzere Strecken können mehr Sicherheit bieten. Wenn du weiter als XXXm laufen musst, reduziert sich dein Preis." 
         state_desc = (
             <>
-              Insgesamt {totalPassengers > 1 ? "müsst ihr " : "musst du "}<span className="text-indigo-500">{totalWalkingDistance}m</span> weit laufen.
+                Insgesamt {totalPassengers > 1 ? "müsst ihr " : "musst du "}<span className="text-indigo-500">{totalWalkingDistance}m</span> weit laufen.
             </>
           );
     } else {
         title = "Physischer Komfort"
-        subtitle = "lümo ermöglicht angeneme Fahrten."
+        subtitle = "lümo sorgt für angeneme Fahrten."
         rule =  "Wenn du länger als XX Minuten warten musst und die Umstände nicht so angenehm sind, reduziert sich dein Preis."  
         state_desc = (
             <>
-              {totalPassengers > 1 ? "Ihr müsst " : "Du musst "}{isDiscount ? "" : "nur "}<span className="text-sky-500">{waitingTime.toFixed()} Minuten</span> warten!
+                {totalPassengers > 1 ? "Ihr müsst " : "Du musst "}{isDiscount ? "" : "nur "}<span className="text-sky-500">{waitingTime.toFixed()} Minuten</span> warten!
             </>
           ); 
     }
 
     return (
         <div lang="de" className={`hyphens-auto px-2.5 pb-2 rounded-b-md ${color}`}>
-            <h2 className={`pt-2 inter-500`}>{factor == "ticket" && !isDiscount ? "Grundpreis: " : isDiscount ? "Reduzierung: " : "Komfortzuschlag: "}{title}</h2>
-            <h3>{subtitle}</h3>
+            <div className="flex justify-between items-center pt-2">
+                <div className="flex flex-col">
+                    <h2 className={`inter-500`}>{factor == "ticket" && !isDiscount ? "Grundpreis: " : isDiscount ? "Reduzierung: " : "Zuschlag: "}{title}</h2>  
+                    <h3>{subtitle}</h3>                                
+                </div>
+                {factor != "ticket" && totalPassengers > 1 && ( <p className={`w-fit h-fit text-center border-l text-xs ml-auto px-2 ${factor === "alternative" ? "text-pink-500 border-pink-300" : factor === "safety" ? "text-indigo-500 border-indigo-300" : "text-sky-500 border-sky-300"}`}>{individualShare.toFixed(2)}€ /<br></br>Person</p>)}  
+            </div>
             <p className="text-zinc-800 pt-1">{rule}</p>
             <div className={`w-full h-0.5 rounded-full my-2 border-b-2 border-dashed ${color}`}></div>
             <p className="text-zinc-800 inter-400 text-center">{state_desc}</p>
@@ -102,7 +109,7 @@ function Explanation(props) {
                 </div>
             ) : 
             factor == "alternative" ? (
-                <div className="w-full flex items-center justify-center text-zinc-700">
+                <div className="w-full flex items-center justify-center text-zinc-700">                
                     <div className="flex items-center justify-center py-1.5">
                         <img src={LumoLogo} className="mr-1 w-6 h-6"></img>
                         <p className="pl-1">{lumoTime.toFixed()} min</p>
@@ -115,6 +122,7 @@ function Explanation(props) {
                 </div>
             ) :
             factor == "safety" ? (
+                <>
                 <div className="w-full flex items-center justify-center text-zinc-700">
                     <div className="flex flex-col items-start justify-start py-1.5">
                         <p className="inter-500">Einstieg</p>
@@ -130,9 +138,10 @@ function Explanation(props) {
                         <p className="">{walk_from.toFixed()}m</p>
                     </div>
                 </div>
+                </>
             ): (
                 <>
-                {isDiscount && (
+                {(
                 <div className="flex flex-col h-20 w-full items-center justify-center">
                     <Weather condition={weatherCondition} temp={temperature} />
                     <Temperature temp={temperature} threshold={temp_threshold} />
