@@ -1,6 +1,7 @@
 import { useRef, useContext, useState, useEffect } from "react";
 import { Popover, PopoverButton, PopoverPanel, Switch } from '@headlessui/react'
 import { MapContainer, TileLayer, ZoomControl, useMapEvents, Marker, Tooltip } from "react-leaflet";
+import {Icon} from 'leaflet'
 import "leaflet/dist/leaflet.css";
 import { AppContext } from "../context/context"
 import ChevronDown from "../assets/icons/ChevronDown";
@@ -14,6 +15,13 @@ function Map() {
     const [selectedAddress, setSelectedAddress] = useState("");
     const [center, setCenter] = useState(null);
     const [showTicketSettings, setShowTicketSettings] = useState(false)
+
+    const locationIcon = new Icon ({
+      iconUrl : '/location-pin.svg',
+      iconSize : [35, 35],
+      iconAnchor : [20, 5],
+      popupAnchor : [-3, -76]
+    })
 
     function ClickHandler({ onMapClick }) {
       if(chooseOnMap) {
@@ -117,12 +125,12 @@ function Map() {
             attribution='&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
             url='https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png'
           />
-          <Marker id="originMarker" position={originCoords} >
+          <Marker id="originMarker" position={originCoords} icon={locationIcon} >
             <Tooltip direction="top" permanent>Start</Tooltip>
           </Marker>
           <ClickHandler onMapClick={handleMapClick} />
           {destinationCoords && 
-          <Marker id="destinationMarker" position={destinationCoords} >
+          <Marker id="destinationMarker" position={destinationCoords} icon={locationIcon} >
             <Tooltip direction="top" permanent>Ziel</Tooltip>  
           </Marker>
           }
