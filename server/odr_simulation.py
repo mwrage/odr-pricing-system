@@ -18,7 +18,8 @@ def calculate_odr_trip_time(lat_org, long_org, lat_dest, long_dest):
     response = requests.get(url)
     json = response.json()
     seconds = json['routes'][0]['sections'][0]['summary']['duration']
-    minutes = seconds / 60
+    delay = random.randint(2, 4)
+    minutes = (seconds / 60) + delay
     return {'time': minutes}
 # create 2 to 3 trip options for one request
 

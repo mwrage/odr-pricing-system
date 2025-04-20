@@ -114,7 +114,7 @@ function Map() {
           <TileLayer
             //attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             // url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            attribution='&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            attribution='&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
             url='https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png'
           />
           <Marker id="originMarker" position={originCoords} >
@@ -126,7 +126,7 @@ function Map() {
             <Tooltip direction="top" permanent>Ziel</Tooltip>  
           </Marker>
           }
-          <ZoomControl position="bottomright" />
+          {/* <ZoomControl position="bottomright" /> */}
         </MapContainer>            
           )}
 
