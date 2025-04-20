@@ -8,8 +8,10 @@ export async function sendRequestToBackend ({setTripRequested, setRequestRespons
 
       if (scenario) {
         setRequestResponse([scenario.options])
-        setWaitingForResponse(false)
-        setTripRequested(true)
+        setTimeout(() => {
+          setWaitingForResponse(false)
+          setTripRequested(true)
+        }, 3000);
       } else {
         console.warn('Szenario nicht gefunden');
       }

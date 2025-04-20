@@ -2,16 +2,14 @@ import ChevronDown from "../assets/icons/ChevronDown";
 import User4 from "../assets/icons/User4";
 import { AppContext } from "../context/context"
 import { useContext, useState, useEffect } from "react";
+import { calculateArrayTotal } from "../utils/calculateArrayTotal";
 
-function PassengerButton({ num })  {
+function PassengerButton()  {
     const { passengersNum } = useContext(AppContext);
     const [passengersSum, setPassengersSum] = useState(1);
 
     useEffect(() => {
-        let temp = 0;
-        for (let i = 0; i < passengersNum.length; i++) {
-            temp += passengersNum[i];
-        }
+        const temp = calculateArrayTotal(passengersNum)
         setPassengersSum(temp);
     }, [passengersNum]);
 

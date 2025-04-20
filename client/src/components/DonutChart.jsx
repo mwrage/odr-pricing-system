@@ -6,8 +6,11 @@ const DonutChart = ({ data, total, max, width = 300, height = 300 }) => {
     const radius = Math.min(width, height) / 2;
     const color = d3.scaleOrdinal(d3.schemeCategory10);
     const arc = d3.arc().innerRadius(radius - 50).outerRadius(radius);  
-    const pie = d3.pie().value(d => d.value);
-    const pieChart = pie(data)
+    const positiveData = data.filter(d => d.label > 0);
+    const negativeData = data.filter(d => d.label <= 0);
+    const pie = d3.pie().value(d => Math.abs(d.label)).sort(null);
+    const sortedData = [...positiveData, ...negativeData];
+    const pieChart = pie(sortedData);
     const outerLabelArc = d3.arc().innerRadius(radius).outerRadius(radius + 10);
   
     useEffect(() => {
@@ -31,7 +34,7 @@ const DonutChart = ({ data, total, max, width = 300, height = 300 }) => {
       .attr('stroke', 'white')
       .style('stroke-width', '2px');
 
-  }, [data, width, height]);
+  }, [sortedData, width, height]);
 
   return (
     <div className="relative w-1/2 aspect-square">
@@ -57,13 +60,13 @@ const DonutChart = ({ data, total, max, width = 300, height = 300 }) => {
             className="absolute text-xs inter-400 text-center pointer-events-none"
             style={{
               left: `calc(50% + ${x * 0.85}px)`,
-              top: `calc(50% + ${y * 0.76}px)`,
+              top: `calc(50% + ${y * 0.8}px)`,
               transform: 'translate(-50%, -50%)',
               color: d.data.textColorDonut,
             }}
           >
             <p>{d.data.label.toFixed(2)}€</p>
-            <p>{d.data.factor}</p>
+            <p className='text-wrap hyphens-auto w-16' lang='de'>{d.data.factor}</p>
           </div>
         );
       })} 

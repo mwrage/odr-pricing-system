@@ -11,7 +11,7 @@ const ContextProvider = ({ children }) => {
   // while backend calculates the options
   const [waitingForResponse, setWaitingForResponse] = useState(false);
   // passengers input
-  const [passengersNum, setPassengersNum] = useState([1,0,0,0,0]);
+  const [passengersNum, setPassengersNum] = useState([0,0,0,0,0]);
   // date / time input
   const dates = getTimePeriod()
   const [tripTimeLabels, setTripTimeLabels] = useState([dates[0].label, '20:00']);
@@ -41,13 +41,17 @@ const ContextProvider = ({ children }) => {
   const [chooseStart, setChooseStart] = useState(false)
   // results
   const [results, setResults] = useState([]);
-  //
+  // Button states for request/booking
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [isValidRequest, setIsValidRequest] = useState(true);
 
   useEffect(() => {
-    console.log(requestResponse)
-  }, [requestResponse]);
+    if (hasTicket) {
+      setPassengersNum([1, 0, 0, 0, 0]);
+    } else {
+      setPassengersNum([0, 1, 0, 0, 0]);
+    }
+  }, [hasTicket]);
 
   return (
     <AppContext.Provider value={{ tripRequested, setTripRequested, passengersNum, setPassengersNum, tripTime, setTripTime, isDeparture, setIsDeparture, 

@@ -1,6 +1,4 @@
 import { useState } from "react"
-import { Disclosure, DisclosureButton, DisclosurePanel, Description, Dialog, DialogPanel, DialogTitle } from '@headlessui/react'
-import ChevronDown from "../assets/icons/ChevronDown";
 import Bus1 from "../assets/icons/Bus1";
 import Ticket1 from "../assets/icons/Ticket1";
 import CloudSun from "../assets/icons/CloudSun";
@@ -14,7 +12,7 @@ function PriceDetails(props) {
     return (
       <div className="flex flex-col h-full">
 
-        <div className="flex items-center justify-center w-full pt-8 pb-10">
+        <div className="flex items-center justify-center w-full pt-9 pb-10">
             <DonutChart total={price} max={regular_price} data={segments} /> 
         </div>
         

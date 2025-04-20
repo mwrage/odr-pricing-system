@@ -2,7 +2,7 @@ import PassengersInput from "./PassengersInput";
 import ConfirmButton from "./ConfirmButton";
 import ChevronDown from "../assets/icons/ChevronDown";
 import { sendRequestToBackend } from "../utils/sendRequestToBackend";
-import { useState, useContext  } from "react"
+import { useContext  } from "react"
 import { AppContext } from "../context/context"
 
 function PassengerSettings({ createNewRequest = false, togglePassengerSettings })  {
@@ -15,6 +15,8 @@ function PassengerSettings({ createNewRequest = false, togglePassengerSettings }
       setWaitingForResponse(true)
       const results = sendRequestToBackend({setTripRequested, setRequestResponse, setWaitingForResponse, isPreebooked, hasTicket, originCoords, destinationCoords, isDeparture, tripTime})
       setResults(results)
+    } else {
+      togglePassengerSettings()      
     }
   }
 
