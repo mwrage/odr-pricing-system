@@ -118,12 +118,12 @@ function Map() {
             url='https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png'
           />
           <Marker id="originMarker" position={originCoords} >
-            <Tooltip direction="top">Start</Tooltip>
+            <Tooltip direction="top" permanent>Start</Tooltip>
           </Marker>
           <ClickHandler onMapClick={handleMapClick} />
           {destinationCoords && 
           <Marker id="destinationMarker" position={destinationCoords} >
-            <Tooltip direction="top">Ziel</Tooltip>  
+            <Tooltip direction="top" permanent>Ziel</Tooltip>  
           </Marker>
           }
           <ZoomControl position="bottomright" />

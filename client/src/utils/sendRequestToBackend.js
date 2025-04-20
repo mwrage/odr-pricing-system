@@ -1,4 +1,4 @@
-export async function sendRequestToBackend ({setTripRequested, setRequestResponse, setWaitingForResponse, isPreebooked, hasTicket, originCoords, destinationCoords, isDeparture, tripTime, scenarioParam}) {
+export async function sendRequestToBackend ({setTripRequested, setRequestResponse, setWaitingForResponse, isPreebooked, hasTicket, originCoords, destinationCoords, isDeparture, tripTime, scenarioParam, passengersNum}) {
 
     if (scenarioParam !== null) {
       const scenarioID = parseInt(scenarioParam);
@@ -26,6 +26,7 @@ export async function sendRequestToBackend ({setTripRequested, setRequestRespons
         dest: destinationCoords,
         departure: isDeparture,
         time: tripTime,
+        passengers: passengersNum
       }
     
       console.log(data.dest[0])
