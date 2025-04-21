@@ -44,11 +44,11 @@ function PassengerCounter(props) {
                 </div>   
                 <div className="flex items-center justify-center">
                     <button onClick={decrementCount} className="p-2.5 hover:cursor-pointer">
-                        <Minus size={22} />                        
+                        <Minus size={22} color={(passengersNum[id] == 0) || (hasTicket && id == 0 && passengersNum[id] == 1) || (!hasTicket && id == 1 && passengersNum[id] == 1) ? "#d4d4d8" : "#343C54" } />                        
                     </button>
                     <p className="">{passengersNum[id]}</p>
                     <button onClick={incrementCount} className="p-2.5 hover:cursor-pointer">
-                        <Plus size={22} />                        
+                        <Plus size={22} color={calculateArrayTotal(passengersNum) == 5 ? "#d4d4d8" : "#343C54" } />                        
                     </button>
                 </div>         
             </div>

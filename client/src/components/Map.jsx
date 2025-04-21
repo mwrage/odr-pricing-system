@@ -92,6 +92,20 @@ function Map() {
         setOriginCoords(coords)
       });
     }, []);
+
+    useEffect(() => {
+      if (chooseOnMap && mapRef.current) {
+        const map = mapRef.current;
+        if (map && map.setZoom) {
+          if (map && map._leaflet_id) { // prüfen, ob die Map schon geladen ist
+            map.flyTo(map.getCenter(), chooseOnMap ? 13 : 16, {
+              animate: true,
+              duration: 1.5, // Dauer in Sekunden
+            });
+          }
+        }
+      }
+    }, [chooseOnMap]);
   
     return ( 
       <div className={`flex flex-col relative ${tripRequested ? "h-1/4" : "h-2/3"}`}>

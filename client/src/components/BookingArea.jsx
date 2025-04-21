@@ -121,9 +121,9 @@ function BookingArea() {
               <TextInput label="Gewünschter Start" id="originInput" placeholder="" iconRotation="rotate-180" />
               <TextInput label="Gewünschtes Ziel" id="destinationInput" placeholder="" iconRotation="" />
 
-              <div className="flex items-center py-2">
+              <div className="flex items-center py-2 hover:cursor-pointer">
                 <MapPin5 size={20} />
-                <button className="px-2 text-xs" onClick={() => setChooseOnMap(true)}>{chooseStart ? "Start" : "Ziel"} auf Karte auswählen</button>
+                <button className="px-2 text-xs hover:cursor-pointer" onClick={() => setChooseOnMap(true)}>{chooseStart ? "Start" : "Ziel"} auf Karte auswählen</button>
               </div>
               <div className="w-full h-0.5 bg-zinc-100 rounded-full my-2"></div>
               <p className="px-2 text-xs">Vorschläge</p>
