@@ -21,16 +21,3 @@ def calculate_odr_trip_time(lat_org, long_org, lat_dest, long_dest):
     delay = random.randint(2, 4)
     minutes = (seconds / 60) + delay
     return {'time': minutes}
-# create 2 to 3 trip options for one request
-
-
-
-# if alternative stop choice is implemented: recreate option with nearer stop --> keep vehicle location
-
-
-
-
-# Lübeck Zentrum: 53.86546719714734, 10.686561028590345
-# Bad Schwartau Zentrum: 
-
-# 53.87260353515534, 10.688383503528248

@@ -58,7 +58,13 @@ function DateTimePicker ({ subLabel }) {
       const dateNow = new Date();
       const isSameDay = chosenDate.getFullYear() === dateNow.getFullYear() && chosenDate.getMonth() === dateNow.getMonth() && chosenDate.getDate() === dateNow.getDate();
       if (isSameDay) {
-        setIsPreebooked(false)
+        const timeNow = new Date();
+        const dayTimeNow = timeNow.getHours();
+        if (dayTimeNow >= 20){
+          setIsPreebooked(false)
+        } else {
+          setIsPreebooked(true)
+        }
       } else {
         setIsPreebooked(true)
       }

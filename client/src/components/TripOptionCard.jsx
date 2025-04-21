@@ -7,7 +7,7 @@ import QuestionMarkCircle from "../assets/icons/QuestionMarkCircle";
 
 
 function TripOptionCard(props) {
-    const { index, selected, onClick, type, walk_to, walk_from, prebooking, departure, stop, arrival, price, discount, regular_price, ticket_share, alternative_share, safety_share, comfort_share, lumoTime, busTime, ticket_level, totalWalkingDistance, weather, weatherCondition, temperature, distance_threshold, temp_threshold, wait_threshold, walk_to_dist, walk_from_dist} = props
+    const { index, selected, onClick, type, walk_to, walk_from, prebooking, departure, stop, arrival, price, discount, regular_price, ticket_share, alternative_share, safety_share, comfort_share, lumoTime, busTime, ticket_level, totalWalkingDistance, weather, weatherCondition, temperature, distance_threshold, temp_threshold, wait_threshold, walk_to_dist, walk_from_dist, requestedTime} = props
     const [showDetails, setShowDetails] = useState(false)
     const { setIsOpen } = useContext(AppContext);
 
@@ -44,7 +44,7 @@ function TripOptionCard(props) {
                 ) : (
                     <>
                     {/* <TripOptionShort selected={selected} walk_to={walk_to} walk_from={walk_from} prebooking={prebooking} departure={departure} stop={stop} arrival={arrival} price={price} discount={discount} regular_price={regular_price} ticket_share={ticket_share} alternative_share={alternative_share} safety_share={safety_share} comfort_share={comfort_share}/> */}
-                    <TripOptionShort selected={selected} walk_to={walk_to} walk_from={walk_from} prebooking={prebooking} departure={departure} stop={stop} arrival={arrival} price={price} discount={discount} regular_price={regular_price} segments={segments}/>
+                    <TripOptionShort selected={selected} walk_to={walk_to} walk_from={walk_from} prebooking={prebooking} departure={departure} stop={stop} arrival={arrival} price={price} discount={discount} regular_price={regular_price} segments={segments}  requestedTime={requestedTime}/>
                     <button className="hover:cursor-pointer w-full self-center text-sm text-center bg-zinc-800 text-white mt-2 mb-3 rounded-lg py-2" onClick={() => setShowDetails(true)}>Mehr zu meinem Preis</button>
                     </>
                 )}

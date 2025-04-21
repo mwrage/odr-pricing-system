@@ -54,6 +54,16 @@ const ContextProvider = ({ children }) => {
     }
   }, [hasTicket]);
 
+  useEffect(() => {
+    const timeNow = new Date();
+    const dayTimeNow = timeNow.getHours();
+    if (dayTimeNow >= 20){
+      setIsPreebooked(false)
+    } else {
+      setIsPreebooked(true)
+    }      
+  }, [isPreebooked]);
+
   return (
     <AppContext.Provider value={{ tripRequested, setTripRequested, passengersNum, setPassengersNum, tripTime, setTripTime, isDeparture, setIsDeparture, 
       chooseStart, setChooseStart,requestResponse, setRequestResponse, waitingForResponse, setWaitingForResponse, originCoords, setOriginCoords, isOpen, setIsOpen,

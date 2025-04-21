@@ -6,7 +6,15 @@ import ArrowDownward from "../assets/icons/ArrowDownward"
 import StackedBarChart from "./StackedBarChart";
 
 function TripOptionShort(props) {
-    const { selected, walk_to, walk_from, prebooking, departure, stop, arrival, price, discount, regular_price, segments } = props
+    const { selected, walk_to, walk_from, prebooking, departure, stop, arrival, price, discount, regular_price, segments, requestedTime } = props
+
+    const departureTime = () => {
+        const date = new Date(requestedTime);
+        date.setMinutes(date.getMinutes() + departure);
+        const hours = String(date.getHours()).padStart(2, '0');
+        const minutes = String(date.getMinutes()).padStart(2, '0');
+        return `${hours}:${minutes}`
+    }
 
     return (
         <>              
@@ -35,7 +43,7 @@ function TripOptionShort(props) {
                 
                 {/* Departure details */}
                 {prebooking ? (
-                    <p className="py-3 pl-3">Einstieg {departure.toFixed()} von {stop}</p>
+                    <p className="py-3">Einstieg {departureTime()} von {stop}</p>
                 ) : (
                     <div className="flex items-center py-3">
                         <RssRight size={20} />

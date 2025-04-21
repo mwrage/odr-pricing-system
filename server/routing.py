@@ -15,6 +15,7 @@ def get_next_stops(lat_org, long_org):
     url = f"https://transit.hereapi.com/v8/stations?apiKey={api_key}&in={lat_org},{long_org}" # r = 500 m default
     response = requests.get(url)
     json = response.json()
+    print(json)
     name_next_station = json['stations'][0]['place']['name']
     coords_next_station = json['stations'][0]['place']['location']
     return {'name_next_station': name_next_station, 'coords_next_station': coords_next_station}
@@ -59,8 +60,6 @@ def get_location(lat, long):
     geolocator = Nominatim(user_agent="prototyp-on-demand-ridepooling-bachelorarbeit")
     location = geolocator.reverse(f"{lat}, {long}", timeout=20)
     # check validity
-    print("LOCATION ADDRESS")
-    print(location.raw["address"])
     if "town" in location.raw["address"] or "city" in location.raw["address"]:
         # extract place
         if "city" in location.raw["address"]:
@@ -105,10 +104,6 @@ def get_routing_information(lat_org, long_org, lat_dest, long_dest, plan_pref, p
     # 1. Determine ticket level
     place_org = get_location(lat_org, long_org)
     place_dest = get_location(lat_dest, long_dest)
-    print("place_org")
-    print(place_org)
-    print("place_dest")
-    print(place_dest)
     if (place_org =="invalid" or place_dest == "invalid" or (lat_org == lat_dest and long_org == long_dest)):
         return {'status': 400, 'ticket_level': "p1", 'next_stop_org_name': "Nicht gefunden", 'bus_time': "Nicht gefunden", 'odr_trip_time': 0, 'odr_wait_time': 0, 'walking_time_org_stop': 0, 'walking_time_dest_stop': 0, 'walking_dist_org_stop': 0, 'walking_dist_dest_stop': 0, 'total_walking_distance': 0, 'weather': "Nicht gefunden", 'temperature': 0}
     else: 
@@ -122,14 +117,11 @@ def get_routing_information(lat_org, long_org, lat_dest, long_dest, plan_pref, p
         next_stop_org = get_next_stops(lat_org, long_org)
         next_stop_dist = get_next_stops(lat_dest, long_dest)
         dist_org_stop = get_walking_time_distance(lat_org, long_org, next_stop_org['coords_next_station']['lat'], next_stop_org['coords_next_station']['lng'])
-        dist_dest_stop = get_walking_time_distance(lat_org, long_org, next_stop_dist['coords_next_station']['lat'], next_stop_dist['coords_next_station']['lng'])
+        dist_dest_stop = get_walking_time_distance(lat_dest, long_dest, next_stop_dist['coords_next_station']['lat'], next_stop_dist['coords_next_station']['lng'])
         total_walking_distance = dist_org_stop['distance'] + dist_dest_stop['distance']
         # 4. waiting time
         odr_coords = get_odr_position()
         odr_wait_time = calculate_odr_trip_time(odr_coords['lat'], odr_coords['lng'], next_stop_org['coords_next_station']['lat'], next_stop_org['coords_next_station']['lng'])
-        # 5. TODO: weather + temperature --> radius (out-/inside)
+        # 5. weather + temperature
         weather_temperature = get_weather_data()
         return {'status': 200, 'ticket_level': ticket_level, 'next_stop_org_name': next_stop_org['name_next_station'], 'bus_time': bus_time, 'odr_trip_time': odr_trip_time['time'], 'odr_wait_time': odr_wait_time['time'], 'walking_time_org_stop': dist_org_stop['time'], 'walking_time_dest_stop': dist_dest_stop['time'], 'walking_dist_org_stop': dist_org_stop['distance'], 'walking_dist_dest_stop': dist_dest_stop['distance'], 'total_walking_distance': total_walking_distance, 'weather': weather_temperature['weather'], 'temperature': weather_temperature['temperature'], 'condition': weather_temperature['condition']}
-
-# TODO
-# get next stop within XX m radius as alternative to reduce price if necessary

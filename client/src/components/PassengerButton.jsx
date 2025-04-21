@@ -13,11 +13,11 @@ function PassengerButton({ btnStyle = true })  {
     const scenarioParam = query.get("scenario");
 
     useEffect(() => {
-        if (scenarioParam == 1) {
+        if (scenarioParam == 0) {
             setHasTicket(true)
             setPassengersNum([1, 0, 0, 0, 0]); // has ticket
             setPassengersSum(1);
-        } else if (scenarioParam == 2) {
+        } else if (scenarioParam == 1) {
             setHasTicket(false)
             setPassengersNum([0, 1, 0, 0, 0]); // has no ticket
             setPassengersSum(1);    
