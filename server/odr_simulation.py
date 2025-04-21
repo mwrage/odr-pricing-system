@@ -1,9 +1,10 @@
 import json
 import random
 import requests
+import os
 
 # variables
-api_key = 'Qg_RbMu24ib7wN9oPsZRvww6ikkzpvvZHLJ4wpoPp-w'
+api_key = os.environ.get('HERE_API_KEY')
 
 # randomly set locoation of vehicle within operating area
 def get_odr_position():

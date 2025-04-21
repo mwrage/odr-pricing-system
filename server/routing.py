@@ -1,11 +1,11 @@
 import requests
-import random
+import os
 from geopy.geocoders import Nominatim
 from utils import calculate_time_difference
 from odr_simulation import get_odr_position, calculate_odr_trip_time
 
 # variables
-api_key = 'Qg_RbMu24ib7wN9oPsZRvww6ikkzpvvZHLJ4wpoPp-w'
+api_key = os.environ.get('HERE_API_KEY')
 hl = "lübeck"
 bs = "bad schwartau"
 sd = "stockelsdorf"

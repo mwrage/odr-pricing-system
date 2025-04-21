@@ -6,6 +6,7 @@ import Temperature from "./Temperature";
 import Weather from "./Weather";
 import Route1 from "../assets/icons/Route1"
 import { calculateArrayTotal } from "../utils/calculateArrayTotal";
+import Ticket1 from "../assets/icons/Ticket1";
 
 function Explanation(props) {
     const { factor, isDiscount, state, color, ticket_level, lumoTime, busTime, totalWalkingDistance, weather, weatherCondition, temperature, waitingTime, distance_threshold, temp_threshold, wait_threshold,  walk_to, walk_from } = props;
@@ -44,7 +45,7 @@ function Explanation(props) {
     else if (factor === "alternative") {
         title = "Alternativangebot"
         subtitle = "lümo sorgt für deine Mobilität." 
-        rule =  "Wenn du mit der Bus mehr als 10 Minuten länger als das lümo braucht, wird dein Preis reduziert, weil es kein vergleichbares Angebot gibt." 
+        rule =  "Wenn der Bus mehr als 10 Minuten länger braucht, wird dein Preis reduziert, weil es kein vergleichbares Angebot gibt." 
         if (isDiscount) {
             state_desc = (
                 <>
@@ -62,7 +63,7 @@ function Explanation(props) {
     else if (factor === "safety") {
         title = "Sicherheit"
         subtitle = "lümo bringt dich sicher ans Ziel."
-        rule =  "Kürzere Strecken können mehr Sicherheit bieten. Wenn du weiter als XXXm laufen musst, reduziert sich dein Preis." 
+        rule =  `Kürzere Strecken können mehr Sicherheit bieten. Wenn du weiter als ${distance_threshold.toFixed()}m laufen musst, reduziert sich dein Preis.`
         state_desc = (
             <>
                 Insgesamt {totalPassengers > 1 ? "müsst ihr " : "musst du "}<span className="text-indigo-500">{totalWalkingDistance}m</span> weit laufen.
@@ -71,7 +72,7 @@ function Explanation(props) {
     } else {
         title = "Physischer Komfort"
         subtitle = "lümo sorgt für angeneme Fahrten."
-        rule =  "Wenn du länger als XX Minuten warten musst und die Umstände nicht so angenehm sind, reduziert sich dein Preis."  
+        rule =  `Wenn du länger als ${wait_threshold} Minuten warten musst und die Umstände nicht so angenehm sind, reduziert sich dein Preis.`  
         state_desc = (
             <>
                 {totalPassengers > 1 ? "Ihr müsst " : "Du musst "}{isDiscount ? "" : "nur "}<span className="text-sky-500">{waitingTime.toFixed()} Minuten</span> warten!
@@ -80,7 +81,7 @@ function Explanation(props) {
     }
 
     return (
-        <div lang="de" className={`hyphens-auto px-1 pb-2 rounded-b-md ${color}`}>
+        <div lang="de" className={`hyphens-auto px-0.5 pb-2 rounded-b-md ${color}`}>
             <div className="flex justify-between items-center pt-2">
                 <div className="flex flex-col">
                     <h2 className={`inter-500`}>{factor == "ticket" && !isDiscount ? "Grundpreis: " : isDiscount ? "Reduzierung: " : "Zuschlag: "}{title}</h2>  
@@ -103,14 +104,20 @@ function Explanation(props) {
                     </div>
                     {selectedDetails && (
                         <div className="w-full flex flex-col justify-center text-left rounded-lg rounded-tl-none text-zinc-700 text-xs hyphens-auto" lang="de">
-                            <p className="text-center inter-500">Wo? <span className="inter-300">{selectedDetails.region}</span></p>
-                            <p className="text-center inter-500">Wie viel? <span className="inter-300">{selectedDetails.price} Kinder/Erwachsene</span></p>
+                            <div className="flex items-center justify-center text-center inter-500">
+                                <Route1 size={14}/>
+                                <span className="pl-1 inter-300">{selectedDetails.region}</span>
+                            </div>
+                            <div className="flex items-center justify-center text-center inter-500">
+                                <Ticket1 size={14} style={"#343C54"}/>
+                                <span className="pl-1 inter-300">{selectedDetails.price} Kinder/Erwachsene</span>
+                            </div>
                         </div>
                     )}
                 </div>
             ) : 
             factor == "alternative" ? (
-                <div className="w-full flex items-center justify-center text-zinc-700 h-16 py-2">                
+                <div className="w-full flex items-center justify-center text-zinc-700 h-16">                
                     <div className="flex items-center justify-center">
                         <img src={LumoLogo} className="mr-1 w-7 h-7"></img>
                         <p className="pl-1">{lumoTime.toFixed()} min</p>

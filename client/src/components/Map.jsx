@@ -105,6 +105,30 @@ function Map() {
         }
       }
     }, [chooseOnMap]);
+
+    useEffect(() => {
+      const map = mapRef.current;
+      if (map && map.flyTo) {
+        if (originCoords) {
+          map.flyTo(originCoords, 16, {
+            animate: true,
+            duration: 1,
+          });
+        }
+      }
+    }, [originCoords]);
+
+    useEffect(() => {
+      const map = mapRef.current;
+      if (map && map.flyTo) {
+        if (destinationCoords) {
+          map.flyTo(destinationCoords, 16, {
+            animate: true,
+            duration: 1,
+          });
+        }
+      }
+    }, [destinationCoords]);
   
     return ( 
       <div className={`flex flex-col relative ${tripRequested ? "h-1/4" : "h-2/3"}`}>

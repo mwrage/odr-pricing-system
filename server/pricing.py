@@ -4,9 +4,9 @@ ticket_price_child = {'p1': 1.5, 'p2': 2, 'p3': 2.5}
 min_surcharge = 1
 dynamic_surcharge = 5
 factor_shares = {'alternative': 0.45, 'safety': 0.34, 'comfort': 0.21}
-distance_threshold = 100
+distance_threshold = 200
 temp_threshold = 5
-wait_threshold = 10
+wait_threshold = 12
 
 # rules system: determine discount or surcharge for each factor
 def determine_factor_impact(has_ticket, lumo_time, bus_time, walking_distance, waiting_time, weather, temperature, passengers_data):

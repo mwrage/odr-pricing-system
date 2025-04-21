@@ -62,7 +62,7 @@ function BookingArea() {
     return (
       <> 
         {/* ${expanded ? "h-full" : dateSettings ? "h-1/2" : passengerSettings ? "h-2/3" : "h-[35%]" } */}
-        <div className={`z-20 flex flex-col w-full bg-white rounded-b-3xl self-end px-5 pb-5 rounded-t-md ${(expanded ||  dateSettings || passengerSettings) ? "h-full" :  "h-[35%]" }`} style={{ boxShadow: '0 -2px 6px rgba(0, 0, 0, 0.1)' }}>
+        <div className={`z-20 flex flex-col w-full bg-white rounded-b-3xl self-end px-5 rounded-t-md ${(expanded ||  dateSettings || passengerSettings) ? "h-full" :  "h-[35%]" }`} style={{ boxShadow: '0 -2px 6px rgba(0, 0, 0, 0.1)' }}>
         { !dateSettings && !passengerSettings && (
             <button onClick={expandSettings} className="w-full pt-2 pb-3 hover:cursor-pointer">
               <div className="w-1/6 h-1 bg-zinc-200 rounded-full mx-auto"></div>
