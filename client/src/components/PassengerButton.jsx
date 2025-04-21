@@ -3,14 +3,28 @@ import User4 from "../assets/icons/User4";
 import { AppContext } from "../context/context"
 import { useContext, useState, useEffect } from "react";
 import { calculateArrayTotal } from "../utils/calculateArrayTotal";
+import { useLocation } from "react-router-dom";
 
 function PassengerButton({ btnStyle = true })  {
-    const { passengersNum } = useContext(AppContext);
+    const { passengersNum, setPassengersNum, setHasTicket } = useContext(AppContext);
     const [passengersSum, setPassengersSum] = useState(1);
+    const location = useLocation();
+    const query = new URLSearchParams(location.search);
+    const scenarioParam = query.get("scenario");
 
     useEffect(() => {
-        const temp = calculateArrayTotal(passengersNum)
-        setPassengersSum(temp);
+        if (scenarioParam == 1) {
+            setHasTicket(true)
+            setPassengersNum([1, 0, 0, 0, 0]); // has ticket
+            setPassengersSum(1);
+        } else if (scenarioParam == 2) {
+            setHasTicket(false)
+            setPassengersNum([0, 1, 0, 0, 0]); // has no ticket
+            setPassengersSum(1);    
+        } else {
+            const temp = calculateArrayTotal(passengersNum)
+            setPassengersSum(temp);            
+        }
     }, [passengersNum]);
 
     return (

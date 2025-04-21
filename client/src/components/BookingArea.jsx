@@ -82,10 +82,10 @@ function BookingArea() {
                   </div>
                 </button>
                 {/* <DateInput /> */}
-                <button className="flex items-center w-[45%] bg-gray-100 rounded-r-lg py-4 hover:cursor-pointer" onClick={toggleDateSettings}>
-                  <CalendarDays style={"ml-3"} />
-                  <p className="text-xs font-normal pl-2 pr-0.5">{time}</p>      
-                  <ChevronDown style={"pr-2 scale-60"} />  
+                <button className="flex items-center justify-center w-[45%] bg-gray-100 rounded-r-lg py-2 hover:cursor-pointer" onClick={toggleDateSettings}>
+                  <CalendarDays size={24} style={"ml-5"} />
+                  <p className="text-xs font-normal pl-2 pr-0.5"></p>      
+                  <ChevronDown size={36} style={"mr-2 scale-60"} />  
                 </button>
               </div>
               {/* Passenger */}

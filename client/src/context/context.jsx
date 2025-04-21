@@ -44,6 +44,7 @@ const ContextProvider = ({ children }) => {
   // Button states for request/booking
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [isValidRequest, setIsValidRequest] = useState(true);
+  const [isOpen, setIsOpen] = useState(false)
 
   useEffect(() => {
     if (hasTicket) {
@@ -55,7 +56,7 @@ const ContextProvider = ({ children }) => {
 
   return (
     <AppContext.Provider value={{ tripRequested, setTripRequested, passengersNum, setPassengersNum, tripTime, setTripTime, isDeparture, setIsDeparture, 
-      chooseStart, setChooseStart,requestResponse, setRequestResponse, waitingForResponse, setWaitingForResponse, originCoords, setOriginCoords, 
+      chooseStart, setChooseStart,requestResponse, setRequestResponse, waitingForResponse, setWaitingForResponse, originCoords, setOriginCoords, isOpen, setIsOpen,
       destinationCoords, setDestinationCoords, isPreebooked, setIsPreebooked, tripTimeLabels, setTripTimeLabels, hasTicket, setHasTicket, chooseOnMap, setChooseOnMap, 
       originName, setOriginName, destinationName, setDestinationName, results, setResults, isButtonDisabled, setIsButtonDisabled, isValidRequest, setIsValidRequest }}>
       {children}

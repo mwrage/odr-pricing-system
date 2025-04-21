@@ -11,6 +11,7 @@ import LegendButton from "./LegendButton";
 import PassengerSettings from "./PassengersSettings";
 import DateInput from "./DateInput";
 import InvalidRequestCard from "./InvalidRequestCard";
+import PriceStructureModal from "./PriceStructureModal";
 
 function RequestResults() {
 
@@ -18,7 +19,7 @@ function RequestResults() {
     const [dateSettings, setDateSettings] = useState(false)
     const [selectedOption, setSelectedOption] = useState(0);
     const [booked, setBooked] = useState(false)
-    const { requestResponse, tripTimeLabels, isPreebooked, isValidRequest, setIsValidRequest } = useContext(AppContext);
+    const { requestResponse, tripTimeLabels, isPreebooked, isValidRequest, setIsValidRequest, isOpen } = useContext(AppContext);
     const [showLegend, setShowLegend] = useState(false)
     const [passengerSettings, setPassengerSettings] = useState(false)
     const expandList = () => {
@@ -47,13 +48,13 @@ function RequestResults() {
       }, [requestResponse]);
 
     return (
-        <>  
+        <>  {isOpen && (<PriceStructureModal/>)}
             {booked && <BookingConfirmation />}
-            <div className={`z-20 flex flex-col w-full bg-gray-50 self-end px-4 rounded-t-md ${expanded ? "h-full" : (passengerSettings || dateSettings) ? "h-1/4" :  "h-3/4" }`} style={{ boxShadow: '0 -2px 6px rgba(0, 0, 0, 0.1)' }}>
+            <div className={`z-20 flex flex-col w-full bg-gray-50 self-end px-4 rounded-t-md ${expanded ? "h-3/4" : (passengerSettings || dateSettings) ? "h-1/4" :  "h-1/2" }`} style={{ boxShadow: '0 -2px 6px rgba(0, 0, 0, 0.1)' }}>
                 <button onClick={expandList} className="w-full pt-2 pb-3 hover:cursor-pointer">
                     <div className="w-1/6 h-1 bg-zinc-200 rounded-full mx-auto"></div>
                 </button>
-
+                
                 <div className="overflow-y-scroll h-full no-scrollbar">
                     <h1 className="font-medium py-2">lümo</h1>
                     {requestResponse[0].map((option, index) => (
