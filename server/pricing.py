@@ -28,14 +28,9 @@ def determine_factor_impact(has_ticket, lumo_time, bus_time, walking_distance, w
         else:
             for i in range(passenger['num']):
                 passengers_tickets.append({'category': passenger['group'], 'ticket_factor': 1})
-    # ticket
-    #if (has_ticket): 
-    #    ticket = 0
-    #else:
-    #    ticket = 1
 
     # quality of alternative
-    if (bus_time > lumo_time):
+    if (bus_time - lumo_time >= 10):
         alternative = 0
     else:
         alternative = 1
@@ -72,7 +67,7 @@ def calculate_price(factor_classifications, ticket_level):
         else: 
             total_needs_ticket_prices = total_needs_ticket_prices + ticket_price_child[ticket_level] * passenger['ticket_factor']
 
-    individual_price = total_needs_ticket_prices + min_surcharge + ((dynamic_surcharge * factor_classifications['safety'] * factor_shares['safety']) + (dynamic_surcharge * factor_classifications['comfort'] * factor_shares['comfort']) * len(factor_classifications['ticket']))    
+    individual_price = total_needs_ticket_prices + min_surcharge + ((dynamic_surcharge * factor_classifications['alternative'] * factor_shares['alternative'])  + (dynamic_surcharge * factor_classifications['safety'] * factor_shares['safety']) + (dynamic_surcharge * factor_classifications['comfort'] * factor_shares['comfort'])) * len(factor_classifications['ticket'])   
     
     
     # discount due to situational factors
@@ -98,7 +93,7 @@ def calculate_price(factor_classifications, ticket_level):
     temp_comfort_share = (dynamic_surcharge * factor_shares['comfort']) * len(factor_classifications['ticket'])
     comfort_share = temp_comfort_share if factor_classifications['comfort'] else temp_comfort_share * (-1)
 
-    return {'total_price': total_price, 'individual_price': individual_price, 'discount': discount, 
+    return {'total_price': total_price, 'individual_price': individual_price, 'discount': discount, 'total_ticket_prices': round(total_ticket_prices, 2),
             'distance_threshold': distance_threshold, 'temp_threshold': temp_threshold,  'wait_threshold': wait_threshold,
             'ticket_share': round(ticket_share, 2), 'alternative_share': round(alternative_share, 2), 'safety_share': round(safety_share, 2), 'comfort_share': round(comfort_share, 2)}
 

@@ -17,7 +17,7 @@ function StackedBarChart({ segments }) {
           return (
             <div key={idx} className={`flex items-center justify-center border-y text-xs py-[0.15rem] ${idx === sortedSegments.length-1 ? "border-r" : ""} ${seg.textColorBar}`}
               style={{ width: `${widthPercent}%`, backgroundColor: seg.color, opacity: seg.opacity, whiteSpace: "nowrap" }}>
-              {seg.label != 1 ? seg.label.toFixed(2) : seg.label}
+              {seg.label == 0 ? "" : seg.label != 1 ? seg.label.toFixed(2) : seg.label}
             </div>
           );
         })}

@@ -12,7 +12,7 @@ function PriceDetails(props) {
     return (
       <div className="flex flex-col h-full">
 
-        <div className="flex items-center justify-center w-full pt-9 pb-10">
+        <div className="flex items-center justify-center w-full pt-10 pb-14">
             <DonutChart total={price} max={regular_price} data={segments} /> 
         </div>
         

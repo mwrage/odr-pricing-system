@@ -28,7 +28,7 @@ function Explanation(props) {
     let state_desc = ""
 
     if (factor === "ticket") {
-        title = "ÖPNV-Tarif" 
+        title = "ÖPNV-Ticket" 
         subtitle = "lümo unterstützt den ÖPNV."     
         state_desc = (
             <>
@@ -44,7 +44,7 @@ function Explanation(props) {
     else if (factor === "alternative") {
         title = "Alternativangebot"
         subtitle = "lümo sorgt für deine Mobilität." 
-        rule =  "Wenn du mit dem Bus wesentlich länger brauchst, wird dein Preis reduziert, weil es kein vergleichbares Angebot gibt." 
+        rule =  "Wenn du mit der Bus mehr als 10 Minuten länger als das lümo braucht, wird dein Preis reduziert, weil es kein vergleichbares Angebot gibt." 
         if (isDiscount) {
             state_desc = (
                 <>

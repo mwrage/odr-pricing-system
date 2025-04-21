@@ -10,7 +10,6 @@ def get_odr_position():
     with open('odr-data.json', 'r', encoding='utf-8') as json_file:
         positions = json.load(json_file)
     odr_position = random.choice(positions)
-    print(odr_position)
     return {'lat': odr_position['lat'], 'lng': odr_position['lng']}
 
 def calculate_odr_trip_time(lat_org, long_org, lat_dest, long_dest):
