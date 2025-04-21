@@ -7,11 +7,12 @@ import { AppContext } from "../context/context"
 import ChevronDown from "../assets/icons/ChevronDown";
 import Ticket1 from "../assets/icons/Ticket1";
 import { reverseGeocode } from "../utils/reverseGeocode";
+import BookingConfirmation from "./BookingConfirmation";
 
 function Map() {
   
     const mapRef = useRef(null);
-    const { tripRequested, setTripRequested, originCoords, setOriginCoords, destinationCoords, setDestinationCoords, hasTicket, setHasTicket, chooseOnMap, setChooseOnMap, setDestinationName, setOriginName, chooseStart, setChooseStart } = useContext(AppContext);
+    const { tripRequested, setTripRequested, originCoords, setOriginCoords, destinationCoords, setDestinationCoords, hasTicket, setHasTicket, chooseOnMap, setChooseOnMap, setDestinationName, setOriginName, chooseStart, booked } = useContext(AppContext);
     const [selectedAddress, setSelectedAddress] = useState("");
     const [center, setCenter] = useState(null);
     const [showTicketSettings, setShowTicketSettings] = useState(false)
@@ -61,8 +62,6 @@ function Map() {
       const data = await response.json();
       const address = data.display_name || "Adresse nicht gefunden";
       setSelectedAddress(address);
-      console.log(address)
-      console.log(hasTicket)
     };
 
     useEffect(() => {
@@ -109,6 +108,7 @@ function Map() {
   
     return ( 
       <div className={`flex flex-col relative ${tripRequested ? "h-1/4" : "h-2/3"}`}>
+          {booked && <BookingConfirmation />}
           {tripRequested && (
             <button className="m-4 flex items-center justify-center absolute z-20 h-10 w-10 rounded-full bg-white shadow-lg shadow-zinc-400 hover:cursor-pointer" onClick={navigateBack}>
               <ChevronDown size={24} style={"rotate-90"} />

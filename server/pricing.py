@@ -78,8 +78,6 @@ def calculate_price(factor_classifications, ticket_level):
     # discount due to situational factors
     discount = round(((total_price - individual_price) / total_price), 2) * 100
     
-    #temp_ticket_share = ticket_price_adult[ticket_level] # TODO
-    #ticket_share = temp_ticket_share if factor_classifications['ticket'] == 1 else temp_ticket_share * (-1)
     total_num = 0
     for passenger in factor_classifications['passengers_data']:
         total_num = total_num + passenger['num']
@@ -87,7 +85,7 @@ def calculate_price(factor_classifications, ticket_level):
     if (total_num > 1):
         ticket_share = total_needs_ticket_prices
     else:
-        temp_ticket_share = ticket_price_adult[ticket_level] # TODO
+        temp_ticket_share = ticket_price_adult[ticket_level]
         ticket_share = temp_ticket_share if total_needs_ticket_prices > 0 else temp_ticket_share * (-1)
 
 

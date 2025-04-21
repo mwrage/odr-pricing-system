@@ -32,7 +32,6 @@ function BookingArea() {
       setRotated(!setRotated)
     }
     const toggleDateSettings = () => {
-      console.log(tripTime)
       setDateSettings(!dateSettings)
     }
     const togglePassengerSettings = () => {

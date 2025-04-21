@@ -28,8 +28,7 @@ export async function sendRequestToBackend ({setTripRequested, setRequestRespons
         time: tripTime,
         passengers: passengersNum
       }
-      console.log(data.dest)
-      console.log(data.dest[0])
+
       const devURL = "http://localhost:8080/api/process-request"
       const productionURL = "https://odr-pricing-system.onrender.com/api/process-request"
       const response = await fetch(devURL, {

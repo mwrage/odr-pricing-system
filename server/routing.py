@@ -15,7 +15,6 @@ def get_next_stops(lat_org, long_org):
     url = f"https://transit.hereapi.com/v8/stations?apiKey={api_key}&in={lat_org},{long_org}" # r = 500 m default
     response = requests.get(url)
     json = response.json()
-    print(json)
     name_next_station = json['stations'][0]['place']['name']
     coords_next_station = json['stations'][0]['place']['location']
     return {'name_next_station': name_next_station, 'coords_next_station': coords_next_station}
@@ -33,7 +32,6 @@ def get_walking_time_distance(lat_org, long_org, lat_dest, long_dest):
 
  
 # BUS ALTERNATIVE: calculate total trip time (walk time till entry + trip time + walk time from exit)
-# TODO: tolerance range for difference
 def get_toatal_bus_time_in_min(lat_org, long_org, lat_dest, long_dest, time, plan_pref):
     # query based on planning preference
     url = ""
