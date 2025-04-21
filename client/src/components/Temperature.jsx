@@ -13,7 +13,7 @@ function Temperature({ temp, threshold })  {
     )`;
   
     return (
-      <div className="relative mt-2 w-1/2 h-20">
+      <div className="relative w-1/2">
         <div className="absolute w-full h-3 rounded" style={{ background: gradient }} />
         <div style={{ left: `${valuePercent}%` }} className="absolute top-0 h-3">
           <div className="absolute -top-1 h-5 w-0.5 bg-zinc-800" />
@@ -21,7 +21,7 @@ function Temperature({ temp, threshold })  {
         </div>
         <div style={{ left: `${thresholdPercent}%` }} className="absolute top-0 h-3">
           <div className="absolute -top-1 h-5 w-0.5 bg-red-500" />
-          <div className="absolute -bottom-6 -translate-by-1/2 text-sm text-red-500">{threshold}°C</div>
+          <div className="absolute -bottom-6 -translate-by-1/2 text-xs text-red-500">{threshold}°C</div>
         </div>
       </div>
     );

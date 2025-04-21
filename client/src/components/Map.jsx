@@ -45,14 +45,14 @@ function Map() {
           setOriginName(name);
         };
         fetchOriginName();
-        setOriginCoords(latlng);
+        setOriginCoords([latlng.lat, latlng.lng]);
       } else {
         const fetchDestinationName = async () => {
             const name = await reverseGeocode(latlng.lat, latlng.lng);
             setDestinationName(name);
           };
         fetchDestinationName();
-        setDestinationCoords(latlng);        
+        setDestinationCoords([latlng.lat, latlng.lng]);        
       }
       setChooseOnMap(false)
       const response = await fetch(

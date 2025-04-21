@@ -13,7 +13,7 @@ function LegendButton()  {
                     <div className="w-1.5 h-1.5 bg-sky-500 rounded-br-sm"></div>                    
                 </div>
             </div>
-            <p className="font-normal text-xs px-1">Preisfaktoren anzeigen</p>
+            <p className="font-normal text-xs px-1">Preislegende</p>
             <ChevronDown size={14} style={"pb-0.5"}/>    
         </div>
 

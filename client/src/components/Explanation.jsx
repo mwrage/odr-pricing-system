@@ -16,9 +16,9 @@ function Explanation(props) {
     const individualShare = (isDiscount ? singleShare * (-1) : singleShare)
     const [selectedTicketLevel, setSelectedTicketLevel] = useState(ticket_level);
     const ticketLevels = [
-        { id: "p1", label: "Preisstufe 1", price: "2.40€", region: "Innerhalb von Bad Schwartau / Stockelsdorf" },
-        { id: "p2", label: "Preisstufe 2", price: "3.40€", region: "Zwischen Bad Schwartau - Stockelsdorf" },
-        { id: "p3", label: "Preisstufe 3", price: "4.20€", region: "In Lübeck oder zwischen Lübeck - Bad Schwartau / Stockelsdorf" },
+        { id: "p1", label: "Preisstufe 1", price: "1.50€/2.40€", region: "Innerhalb von Bad Schwartau / Stockelsdorf" },
+        { id: "p2", label: "Preisstufe 2", price: "2.00€/3.40€", region: "Zwischen Bad Schwartau - Stockelsdorf" },
+        { id: "p3", label: "Preisstufe 3", price: "2.50€/4.20€", region: "Lübeck / Lübeck - Bad Schwartau / Stockelsdorf" },
     ];
     const selectedDetails = ticketLevels.find(t => t.id === selectedTicketLevel);
 
@@ -32,7 +32,7 @@ function Explanation(props) {
         subtitle = "lümo unterstützt den ÖPNV."     
         state_desc = (
             <>
-              {totalPassengers > 1 ? `${totalPassengersWithTicket} von ${totalPassengers} besitzen `  : "Du besitzt "}<span className="text-amber-500">{(isDiscount || totalPassengers > 1) ? "ein" : "kein"}</span> gültiges Ticket.
+              {totalPassengers > 1 ? `${totalPassengersWithTicket} von ${totalPassengers} ${totalPassengersWithTicket == 1 ? "besitzt ": "besitzen "}`  : "Du besitzt "}<span className="text-amber-500">{(isDiscount || totalPassengers > 1) ? "ein" : "kein"}</span> gültiges Ticket.
             </>
           );
         if (isDiscount) {
@@ -80,7 +80,7 @@ function Explanation(props) {
     }
 
     return (
-        <div lang="de" className={`hyphens-auto px-2.5 pb-2 rounded-b-md ${color}`}>
+        <div lang="de" className={`hyphens-auto px-1 pb-2 rounded-b-md ${color}`}>
             <div className="flex justify-between items-center pt-2">
                 <div className="flex flex-col">
                     <h2 className={`inter-500`}>{factor == "ticket" && !isDiscount ? "Grundpreis: " : isDiscount ? "Reduzierung: " : "Zuschlag: "}{title}</h2>  
@@ -93,37 +93,38 @@ function Explanation(props) {
             <p className="text-zinc-800 inter-400 text-center">{state_desc}</p>
 
             {factor == "ticket" ? (
-                <div className="flex flex-col items-center justify-between">
+                <div className="flex flex-col items-center justify-between h-16">
                     <div className="flex justify-between w-full">
                         {ticketLevels.map(({ id, label }) => (
-                            <button key={id} className={`my-2 mr-1 px-2 py-1 rounded-full border ${selectedTicketLevel === id ? "bg-amber-500 text-white" : "border-amber-500 text-zinc-700"}`} onClick={() => setSelectedTicketLevel(id)}>
+                            <button key={id} className={`my-1 mr-1 px-2 py-1 rounded-full border ${selectedTicketLevel === id ? "bg-amber-500 text-white" : "border-amber-500 text-zinc-700"}`} onClick={() => setSelectedTicketLevel(id)}>
                                 <p className="text-xs">{label}</p>
                             </button>
                         ))}
                     </div>
                     {selectedDetails && (
                         <div className="w-full flex flex-col justify-center text-left rounded-lg rounded-tl-none text-zinc-700 text-xs hyphens-auto" lang="de">
-                        <p className="text-center inter-500">{selectedDetails.label}: {selectedDetails.price} - <span className="inter-300">{selectedDetails.region}</span></p>
+                            <p className="text-center inter-500">Wo? <span className="inter-300">{selectedDetails.region}</span></p>
+                            <p className="text-center inter-500">Wie viel? <span className="inter-300">{selectedDetails.price} Kinder/Erwachsene</span></p>
                         </div>
                     )}
                 </div>
             ) : 
             factor == "alternative" ? (
-                <div className="w-full flex items-center justify-center text-zinc-700">                
-                    <div className="flex items-center justify-center py-1.5">
-                        <img src={LumoLogo} className="mr-1 w-6 h-6"></img>
+                <div className="w-full flex items-center justify-center text-zinc-700 h-16 py-2">                
+                    <div className="flex items-center justify-center">
+                        <img src={LumoLogo} className="mr-1 w-7 h-7"></img>
                         <p className="pl-1">{lumoTime.toFixed()} min</p>
                     </div>
                     <div className="w-[1px] mx-2 h-6 bg-pink-500"></div>
-                    <div className="flex items-center justify-center py-1.5">
-                        <Bus1 size={24} color={"#ec4899"} />
+                    <div className="flex items-center justify-center">
+                        <Bus1 size={28} color={"#ec4899"} />
                         <p className="pl-1">{busTime.toFixed()} min</p>
                     </div>
                 </div>
             ) :
             factor == "safety" ? (
                 <>
-                <div className="w-full flex items-center justify-center text-zinc-700">
+                <div className="w-full flex items-center justify-center text-zinc-700 h-16">
                     <div className="flex flex-col items-start justify-start py-1.5">
                         <p className="inter-500">Einstieg</p>
                         <p className="">{walk_to.toFixed()}m</p>
@@ -142,7 +143,7 @@ function Explanation(props) {
             ): (
                 <>
                 {(
-                <div className="flex flex-col h-20 w-full items-center justify-center">
+                <div className="flex flex-col w-full items-center justify-start h-16">
                     <Weather condition={weatherCondition} temp={temperature} />
                     <Temperature temp={temperature} threshold={temp_threshold} />
                 </div>
