@@ -1,4 +1,4 @@
-export async function sendRequestToBackend ({setTripRequested, setRequestResponse, setWaitingForResponse, isPreebooked, hasTicket, originCoords, destinationCoords, isDeparture, tripTime, scenarioParam, passengersNum}) {
+export async function sendRequestToBackend ({setTripRequested, setRequestResponse, setWaitingForResponse, isPreebooked, hasTicket, originCoords, destinationCoords, isDeparture, tripTime, scenarioParam, passengersNum, setHasTicket, setPassengersNum}) {
 
     if (scenarioParam !== null) {
       const scenarioID = parseInt(scenarioParam);
@@ -32,7 +32,7 @@ export async function sendRequestToBackend ({setTripRequested, setRequestRespons
       const devURL = "http://localhost:8080/api/process-request"
       const productionURL = "https://odr-pricing-system.onrender.com/api/process-request"
       try {
-        const response = await fetch(devURL, {
+        const response = await fetch(productionURL, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

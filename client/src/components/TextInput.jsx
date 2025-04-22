@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import { AppContext } from "../context/context"
 import ArrowDownward from "../assets/icons/ArrowDownward";
 import { reverseGeocode } from "../utils/reverseGeocode";
+import { useLocation } from "react-router-dom";
 
 function TextInput(props) {
     
@@ -10,13 +11,28 @@ function TextInput(props) {
     const [address, setAddress] = useState([]);
     const [suggestions, setSuggestions] = useState([]);
     const [showDropdown, setShowDropdown] = useState(false);
+    const location = useLocation();
+    const query = new URLSearchParams(location.search);
+    const scenarioParam = query.get("scenario");
   
     useEffect(() => {
       fetch("/address-suggestions.json")
         .then((res) => res.json())
         .then((data) => setAddress(data));
       const fetchOriginName = async () => {
-        const name = await reverseGeocode(originCoords[0], originCoords[1]);
+        let name = "";
+        if (scenarioParam == 0) {
+          setOriginCoords([53.84744398630202, 10.678369399799335])
+          name = await reverseGeocode(53.84744398630202, 10.678369399799335);   
+        } else if (scenarioParam == 1) {
+          setOriginCoords([53.860392208920615, 10.69017740460969])
+          name = await reverseGeocode(53.860392208920615, 10.69017740460969);   
+        } else if (scenarioParam == 2) {
+          setOriginCoords([53.868803464034976, 10.703942829848167])
+          name = await reverseGeocode(53.868803464034976, 10.703942829848167);   
+        } else {
+          name = await reverseGeocode(originCoords[0], originCoords[1]);          
+        }
         setOriginName(name);
       };
       fetchOriginName();

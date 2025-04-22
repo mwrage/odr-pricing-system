@@ -2,7 +2,6 @@ import { createContext, useEffect, useState } from 'react';
 import { getTimePeriod } from '../utils/getTimePeriod';
 import { formatRequestedTime } from '../utils/formatRequestTime';
 
-
 const AppContext = createContext();
 
 const ContextProvider = ({ children }) => {

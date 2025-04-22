@@ -8,6 +8,7 @@ import ChevronDown from "../assets/icons/ChevronDown";
 import Ticket1 from "../assets/icons/Ticket1";
 import { reverseGeocode } from "../utils/reverseGeocode";
 import BookingConfirmation from "./BookingConfirmation";
+import { useLocation } from "react-router-dom";
 
 function Map() {
   
@@ -15,7 +16,9 @@ function Map() {
     const { tripRequested, setTripRequested, originCoords, setOriginCoords, destinationCoords, setDestinationCoords, hasTicket, setHasTicket, chooseOnMap, setChooseOnMap, setDestinationName, setOriginName, chooseStart, booked } = useContext(AppContext);
     const [selectedAddress, setSelectedAddress] = useState("");
     const [center, setCenter] = useState(null);
-    const [showTicketSettings, setShowTicketSettings] = useState(false)
+    const location = useLocation();
+    const query = new URLSearchParams(location.search);
+    const scenarioParam = query.get("scenario");
 
     const locationIcon = new Icon ({
       iconUrl : '/location-pin.svg',
@@ -65,9 +68,22 @@ function Map() {
     };
 
     useEffect(() => {
+      if (scenarioParam == 0) {
+        setHasTicket(true)
+      } else if (scenarioParam == 1) {
+          setHasTicket(false)
+      } else if (scenarioParam == 2) {
+          setHasTicket(true)
+      }
       const getUserLocation = () => {
         return new Promise((resolve) => {
-          if (!navigator.geolocation) {
+          if (scenarioParam == 0) {
+            resolve([53.84744398630202, 10.678369399799335])
+          } else if (scenarioParam == 1) {
+            resolve([53.860392208920615, 10.69017740460969])
+          } else if (scenarioParam == 2) {
+            resolve([53.868803464034976, 10.703942829848167])
+          } else if (!navigator.geolocation) {
             resolve([53.86793879579819, 10.688151930113486]);
           } else {
             navigator.geolocation.getCurrentPosition(

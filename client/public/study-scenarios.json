@@ -84,7 +84,6 @@
         }
       ]
     },
-
     {
         "scenarioID": 1,
         "options": [
@@ -94,26 +93,26 @@
                 "debug": false, 
                 "prebooking": false, 
                 "ticket": false, 
-                "start": [53.858993185291354, 10.686873582364065], 
+                "start": [53.860392208920615, 10.69017740460969],
                 "dest": [53.87995628067834, 10.706190460502084], 
                 "departure": true, 
-                "time": "2025-05-01T20:30:00"
+                "time": "2025-05-01T21:00:00"
             },
             "route": {
                 "status": 200, 
                 "ticket_level": "p2", 
-                "next_stop_org_name": "Bei der Gasanstalt", 
-                "bus_time": 30, 
-                "odr_trip_time": 21, 
-                "odr_wait_time": 5, 
-                "walking_time_org_stop": 3, 
+                "next_stop_org_name": "Stadthalle", 
+                "bus_time": 23, 
+                "odr_trip_time": 18, 
+                "odr_wait_time": 9, 
+                "walking_time_org_stop": 2, 
                 "walking_time_dest_stop": 2, 
-                "walking_dist_org_stop": 120, 
-                "walking_dist_dest_stop": 100, 
-                "total_walking_distance": 220, 
+                "walking_dist_org_stop": 125, 
+                "walking_dist_dest_stop": 100,  
+                "total_walking_distance": 225, 
                 "weather": "good", 
-                "temperature": 17, 
-                "condition": "01n"
+                "temperature": 11, 
+                "condition": "03n"
             },
             "pricing": {
                 "total_price": 9.4, 
@@ -133,39 +132,85 @@
             "request": {
                 "debug": false, 
                 "prebooking": false, 
-                "ticket": true, 
-                "start": [53.84744398630202, 10.678369399799335], 
+                "ticket": false, 
+                "start": [53.860392208920615, 10.69017740460969],
                 "dest": [53.87995628067834, 10.706190460502084], 
                 "departure": true, 
-                "time": "2025-05-02T23:30:00"
+                "time": "2025-05-01T21:00:00"
             },
             "route": {
                 "status": 200, 
                 "ticket_level": "p2", 
-                "next_stop_org_name": "Bei der Gasanstalt", 
-                "bus_time": 58, 
-                "odr_trip_time": 32, 
-                "odr_wait_time": 17, 
+                "next_stop_org_name": "Stadthalle", 
+                "bus_time": 25, 
+                "odr_trip_time": 23, 
+                "odr_wait_time": 16, 
                 "walking_time_org_stop": 2, 
-                "walking_time_dest_stop": 1, 
-                "walking_dist_org_stop": 30, 
-                "walking_dist_dest_stop": 100, 
-                "total_walking_distance": 130, 
-                "weather": "bad", 
-                "temperature": 8, 
-                "condition": "09n"
+                "walking_time_dest_stop": 2, 
+                "walking_dist_org_stop": 125, 
+                "walking_dist_dest_stop": 100,  
+                "total_walking_distance": 225, 
+                "weather": "good", 
+                "temperature": 11, 
+                "condition": "03n"
             },
             "pricing": {
                 "total_price": 9.4, 
-                "individual_price": 2.70, 
-                "discount": 71,
+                "individual_price": 5.65, 
+                "discount": 40,
                 "distance_threshold": 200, 
                 "temp_threshold": 5,  
                 "wait_threshold": 12,
-                "ticket_share": -3.4, 
-                "alternative_share": -2.25, 
-                "safety_share": 1.70,
+                "ticket_share": 3.4, 
+                "alternative_share": 2.25, 
+                "safety_share": -1.70,
                 "comfort_share": -1.05
+            }
+        }
+      ]   
+    },
+    {
+        "scenarioID": 2,
+        "options": [
+        {
+            "id": 0,
+            "request": {
+                "debug": false, 
+                "prebooking": false, 
+                "ticket": true, 
+                "start": [53.868803464034976, 10.703942829848167], 
+                "dest": [53.872754700859964, 10.673311861152877], 
+                "departure": true, 
+                "time": "2025-05-01T20:30:00"
+            },
+            "route": {
+                "status": 200, 
+                "ticket_level": "p2", 
+                "next_stop_org_name": "An der Falkenwiese", 
+                "bus_time": 29, 
+                "odr_trip_time": 21, 
+                "odr_wait_time": 13, 
+                "walking_time_org_stop": 5, 
+                "walking_time_dest_stop": 2, 
+                "walking_dist_org_stop": 347, 
+                "walking_dist_dest_stop": 132, 
+                "total_walking_distance": 479, 
+                "weather": "good", 
+                "temperature": 17, 
+                "condition": "09n"
+            },
+            "pricing": {
+                "total_price": 17.8, 
+                "individual_price": 8.9, 
+                "discount": 50,
+                "total_ticket_prices": 6.8,
+                "distance_threshold": 200, 
+                "temp_threshold": 5,  
+                "wait_threshold": 12,
+                "ticket_share": 3.4, 
+                "alternative_share": 4.5, 
+                "safety_share": -3.40,
+                "comfort_share": -2.1
             }
         }
       ]   

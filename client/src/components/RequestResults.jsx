@@ -85,7 +85,7 @@ function RequestResults() {
                             </button>
                             <button className="flex items-center justify-self-end border-1 border-zinc-300 text-zinc-400 px-3 py-1.5 rounded-full" >
                                 {/** onClick={togglePassengerSettings}*/ }
-                                <PassengerButton btnStyle={false}/>
+                                <PassengerButton resultsView={true} btnStyle={false}/>
                             </button>
                         </div>
                         <div className="flex">

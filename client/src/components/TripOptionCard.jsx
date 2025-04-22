@@ -5,6 +5,7 @@ import PriceDetails from "./PriceDetails";
 import ChevronDown from "../assets/icons/ChevronDown";
 import QuestionMarkCircle from "../assets/icons/QuestionMarkCircle";
 import { calculateArrayTotal } from "../utils/calculateArrayTotal";
+import { useLocation } from "react-router-dom";
 
 
 function TripOptionCard(props) {
@@ -14,6 +15,9 @@ function TripOptionCard(props) {
     const totalPassengers = calculateArrayTotal(passengersNum)
     const totalPassengersWithTicket = calculateArrayTotal([passengersNum[0], passengersNum[2], passengersNum[4]])
     const totalPassengersWithoutTicket = calculateArrayTotal([passengersNum[1], passengersNum[3]])
+    const location = useLocation();
+    const query = new URLSearchParams(location.search);
+    const scenarioParam = query.get("scenario");
 
     const segments = [
         { factor:"Min.", label: 1, value: 1, color: "#3f3f46", textColorDonut: "#3f3f46", textColorBar: "text-white border-zinc-800" },
@@ -21,7 +25,7 @@ function TripOptionCard(props) {
         { factor:"Alternativangebot", label: alternative_share, value: alternative_share < 0 ? alternative_share * (-1) : alternative_share, color: alternative_share < 0 ? "rgba(236, 72, 153, 0.1)" : "#ec4899", textColorDonut: "#ec4899", textColorBar: alternative_share < 0 ? "text-zinc-800 border-pink-300" : "text-white border-pink-500"},
         { factor:"Sicherheit", label: safety_share, value: safety_share < 0 ? safety_share * (-1) : safety_share, color: safety_share < 0 ? "rgba(99, 102, 241, 0.1)" : "#6366f1", textColorDonut: "#6366f1", textColorBar: safety_share < 0 ? "text-zinc-800 border-indigo-300" : "text-white border-indigo-500"},
         { factor:"Komfort", label: comfort_share, value: comfort_share < 0 ? comfort_share * (-1) : comfort_share, color: comfort_share < 0 ? "rgba(14, 165, 233, 0.1)" : "#0ea5e9", textColorDonut: "#0ea5e9", textColorBar: comfort_share < 0 ? "text-zinc-800 border-sky-300" : "text-white border-sky-500"},  
-        ...((totalPassengers > 1 && totalPassengers - totalPassengersWithoutTicket != 0 && totalPassengers - totalPassengersWithTicket > 0) || ticket_share == 0
+        ...((totalPassengers > 1 && totalPassengers - totalPassengersWithoutTicket != 0 && totalPassengers - totalPassengersWithTicket > 0) || ticket_share == 0 || scenarioParam == 2
             ? [{factor: "Gültige Tickets", label: -(total_ticket - ticket_share), value: total_ticket * (-1), color: "rgba(245, 158, 11, 0.1)", textColorDonut: "#f59e0b", textColorBar: "text-zinc-800 border-amber-300" }]: [])
     ];
 

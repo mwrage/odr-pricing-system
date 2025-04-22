@@ -98,5 +98,8 @@
   {"name": "Rudolf-Diesel-Straße (Stockelsdorf)", "lat": 53.8938, "lng": 10.6260},
   {"name": "Bahndamm (Stockelsdorf)", "lat": 53.8905, "lng": 10.6312},
   {"name": "Weidenweg (Stockelsdorf)", "lat": 53.8900, "lng": 10.6367},
-  {"name": "Bohnrader Weg (Stockelsdorf)", "lat": 53.8979, "lng": 10.6360}
+  {"name": "Bohnrader Weg (Stockelsdorf)", "lat": 53.8979, "lng": 10.6360},
+  {"name": "Hinter den Kirschkaten (Lübeck)", "lat": 53.84744398630202, "lng": 10.678369399799335},
+  {"name": "Mühlenbrücke (Lübeck)", "lat": 53.860392208920615, "lng": 10.69017740460969},
+  {"name": "Wakenitzufer (Lübeck)", "lat": 53.868803464034976, "lng": 10.703942829848167}
 ]

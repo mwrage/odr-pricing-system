@@ -7,6 +7,7 @@ import Weather from "./Weather";
 import Route1 from "../assets/icons/Route1"
 import { calculateArrayTotal } from "../utils/calculateArrayTotal";
 import Ticket1 from "../assets/icons/Ticket1";
+import { useLocation } from "react-router-dom";
 
 function Explanation(props) {
     const { factor, isDiscount, state, color, ticket_level, lumoTime, busTime, totalWalkingDistance, weather, weatherCondition, temperature, waitingTime, distance_threshold, temp_threshold, wait_threshold,  walk_to, walk_from } = props;
@@ -22,6 +23,9 @@ function Explanation(props) {
         { id: "p3", label: "Preisstufe 3", price: "2.50€/4.20€", region: "Lübeck - Bad Schwartau o. Stockelsdorf" },
     ];
     const selectedDetails = ticketLevels.find(t => t.id === selectedTicketLevel);
+    const location = useLocation();
+    const query = new URLSearchParams(location.search);
+    const scenarioParam = query.get("scenario");
 
     let title = ""
     let subtitle = ""
@@ -33,7 +37,7 @@ function Explanation(props) {
         subtitle = "lümo unterstützt den ÖPNV."     
         state_desc = (
             <>
-              {totalPassengers > 1 ? `${totalPassengersWithTicket} von ${totalPassengers} ${totalPassengersWithTicket == 1 ? "besitzt ": "besitzen "}`  : "Du besitzt "}<span className="text-amber-500">{(isDiscount || totalPassengers > 1) ? "ein" : "kein"}</span> gültiges Ticket.
+              {totalPassengers > 1 || scenarioParam == 2 ? `${totalPassengersWithTicket} von ${scenarioParam == 2 ? 2: totalPassengers} ${totalPassengersWithTicket == 1 ? "besitzt ": "besitzen "}`  : "Du besitzt "}<span className="text-amber-500">{(isDiscount || totalPassengers > 1) ? "ein" : "kein"}</span> gültiges Ticket.
             </>
           );
         if (isDiscount) {
@@ -46,19 +50,12 @@ function Explanation(props) {
         title = "Alternativangebot"
         subtitle = "lümo sorgt für deine Mobilität." 
         rule =  "Wenn der Bus mehr als 10 Minuten länger braucht, wird dein Preis reduziert, weil es kein vergleichbares Angebot gibt." 
-        if (isDiscount) {
-            state_desc = (
-                <>
-                    Der Bus braucht <span className="text-pink-500">{(busTime-lumoTime).toFixed() < 0 ? (busTime-lumoTime).toFixed() * (-1) : (busTime-lumoTime).toFixed()} Minuten</span> länger.
-                </>
-              );
-        } else {
-            state_desc = (
-                <>
-                    Der Bus ist <span className="text-pink-500">{(lumoTime-busTime).toFixed() < 0 ? (lumoTime-busTime).toFixed() * (-1) : (lumoTime-busTime).toFixed()} Minuten</span> schneller.
-                </>
-              );
-        }
+        const busFaster = (busTime-lumoTime).toFixed() < 0 ? true : false
+        state_desc = (
+            <>
+                Der Bus {busFaster ? "ist" : "braucht"} <span className="text-pink-500">{(busTime-lumoTime).toFixed() < 0 ? (busTime-lumoTime).toFixed() * (-1) : (busTime-lumoTime).toFixed()} Minuten</span>  {busFaster ? "schneller" : "länger"}.
+            </>
+        );
     }
     else if (factor === "safety") {
         title = "Sicherheit"
@@ -87,7 +84,7 @@ function Explanation(props) {
                     <h2 className={`inter-500`}>{factor == "ticket" && !isDiscount ? "Grundpreis: " : isDiscount ? "Reduzierung: " : "Zuschlag: "}{title}</h2>  
                     <h3>{subtitle}</h3>                                
                 </div>
-                {factor != "ticket" && totalPassengers > 1 && ( <p className={`w-fit h-fit text-center border-l text-xs ml-auto px-2 ${factor === "alternative" ? "text-pink-500 border-pink-300" : factor === "safety" ? "text-indigo-500 border-indigo-300" : "text-sky-500 border-sky-300"}`}>{individualShare.toFixed(2)}€ /<br></br>Person</p>)}  
+                {factor != "ticket" && (totalPassengers > 1 || scenarioParam == 2) && ( <p className={`w-fit h-fit text-center border-l text-xs ml-auto px-2 ${factor === "alternative" ? "text-pink-500 border-pink-300" : factor === "safety" ? "text-indigo-500 border-indigo-300" : "text-sky-500 border-sky-300"}`}>{individualShare.toFixed(2)}€ /<br></br>Person</p>)}  
             </div>
             <p className="text-zinc-800 pt-1">{rule}</p>
             <div className={`w-full h-0.5 rounded-full my-2 border-b-2 border-dashed ${color}`}></div>

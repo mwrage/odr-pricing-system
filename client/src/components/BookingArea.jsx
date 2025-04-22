@@ -19,7 +19,7 @@ function BookingArea() {
     const [dateSettings, setDateSettings] = useState(false)
     const [passengerSettings, setPassengerSettings] = useState(false)
     const [rotated, setRotated] = useState(false)
-    const { setTripRequested, tripTime, setRequestResponse, setWaitingForResponse, isPreebooked, hasTicket, originCoords, destinationCoords, isDeparture, setChooseOnMap, chooseStart, setChooseStart, results, setResults, isButtonDisabled, passengersNum, setDestinationCoords, setDestinationName, setOriginCoords, setOriginName, setIsPreebooked } = useContext(AppContext);
+    const { setTripRequested, tripTime, setRequestResponse, setWaitingForResponse, isPreebooked, hasTicket, setHasTicket, originCoords, destinationCoords, isDeparture, setChooseOnMap, chooseStart, setChooseStart, results, setResults, isButtonDisabled, passengersNum, setDestinationCoords, setDestinationName, setOriginCoords, setOriginName, setIsPreebooked, setPassengersNum} = useContext(AppContext);
     const location = useLocation();
     const query = new URLSearchParams(location.search);
     const scenarioParam = query.get("scenario");
@@ -51,10 +51,10 @@ function BookingArea() {
     }
 
     const handleRequest = () => {
-      if (scenarioParam == 0 || scenarioParam == 1) {
+      if (scenarioParam == 0 || scenarioParam == 1 || scenarioParam == 2) {
         setIsPreebooked(false)
       }
-      const results = sendRequestToBackend({setTripRequested, setRequestResponse, setWaitingForResponse, isPreebooked, hasTicket, originCoords, destinationCoords, isDeparture, tripTime, scenarioParam, passengersNum})
+      const results = sendRequestToBackend({setTripRequested, setRequestResponse, setWaitingForResponse, isPreebooked, hasTicket, originCoords, destinationCoords, isDeparture, tripTime, scenarioParam, passengersNum, setHasTicket, setPassengersNum})
       setResults(results)
       setWaitingForResponse(true)
     }

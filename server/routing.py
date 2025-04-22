@@ -120,6 +120,9 @@ def get_routing_information(lat_org, long_org, lat_dest, long_dest, plan_pref, p
         # 4. waiting time
         odr_coords = get_odr_position()
         odr_wait_time = calculate_odr_trip_time(odr_coords['lat'], odr_coords['lng'], next_stop_org['coords_next_station']['lat'], next_stop_org['coords_next_station']['lng'])
+        total_odr_trip_time = odr_trip_time['time'] + dist_org_stop['time'] + dist_dest_stop['time'] + odr_wait_time['time']
         # 5. weather + temperature
         weather_temperature = get_weather_data()
-        return {'status': 200, 'ticket_level': ticket_level, 'next_stop_org_name': next_stop_org['name_next_station'], 'bus_time': bus_time, 'odr_trip_time': odr_trip_time['time'], 'odr_wait_time': odr_wait_time['time'], 'walking_time_org_stop': dist_org_stop['time'], 'walking_time_dest_stop': dist_dest_stop['time'], 'walking_dist_org_stop': dist_org_stop['distance'], 'walking_dist_dest_stop': dist_dest_stop['distance'], 'total_walking_distance': total_walking_distance, 'weather': weather_temperature['weather'], 'temperature': weather_temperature['temperature'], 'condition': weather_temperature['condition']}
+        return {'status': 200, 'ticket_level': ticket_level, 'next_stop_org_name': next_stop_org['name_next_station'], 'bus_time': bus_time, 
+                'odr_trip_time': total_odr_trip_time, # odr_trip_time['time'], 
+                'odr_wait_time': odr_wait_time['time'], 'walking_time_org_stop': dist_org_stop['time'], 'walking_time_dest_stop': dist_dest_stop['time'], 'walking_dist_org_stop': dist_org_stop['distance'], 'walking_dist_dest_stop': dist_dest_stop['distance'], 'total_walking_distance': total_walking_distance, 'weather': weather_temperature['weather'], 'temperature': weather_temperature['temperature'], 'condition': weather_temperature['condition']}
