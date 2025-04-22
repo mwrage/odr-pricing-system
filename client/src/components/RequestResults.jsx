@@ -66,7 +66,10 @@ function RequestResults() {
                             walk_to_dist={option.route.walking_dist_org_stop} walk_from_dist={option.route.walking_dist_dest_stop} />
                          )}
                         {option.route.status === 400 && (
-                            <InvalidRequestCard />
+                            <InvalidRequestCard description={"lümo fährt nur in Lübeck, Bad Schwartau und Stockelsdorf. Stelle sicher, dass dein Start und Ziel innerhalb dieses Bediengebiets liegen und versuche es erneut!"} />
+                         )}
+                        {option.route.status === 600 && (
+                            <InvalidRequestCard description={"Der Dienst ist gerade nicht erreichbar. Bitte versuche es in ein paar Minuten erneut."} />
                          )}
                         </div>
                     ))}     
@@ -93,9 +96,9 @@ function RequestResults() {
                             </>
                             ) : (
                             <>
-                                <button disabled className="w-full bg-zinc-400 py-2 text-center rounded-xl my-2 hover:cursor-pointer">
+                                <div disabled className="w-full bg-zinc-400 py-2 text-center rounded-xl my-2 hover:cursor-pointer">
                                     <p className="text-white inter-500">{isPreebooked ? "Eine Fahrt reservieren" : "Diese Fahrt buchen"}</p>
-                                </button>
+                                </div>
                             </>
                             )
 

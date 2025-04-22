@@ -7,39 +7,39 @@
             "request": {
                 "debug": false, 
                 "prebooking": false, 
-                "ticket": false, 
-                "start": [53.867, 10.691], 
-                "dest": [53.867, 10.691], 
+                "ticket": true, 
+                "start": [53.84744398630202, 10.678369399799335], 
+                "dest": [53.87995628067834, 10.706190460502084], 
                 "departure": true, 
-                "time": "2025-04-19T20:00:00"
+                "time": "2025-05-02T23:30:00"
             },
             "route": {
                 "status": 200, 
                 "ticket_level": "p2", 
-                "next_stop_org_name": "Hauptbahnhof Lübeck", 
-                "bus_time": 5, 
-                "odr_trip_time": 12, 
-                "odr_wait_time": 12, 
-                "walking_time_org_stop": 4, 
-                "walking_time_dest_stop": 3, 
-                "walking_dist_org_stop": 34, 
-                "walking_dist_dest_stop": 20, 
-                "total_walking_distance": 54, 
+                "next_stop_org_name": "Bei der Gasanstalt", 
+                "bus_time": 58, 
+                "odr_trip_time": 28, 
+                "odr_wait_time": 7, 
+                "walking_time_org_stop": 1, 
+                "walking_time_dest_stop": 2, 
+                "walking_dist_org_stop": 30, 
+                "walking_dist_dest_stop": 100, 
+                "total_walking_distance": 130, 
                 "weather": "bad", 
-                "temperature": 3, 
-                "condition": "10n"
+                "temperature": 8, 
+                "condition": "09n"
             },
             "pricing": {
                 "total_price": 9.4, 
-                "individual_price": 2.05, 
-                "discount": 78,
-                "distance_threshold": 100, 
+                "individual_price": 3.75, 
+                "discount": 60,
+                "distance_threshold": 200, 
                 "temp_threshold": 5,  
-                "wait_threshold": 10,
+                "wait_threshold": 12,
                 "ticket_share": -3.4, 
-                "alternative_share": -2.3, 
-                "safety_share": 1.65,
-                "comfort_share": -1.05
+                "alternative_share": -2.25, 
+                "safety_share": 1.70,
+                "comfort_share": 1.05
             }
         },
         {
@@ -47,39 +47,39 @@
             "request": {
                 "debug": false, 
                 "prebooking": false, 
-                "ticket": false, 
-                "start": [53.867, 10.691], 
-                "dest": [53.867, 10.691], 
+                "ticket": true, 
+                "start": [53.84744398630202, 10.678369399799335], 
+                "dest": [53.87995628067834, 10.706190460502084], 
                 "departure": true, 
-                "time": "2025-04-19T20:00:00"
+                "time": "2025-05-02T23:30:00"
             },
             "route": {
                 "status": 200, 
                 "ticket_level": "p2", 
-                "next_stop_org_name": "Hauptbahnhof Lübeck", 
-                "bus_time": 5, 
-                "odr_trip_time": 12, 
-                "odr_wait_time": 12, 
-                "walking_time_org_stop": 4, 
-                "walking_time_dest_stop": 3, 
-                "walking_dist_org_stop": 34, 
-                "walking_dist_dest_stop": 20, 
-                "total_walking_distance": 54, 
+                "next_stop_org_name": "Bei der Gasanstalt", 
+                "bus_time": 58, 
+                "odr_trip_time": 32, 
+                "odr_wait_time": 17, 
+                "walking_time_org_stop": 1, 
+                "walking_time_dest_stop": 2, 
+                "walking_dist_org_stop": 30, 
+                "walking_dist_dest_stop": 100, 
+                "total_walking_distance": 130, 
                 "weather": "bad", 
-                "temperature": 3, 
-                "condition": "10n"
+                "temperature": 8, 
+                "condition": "09n"
             },
             "pricing": {
                 "total_price": 9.4, 
-                "individual_price": 2.05, 
-                "discount": 78,
-                "distance_threshold": 100, 
+                "individual_price": 2.70, 
+                "discount": 71,
+                "distance_threshold": 200, 
                 "temp_threshold": 5,  
-                "wait_threshold": 10,
-                "ticket_share": 3.4, 
-                "alternative_share": 2.3, 
-                "safety_share": 1.65,
-                "comfort_share": 1.05
+                "wait_threshold": 12,
+                "ticket_share": -3.4, 
+                "alternative_share": -2.25, 
+                "safety_share": 1.70,
+                "comfort_share": -1.05
             }
         }
       ]
@@ -88,86 +88,86 @@
     {
         "scenarioID": 1,
         "options": [
-          {
-              "id": 0,
-              "request": {
-                  "debug": false, 
-                  "prebooking": false, 
-                  "ticket": false, 
-                  "start": [53.867, 10.691], 
-                  "dest": [53.867, 10.691], 
-                  "departure": true, 
-                  "time": "2025-04-19T20:00:00"
-              },
-              "route": {
-                  "status": 200, 
-                  "ticket_level": "p2", 
-                  "next_stop_org_name": "Hauptbahnhof Lübeck", 
-                  "bus_time": 5, 
-                  "odr_trip_time": 12, 
-                  "odr_wait_time": 12, 
-                  "walking_time_org_stop": 4, 
-                  "walking_time_dest_stop": 3, 
-                  "walking_dist_org_stop": 34, 
-                  "walking_dist_dest_stop": 20, 
-                  "total_walking_distance": 54, 
-                  "weather": "bad", 
-                  "temperature": 3, 
-                  "condition": "10n"
-              },
-              "pricing": {
-                  "total_price": 9.4, 
-                  "individual_price": 2.05, 
-                  "discount": 78,
-                  "distance_threshold": 100, 
-                  "temp_threshold": 5,  
-                  "wait_threshold": 10,
-                  "ticket_share": 3.4, 
-                  "alternative_share": -2.3, 
-                  "safety_share": 1.65,
-                  "comfort_share": -1.05
-              }
-          },
-          {
-              "id": 1,
-              "request": {
-                  "debug": false, 
-                  "prebooking": false, 
-                  "ticket": false, 
-                  "start": [53.867, 10.691], 
-                  "dest": [53.867, 10.691], 
-                  "departure": true, 
-                  "time": "2025-04-19T20:00:00"
-              },
-              "route": {
-                  "status": 200, 
-                  "ticket_level": "p2", 
-                  "next_stop_org_name": "Hauptbahnhof Lübeck", 
-                  "bus_time": 5, 
-                  "odr_trip_time": 12, 
-                  "odr_wait_time": 12, 
-                  "walking_time_org_stop": 4, 
-                  "walking_time_dest_stop": 3, 
-                  "walking_dist_org_stop": 34, 
-                  "walking_dist_dest_stop": 20, 
-                  "total_walking_distance": 54, 
-                  "weather": "bad", 
-                  "temperature": 3, 
-                  "condition": "10n"
-              },
-              "pricing": {
-                  "total_price": 9.4, 
-                  "individual_price": 2.05, 
-                  "discount": 78,
-                  "distance_threshold": 100, 
-                  "temp_threshold": 5,  
-                  "wait_threshold": 10,
-                  "ticket_share": 3.4, 
-                  "alternative_share": -2.3, 
-                  "safety_share": 1.65,
-                  "comfort_share": -1.05
-              }
-          }
-        ]   
+        {
+            "id": 0,
+            "request": {
+                "debug": false, 
+                "prebooking": false, 
+                "ticket": false, 
+                "start": [53.858993185291354, 10.686873582364065], 
+                "dest": [53.87995628067834, 10.706190460502084], 
+                "departure": true, 
+                "time": "2025-05-01T20:30:00"
+            },
+            "route": {
+                "status": 200, 
+                "ticket_level": "p2", 
+                "next_stop_org_name": "Bei der Gasanstalt", 
+                "bus_time": 30, 
+                "odr_trip_time": 21, 
+                "odr_wait_time": 5, 
+                "walking_time_org_stop": 3, 
+                "walking_time_dest_stop": 2, 
+                "walking_dist_org_stop": 120, 
+                "walking_dist_dest_stop": 100, 
+                "total_walking_distance": 220, 
+                "weather": "good", 
+                "temperature": 17, 
+                "condition": "01n"
+            },
+            "pricing": {
+                "total_price": 9.4, 
+                "individual_price": 6.70, 
+                "discount": 29,
+                "distance_threshold": 200, 
+                "temp_threshold": 5,  
+                "wait_threshold": 12,
+                "ticket_share": 3.4, 
+                "alternative_share": 2.25, 
+                "safety_share": -1.70,
+                "comfort_share": 1.05
+            }
+        },
+        {
+            "id": 1,
+            "request": {
+                "debug": false, 
+                "prebooking": false, 
+                "ticket": true, 
+                "start": [53.84744398630202, 10.678369399799335], 
+                "dest": [53.87995628067834, 10.706190460502084], 
+                "departure": true, 
+                "time": "2025-05-02T23:30:00"
+            },
+            "route": {
+                "status": 200, 
+                "ticket_level": "p2", 
+                "next_stop_org_name": "Bei der Gasanstalt", 
+                "bus_time": 58, 
+                "odr_trip_time": 32, 
+                "odr_wait_time": 17, 
+                "walking_time_org_stop": 2, 
+                "walking_time_dest_stop": 1, 
+                "walking_dist_org_stop": 30, 
+                "walking_dist_dest_stop": 100, 
+                "total_walking_distance": 130, 
+                "weather": "bad", 
+                "temperature": 8, 
+                "condition": "09n"
+            },
+            "pricing": {
+                "total_price": 9.4, 
+                "individual_price": 2.70, 
+                "discount": 71,
+                "distance_threshold": 200, 
+                "temp_threshold": 5,  
+                "wait_threshold": 12,
+                "ticket_share": -3.4, 
+                "alternative_share": -2.25, 
+                "safety_share": 1.70,
+                "comfort_share": -1.05
+            }
+        }
+      ]   
     }
 ]

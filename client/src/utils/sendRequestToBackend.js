@@ -31,16 +31,39 @@ export async function sendRequestToBackend ({setTripRequested, setRequestRespons
 
       const devURL = "http://localhost:8080/api/process-request"
       const productionURL = "https://odr-pricing-system.onrender.com/api/process-request"
-      const response = await fetch(productionURL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-    
-      const result = await response.json();
-      setRequestResponse([result])
+      try {
+        const response = await fetch(devURL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        });
+      
+        // http status
+        if (!response.ok) {
+          const errorText = await response.text();
+          throw new Error(`Server Error: ${response.status} ${response.statusText} - ${errorText}`);
+        }
+      
+        let result = "";
+        try {
+          result = await response.json();
+        } catch (parseError) {
+          throw new Error("Antwort konnte nicht als JSON gelesen werden: " + parseError.message);
+        }
+      
+        if (result.error) {
+          throw new Error(`API-Fehler: ${result.error}`);
+        }
+        setRequestResponse([result])
+      } catch (error) {
+        const routing_data = {'status': 600, 'ticket_level': "p1", 'next_stop_org_name': "Nicht gefunden", 'bus_time': "Nicht gefunden", 'odr_trip_time': 0, 'odr_wait_time': 0, 'walking_time_org_stop': 0, 'walking_time_dest_stop': 0, 'walking_dist_org_stop': 0, 'walking_dist_dest_stop': 0, 'total_walking_distance': 0, 'weather': "Nicht gefunden", 'temperature': 0}
+        const pricing_data = {'total_price': 0, 'individual_price': 0, 'discount': 0, 'distance_threshold': 0, 'temp_threshold': 0,  'wait_threshold': 0, 'ticket_share': 0, 'alternative_share': 0, 'safety_share': 0, 'comfort_share': 0}
+        const res = [{'id': 0, 'request': data, 'route': routing_data, 'pricing': pricing_data}]
+        setRequestResponse([res])
+        console.error("Ein Fehler ist aufgetreten:", error.message);
+      }
       setWaitingForResponse(false)
       setTripRequested(true)
     }

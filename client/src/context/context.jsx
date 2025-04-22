@@ -66,10 +66,11 @@ const ContextProvider = ({ children }) => {
   }, [isPreebooked]);
 
   return (
-    <AppContext.Provider value={{ tripRequested, setTripRequested, passengersNum, setPassengersNum, tripTime, setTripTime, isDeparture, setIsDeparture, booked, setBooked,
-      chooseStart, setChooseStart,requestResponse, setRequestResponse, waitingForResponse, setWaitingForResponse, originCoords, setOriginCoords, isOpen, setIsOpen,
-      destinationCoords, setDestinationCoords, isPreebooked, setIsPreebooked, tripTimeLabels, setTripTimeLabels, hasTicket, setHasTicket, chooseOnMap, setChooseOnMap, 
-      originName, setOriginName, destinationName, setDestinationName, results, setResults, isButtonDisabled, setIsButtonDisabled, isValidRequest, setIsValidRequest }}>
+    <AppContext.Provider value={{ tripRequested, setTripRequested, passengersNum, setPassengersNum, tripTime, setTripTime, isDeparture, setIsDeparture, 
+      booked, setBooked, chooseStart, setChooseStart,requestResponse, setRequestResponse, waitingForResponse, setWaitingForResponse, originCoords, setOriginCoords, 
+      isOpen, setIsOpen, destinationCoords, setDestinationCoords, isPreebooked, setIsPreebooked, tripTimeLabels, setTripTimeLabels, hasTicket, setHasTicket, 
+      chooseOnMap, setChooseOnMap, originName, setOriginName, destinationName, setDestinationName, results, setResults, isButtonDisabled, setIsButtonDisabled, 
+      isValidRequest, setIsValidRequest }}>
       {children}
     </AppContext.Provider>
   );

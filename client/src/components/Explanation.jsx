@@ -17,9 +17,9 @@ function Explanation(props) {
     const individualShare = (isDiscount ? singleShare * (-1) : singleShare)
     const [selectedTicketLevel, setSelectedTicketLevel] = useState(ticket_level);
     const ticketLevels = [
-        { id: "p1", label: "Preisstufe 1", price: "1.50€/2.40€", region: "Innerhalb von Bad Schwartau / Stockelsdorf" },
-        { id: "p2", label: "Preisstufe 2", price: "2.00€/3.40€", region: "Zwischen Bad Schwartau - Stockelsdorf" },
-        { id: "p3", label: "Preisstufe 3", price: "2.50€/4.20€", region: "Lübeck / Lübeck - Bad Schwartau / Stockelsdorf" },
+        { id: "p1", label: "Preisstufe 1", price: "1.50€/2.40€", region: "Innerhalb von Bad Schwartau o. Stockelsdorf" },
+        { id: "p2", label: "Preisstufe 2", price: "2.00€/3.40€", region: "In Lübeck o. Bad Schwartau - Stockelsdorf" },
+        { id: "p3", label: "Preisstufe 3", price: "2.50€/4.20€", region: "Lübeck - Bad Schwartau o. Stockelsdorf" },
     ];
     const selectedDetails = ticketLevels.find(t => t.id === selectedTicketLevel);
 
@@ -75,7 +75,7 @@ function Explanation(props) {
         rule =  `Wenn du länger als ${wait_threshold} Minuten warten musst und die Umstände nicht so angenehm sind, reduziert sich dein Preis.`  
         state_desc = (
             <>
-                {totalPassengers > 1 ? "Ihr müsst " : "Du musst "}{isDiscount ? "" : "nur "}<span className="text-sky-500">{waitingTime.toFixed()} Minuten</span> warten!
+                {totalPassengers > 1 ? "Ihr müsst " : "Du musst "}<span className="text-sky-500">{waitingTime.toFixed()} Minuten</span> warten!
             </>
           ); 
     }
