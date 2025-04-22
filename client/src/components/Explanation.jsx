@@ -37,7 +37,7 @@ function Explanation(props) {
         subtitle = "lümo unterstützt den ÖPNV."     
         state_desc = (
             <>
-              {totalPassengers > 1 || scenarioParam == 2 ? `${totalPassengersWithTicket} von ${scenarioParam == 2 ? 2: totalPassengers} ${totalPassengersWithTicket == 1 ? "besitzt ": "besitzen "}`  : "Du besitzt "}<span className="text-amber-500">{(isDiscount || totalPassengers > 1) ? "ein" : "kein"}</span> gültiges Ticket.
+              {!(scenarioParam == 0) && !(scenarioParam == 1) && (totalPassengers > 1 || scenarioParam == 2) ? `${totalPassengersWithTicket} von ${(scenarioParam == 0 || scenarioParam == 1) ? 1 : scenarioParam == 2 ? 2 : totalPassengers} ${totalPassengersWithTicket == 1 ? "besitzt ": "besitzen "}`  : "Du besitzt "}<span className="text-amber-500">{(isDiscount || (totalPassengers > 1 && !scenarioParam==1) || scenarioParam==0 || scenarioParam==2) ? "ein" : "kein"}</span> gültiges Ticket.
             </>
           );
         if (isDiscount) {
