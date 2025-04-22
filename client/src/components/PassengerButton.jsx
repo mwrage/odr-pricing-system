@@ -20,7 +20,7 @@ function PassengerButton({ resultsView = false, btnStyle = true })  {
     return (
         <>
             <User4 size={18} color={"#a1a1aa"} />
-            <p className="font-normal text-xs px-1">{resultsView && scenarioParam == 2 ? 2 : passengersSum} {passengersSum == 1 ? "Fahrgast" : "Fahrgäste"}</p>
+            <p className="font-normal text-xs px-1">{resultsView && (scenarioParam == 0 || scenarioParam == 1) ? 1 : resultsView && scenarioParam == 2 ? 2 : passengersSum} {passengersSum == 1 ? "Fahrgast" : "Fahrgäste"}</p>
             { btnStyle && ( <ChevronDown size={14} style={"pb-0.5"}/> )} 
         </>
 
