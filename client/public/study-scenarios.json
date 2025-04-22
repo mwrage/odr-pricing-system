@@ -116,8 +116,8 @@
             },
             "pricing": {
                 "total_price": 9.4, 
-                "individual_price": 6.70, 
-                "discount": 29,
+                "individual_price": 7.70, 
+                "discount": 18,
                 "distance_threshold": 200, 
                 "temp_threshold": 5,  
                 "wait_threshold": 12,
@@ -156,8 +156,8 @@
             },
             "pricing": {
                 "total_price": 9.4, 
-                "individual_price": 5.65, 
-                "discount": 40,
+                "individual_price": 6.65, 
+                "discount": 29,
                 "distance_threshold": 200, 
                 "temp_threshold": 5,  
                 "wait_threshold": 12,
