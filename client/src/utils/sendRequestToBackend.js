@@ -17,6 +17,7 @@ export async function sendRequestToBackend ({setTripRequested, setRequestRespons
       }
 
     } else {
+      console.log(tripTime)
 
       const data = {
         debug: false,
